@@ -1,4 +1,15 @@
-.workspace {
-  margin: 20px;
-  border: 2px solid red;
+.layout {
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_inner {
+    width: 600px;
+    border: 2px solid green;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
