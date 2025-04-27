@@ -29,7 +29,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/shared/styles/styles.scss"],
+            "styles": ["src/app/styles/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -83,7 +83,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/shared/styles/styles.scss"],
+            "styles": ["src/app/styles/styles.scss"],
             "scripts": []
           }
         }

@@ -14,7 +14,8 @@
   --red-color: #ff0763;
 }
 
-body {
+body,
+* {
   background-color: var(--white-color);
   color: var(--blue-color);
   font-family: 'Ubuntu', sans-serif;
