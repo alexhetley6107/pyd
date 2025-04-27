@@ -15,8 +15,12 @@
 
     .logo {
       background: url('/images/logo.svg') no-repeat center/cover;
-      width: 150px;
-      height: 150px;
+      width: 120px;
+      height: 120px;
+    }
+
+    .content {
+      width: 100%;
     }
 
     .footer {
