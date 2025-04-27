@@ -1,3 +1,5 @@
+@import 'fonts';
+
 *,
 *:before,
 *:after {
@@ -15,4 +17,5 @@
 body {
   background-color: var(--white-color);
   color: var(--blue-color);
+  font-family: 'Ubuntu', sans-serif;
 }
