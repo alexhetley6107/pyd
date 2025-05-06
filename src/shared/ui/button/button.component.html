@@ -1,1 +1,9 @@
-<button class="button">Button</button>
+<button
+  class="button"
+  [disabled]="disabled"
+  [ngClass]="{ full_width: fullWidth }"
+  fullWidth="fullWidth"
+  (click)="toggle()"
+>
+  <ng-content></ng-content>
+</button>
