@@ -1,9 +1,10 @@
 <button
   class="button"
   [disabled]="disabled"
-  [ngClass]="{ full_width: fullWidth }"
+  [ngClass]="{ full_width: fullWidth, filled: type === 'filled', outlined: type === 'outlined' }"
+  [type]="type"
   fullWidth="fullWidth"
-  (click)="toggle()"
+  (click)="onClick()"
 >
   <ng-content></ng-content>
 </button>

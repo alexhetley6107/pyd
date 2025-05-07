@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
 import { booleanAttribute, Component, Input } from '@angular/core';
 
+type ButtonVariant = 'filled' | 'outlined';
 @Component({
   selector: 'ui-button',
   imports: [NgClass],
@@ -11,8 +12,6 @@ import { booleanAttribute, Component, Input } from '@angular/core';
 export class ButtonComponent {
   @Input({ transform: booleanAttribute }) fullWidth: boolean = false;
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
-
-  toggle() {
-    console.log(this.fullWidth);
-  }
+  @Input() onClick!: () => void;
+  @Input() type: ButtonVariant = 'filled';
 }

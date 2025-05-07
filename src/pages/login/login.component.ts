@@ -9,4 +9,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './login.component.scss',
   standalone: true,
 })
-export class LoginComponent {}
+export class LoginComponent {
+  handleLogin() {
+    console.log('login');
+  }
+}

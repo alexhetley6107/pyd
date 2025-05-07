@@ -8,9 +8,20 @@
   width: auto;
   font-size: 19px;
   font-weight: 600;
+  border: 1px solid var(--red-color);
 
   &.full_width {
     width: 100%;
+  }
+
+  &.filled {
+    background-color: var(--red-color);
+    color: var(--white-color);
+  }
+
+  &.outlined {
+    color: var(--red-color);
+    background-color: var(--white-color);
   }
 
   &:disabled {
