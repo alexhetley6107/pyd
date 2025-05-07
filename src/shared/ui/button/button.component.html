@@ -1,10 +1,15 @@
 <button
   class="button"
-  [disabled]="disabled"
+  [disabled]="disabled || loading"
   [ngClass]="{ full_width: fullWidth, filled: type === 'filled', outlined: type === 'outlined' }"
   [type]="type"
+  loading="loading"
   fullWidth="fullWidth"
   (click)="onClick()"
 >
+  @if(loading) {
+  <div class="spinner" [ngClass]="{ filled: type === 'filled', outlined: type === 'outlined' }"></div>
+  } @else {
   <ng-content></ng-content>
+  }
 </button>

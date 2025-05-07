@@ -1,4 +1,6 @@
 @import 'fonts';
+@import 'helpers';
+@import 'animation';
 
 *,
 *:before,
@@ -25,16 +27,4 @@ a {
   text-decoration: none;
   color: var(--red-color);
   cursor: pointer;
-}
-
-.flex {
-  display: flex;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.text-center {
-  text-align: center;
 }
