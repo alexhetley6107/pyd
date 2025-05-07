@@ -6,6 +6,7 @@ import { booleanAttribute, Component, Input } from '@angular/core';
   imports: [NgClass],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
+  standalone: true,
 })
 export class ButtonComponent {
   @Input({ transform: booleanAttribute }) fullWidth: boolean = false;

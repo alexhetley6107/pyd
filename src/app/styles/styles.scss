@@ -20,3 +20,9 @@ body,
   color: var(--blue-color);
   font-family: 'Ubuntu', sans-serif;
 }
+
+a {
+  text-decoration: none;
+  color: var(--red-color);
+  cursor: pointer;
+}
