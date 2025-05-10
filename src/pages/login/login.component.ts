@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '../../shared/ui/button/button.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { InputComponent } from '../../shared/ui/input/input.component';
 
 @Component({
@@ -10,7 +10,9 @@ import { InputComponent } from '../../shared/ui/input/input.component';
   standalone: true,
 })
 export class LoginComponent {
+  router = inject(Router);
+
   handleLogin() {
-    console.log('login');
+    this.router.navigate(['dashboard']);
   }
 }

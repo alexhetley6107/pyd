@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { booleanAttribute, Component, Input } from '@angular/core';
+import { booleanAttribute, Component, EventEmitter, Input, Output } from '@angular/core';
 
 type ButtonVariant = 'filled' | 'outlined';
 @Component({
@@ -14,6 +14,11 @@ export class ButtonComponent {
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
   @Input({ transform: booleanAttribute }) loading: boolean = false;
 
-  @Input() onClick!: () => void;
   @Input() type: ButtonVariant = 'filled';
+
+  @Output() onClick = new EventEmitter<void>();
+
+  handleClick() {
+    this.onClick.emit();
+  }
 }

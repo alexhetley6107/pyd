@@ -5,7 +5,8 @@
   <ui-input placeholder="Password" type="password"></ui-input>
   <ui-input placeholder="Confirm your password" type="password"></ui-input>
 
-  <ui-button fullWidth>Sign up</ui-button>
+  <ui-button fullWidth (onClick)="handleSignup()">Sign up</ui-button>
+
   <div class="text-center">
     <a routerLink="/login"> Already have an account? Login</a>
   </div>
