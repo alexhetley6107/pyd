@@ -12,7 +12,7 @@ type ButtonVariant = 'filled' | 'outlined';
 export class ButtonComponent {
   @Input({ transform: booleanAttribute }) fullWidth: boolean = false;
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
-  @Input({ transform: booleanAttribute }) loading: boolean = false;
+  @Input() loading: boolean = false;
 
   @Input() type: ButtonVariant = 'filled';
 

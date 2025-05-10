@@ -9,7 +9,7 @@
     <a routerLink="/forgot-password">Forgot password?</a>
   </div>
 
-  <ui-button fullWidth (onClick)="handleLogin()">Login</ui-button>
+  <ui-button fullWidth (onClick)="handleLogin()" [loading]="isLoading">Login</ui-button>
 
   <div class="text-center">
     <a routerLink="/signup">No account? Sin up</a>

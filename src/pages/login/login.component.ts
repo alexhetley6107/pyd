@@ -12,7 +12,10 @@ import { InputComponent } from '../../shared/ui/input/input.component';
 export class LoginComponent {
   router = inject(Router);
 
+  isLoading = false;
+
   handleLogin() {
-    this.router.navigate(['dashboard']);
+    this.isLoading = !this.isLoading;
+    // this.router.navigate(['dashboard']);
   }
 }
