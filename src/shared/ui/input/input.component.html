@@ -1,3 +1,9 @@
 <div class="wrapper">
-  <input [placeholder]="placeholder" [type]="type" />
+  <input [placeholder]="placeholder" [type]="isPasswordVisible ? 'text' : type" />
+
+  @if(type === 'password') {
+  <button class="eye" (click)="togglePassword()">
+    <img [src]="isPasswordVisible ? '/svg/eye_on.svg' : '/svg/eye_off.svg'" alt="eye" />
+  </button>
+  }
 </div>

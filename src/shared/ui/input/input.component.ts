@@ -12,4 +12,10 @@ type InputTypeUnion = 'text' | 'email' | 'password';
 export class InputComponent {
   @Input() placeholder: string = '';
   @Input() type: InputTypeUnion = 'text';
+
+  isPasswordVisible = false;
+
+  togglePassword() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
 }

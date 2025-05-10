@@ -1,5 +1,6 @@
 .wrapper {
   width: 100%;
+  position: relative;
 
   input {
     width: 100%;
@@ -11,6 +12,21 @@
       outline: none;
 
       border-color: var(--red-color);
+    }
+  }
+
+  .eye {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    border: none;
+
+    img {
+      width: 24px;
+      height: 24px;
+      display: block;
     }
   }
 }
