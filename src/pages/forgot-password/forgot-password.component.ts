@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { InputComponent } from '../../shared/ui/input/input.component';
-import { ButtonComponent } from '../../shared/ui/button/button.component';
+import { InputComponent } from '@/shared/ui/input/input.component';
+import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { Router, RouterLink } from '@angular/router';
 import {
   FormGroup,
@@ -9,7 +9,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { getError } from '../../shared/helpers/formErrors';
+import { getError } from '@/shared/helpers/formErrors';
 
 @Component({
   selector: 'page-forgot-password',

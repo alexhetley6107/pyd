@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { ButtonComponent } from '../../shared/ui/button/button.component';
+import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { Router, RouterLink } from '@angular/router';
-import { InputComponent } from '../../shared/ui/input/input.component';
+import { InputComponent } from '@/shared/ui/input/input.component';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -9,8 +9,8 @@ import {
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
-import { getError } from '../../shared/helpers/formErrors';
-import { matchPasswords, passwordStrengthValidator } from '../../shared/helpers/matchPasswords';
+import { getError } from '@/shared/helpers/formErrors';
+import { matchPasswords, passwordStrengthValidator } from '@/shared/helpers/matchPasswords';
 
 @Component({
   selector: 'page-signup',
