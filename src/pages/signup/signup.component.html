@@ -1,13 +1,33 @@
-<div class="auth-form">
+<form
+  [formGroup]="form"
+  (ngSubmit)="handleSubmit()"
+  (keydown.enter)="handleSubmit()"
+  class="auth-form"
+>
   <h1 class="">Sign up</h1>
-  <ui-input placeholder="Name"></ui-input>
-  <ui-input placeholder="Email" type="email"></ui-input>
-  <ui-input placeholder="Password" type="password"></ui-input>
-  <ui-input placeholder="Confirm your password" type="password"></ui-input>
+  <ui-input formControlName="username" [error]="usernameError" placeholder="Username"></ui-input>
+  <ui-input
+    formControlName="email"
+    [error]="emailError"
+    placeholder="Email"
+    type="email"
+  ></ui-input>
+  <ui-input
+    formControlName="password"
+    [error]="passwordError"
+    placeholder="Password"
+    type="password"
+  ></ui-input>
+  <ui-input
+    formControlName="confirmPassword"
+    [error]="confirmPasswordError"
+    placeholder="Confirm your password"
+    type="password"
+  ></ui-input>
 
-  <ui-button fullWidth (onClick)="handleSignup()">Sign up</ui-button>
+  <ui-button fullWidth type="submit">Sign up</ui-button>
 
   <div class="text-center">
     <a routerLink="/login"> Already have an account? Login</a>
   </div>
-</div>
+</form>

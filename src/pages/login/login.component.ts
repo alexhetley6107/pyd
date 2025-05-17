@@ -9,6 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { getError } from '../../shared/helpers/formErrors';
 
 @Component({
   selector: 'page-login',
@@ -34,21 +35,11 @@ export class LoginComponent {
       password: this.fb.control('', [Validators.required]),
     });
   }
-
   get usernameError(): string | null {
-    const control = this.form.get('username');
-    if (control?.touched && control.invalid) {
-      if (control.errors?.['required']) return 'Username is required.';
-    }
-    return null;
+    return getError(this.form.get('username'), 'Username');
   }
-
   get passwordError(): string | null {
-    const control = this.form.get('password');
-    if (control?.touched && control.invalid) {
-      if (control.errors?.['required']) return 'Password is required.';
-    }
-    return null;
+    return getError(this.form.get('password'), 'Password');
   }
 
   handleSubmit() {
