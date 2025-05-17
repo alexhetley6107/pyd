@@ -1,5 +1,15 @@
-<div class="side-menu">
-  <ui-logo size="lg"></ui-logo>
-  <ui-logo size="md"></ui-logo>
-  <ui-logo size="sm"></ui-logo>
+<div class="side-menu" [ngClass]="{ collapsed: isCollapsed }">
+  <ui-logo></ui-logo>
+
+  <nav class="links">
+    <ul>
+      @for (link of links; track link.path) {
+      <li>
+        <a [routerLink]="link.path" routerLinkActive="active">{{ link.title }}</a>
+      </li>
+      }
+    </ul>
+  </nav>
+
+  <button class="collapse_btn" (click)="toggleCollapse()"></button>
 </div>

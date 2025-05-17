@@ -6,14 +6,15 @@
 >
   <h1 class="">Login</h1>
 
-  <ui-input formControlName="username" placeholder="Username" [error]="usernameError"></ui-input>
-  <ui-input
-    formControlName="password"
-    placeholder="Password"
-    type="password"
-    [error]="passwordError"
-  ></ui-input>
-
+  <div class="">
+    <ui-input formControlName="username" placeholder="Username" [error]="usernameError"></ui-input>
+    <ui-input
+      formControlName="password"
+      placeholder="Password"
+      type="password"
+      [error]="passwordError"
+    ></ui-input>
+  </div>
   <div class="flex justify-between">
     <span>Remember me</span>
     <a routerLink="/forgot-password">Forgot password?</a>
