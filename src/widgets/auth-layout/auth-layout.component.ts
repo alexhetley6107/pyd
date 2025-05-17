@@ -1,9 +1,10 @@
+import { LogoComponent } from '@/shared/ui/logo/logo.component';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'auth-layout',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, LogoComponent],
   templateUrl: './auth-layout.component.html',
   styleUrl: './auth-layout.component.scss',
   standalone: true,

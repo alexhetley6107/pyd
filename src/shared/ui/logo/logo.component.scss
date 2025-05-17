@@ -1,0 +1,18 @@
+.logo {
+  background: url('/images/logo.svg') no-repeat center/cover;
+
+  &.sm {
+    width: 30px;
+    height: 30px;
+  }
+
+  &.md {
+    width: 60px;
+    height: 60px;
+  }
+
+  &.lg {
+    width: 90px;
+    height: 90px;
+  }
+}
