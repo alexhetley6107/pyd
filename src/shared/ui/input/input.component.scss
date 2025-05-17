@@ -18,7 +18,7 @@
   .eye {
     position: absolute;
     right: 10px;
-    top: 50%;
+    top: 20px;
     transform: translateY(-50%);
     cursor: pointer;
     border: none;
@@ -28,5 +28,10 @@
       height: 24px;
       display: block;
     }
+  }
+
+  .error {
+    color: var(--error-color);
+    font-size: 14px;
   }
 }

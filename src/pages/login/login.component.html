@@ -1,17 +1,27 @@
-<div class="auth-form">
+<form
+  [formGroup]="form"
+  (ngSubmit)="handleSubmit()"
+  (keydown.enter)="handleSubmit()"
+  class="auth-form"
+>
   <h1 class="">Login</h1>
 
-  <ui-input placeholder="Email" type="email"></ui-input>
-  <ui-input placeholder="Password" type="password"></ui-input>
+  <ui-input formControlName="username" placeholder="Username" [error]="usernameError"></ui-input>
+  <ui-input
+    formControlName="password"
+    placeholder="Password"
+    type="password"
+    [error]="passwordError"
+  ></ui-input>
 
   <div class="flex justify-between">
     <span>Remember me</span>
     <a routerLink="/forgot-password">Forgot password?</a>
   </div>
 
-  <ui-button fullWidth (onClick)="handleLogin()" [loading]="isLoading">Login</ui-button>
+  <ui-button fullWidth [loading]="isLoading" type="submit">Login</ui-button>
 
   <div class="text-center">
     <a routerLink="/signup">No account? Sin up</a>
   </div>
-</div>
+</form>

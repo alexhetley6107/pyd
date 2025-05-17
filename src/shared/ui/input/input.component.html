@@ -1,9 +1,21 @@
 <div class="wrapper">
-  <input [placeholder]="placeholder" [type]="isPasswordVisible ? 'text' : type" />
+  <input
+    [placeholder]="placeholder"
+    [type]="isPasswordVisible ? 'text' : type"
+    [value]="value"
+    (input)="handleInput($event)"
+    (blur)="handleBlur()"
+  />
 
   @if(type === 'password') {
-  <button class="eye" (click)="togglePassword()">
+  <button class="eye" (mousedown)="togglePassword($event)" type="button">
     <img [src]="isPasswordVisible ? '/svg/eye_on.svg' : '/svg/eye_off.svg'" alt="eye" />
   </button>
+  }
+
+  <div class=""></div>
+
+  @if(error) {
+  <span class="error">* {{ error }}</span>
   }
 </div>
