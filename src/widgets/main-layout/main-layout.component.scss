@@ -1,4 +1,7 @@
 .wrapper {
   display: flex;
   height: 100svh;
+  .content {
+    padding: 10px;
+  }
 }
