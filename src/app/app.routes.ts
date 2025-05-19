@@ -5,6 +5,9 @@ import { SignupComponent } from '../pages/signup/signup.component';
 import { ForgotPasswordComponent } from '../pages/forgot-password/forgot-password.component';
 import { MainLayoutComponent } from '../widgets/main-layout/main-layout.component';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
+import { CalendarComponent } from '@/pages/calendar/calendar.component';
+import { AgileBoardComponent } from '@/pages/agile-board/agile-board.component';
+import { BacklogComponent } from '@/pages/backlog/backlog.component';
 
 export const routes: Routes = [
   {
@@ -18,8 +21,13 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'dashboard',
+    path: '',
     component: MainLayoutComponent,
-    children: [{ path: '', component: DashboardComponent }],
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'agile-board', component: AgileBoardComponent },
+      { path: 'calendar', component: CalendarComponent },
+      { path: 'backlog', component: BacklogComponent },
+    ],
   },
 ];
