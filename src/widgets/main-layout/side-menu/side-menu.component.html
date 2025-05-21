@@ -1,10 +1,13 @@
 <div class="side-menu" [ngClass]="{ collapsed: isCollapsed }">
   <div class="logo flex align-center">
-    <ui-logo></ui-logo>
+    <ui-logo size="sm"></ui-logo>
     <h3>Plan your day</h3>
+    <div class="close" (click)="toggleCollapse()">
+      <img src="/svg/close.svg" alt="" />
+    </div>
   </div>
 
-  <nav class="links">
+  <nav class="links" (click)="onLinkClick()">
     <ul>
       @for (l of links; track l.path) {
       <li>
@@ -22,4 +25,8 @@
   <button class="collapse_btn" (click)="toggleCollapse()">
     <img src="/svg/chevron_left.svg" alt="" />
   </button>
+</div>
+
+<div class="burger" (click)="toggleCollapse()">
+  <img src="/svg/burger.svg" alt="" />
 </div>

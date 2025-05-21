@@ -3,6 +3,8 @@ import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
+const MOBILE_WIDTH = 768;
+
 @Component({
   selector: 'side-menu',
   imports: [RouterLink, LogoComponent, NgClass, RouterLinkActive],
@@ -15,6 +17,13 @@ export class SideMenuComponent {
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
+  }
+
+  onLinkClick() {
+    const shouldClose = window.innerWidth <= MOBILE_WIDTH;
+    if (shouldClose) {
+      this.toggleCollapse();
+    }
   }
 
   links = [
