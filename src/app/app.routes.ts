@@ -8,6 +8,7 @@ import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 import { CalendarComponent } from '@/pages/calendar/calendar.component';
 import { AgileBoardComponent } from '@/pages/agile-board/agile-board.component';
 import { BacklogComponent } from '@/pages/backlog/backlog.component';
+import { NotFoundComponent } from '@/pages/not-found/not-found.component';
 
 export const routes: Routes = [
   {
@@ -30,4 +31,5 @@ export const routes: Routes = [
       { path: 'backlog', component: BacklogComponent },
     ],
   },
+  { path: '**', component: NotFoundComponent },
 ];
