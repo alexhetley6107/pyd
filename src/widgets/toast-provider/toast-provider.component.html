@@ -1,0 +1,13 @@
+<div class="toast-wrapper">
+  @for (t of toasts(); track t.id) {
+  <div class="toast" [ngClass]="{ hide: !t.isOpen }">
+    <div class="toast_content">
+      <div class="message">
+        {{ t.message }}
+      </div>
+
+      <img class="close" src="/svg/close.svg" alt="" (click)="closeToast(t.id)" />
+    </div>
+  </div>
+  }
+</div>

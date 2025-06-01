@@ -10,6 +10,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { getError } from '@/shared/helpers/formErrors';
+import { AuthService } from '@/shared/services/auth.service';
+import { tap } from 'rxjs';
+import { ToastService } from '@/shared/services/toast.service';
 
 @Component({
   selector: 'page-login',
@@ -19,6 +22,8 @@ import { getError } from '@/shared/helpers/formErrors';
 })
 export class LoginComponent {
   router = inject(Router);
+  auth = inject(AuthService);
+  toast = inject(ToastService);
 
   isLoading = false;
 
@@ -43,14 +48,20 @@ export class LoginComponent {
   }
 
   handleSubmit() {
-    console.log(this.form.value);
-
-    if (!this.form.valid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
-    // this.isLoading = !this.isLoading;
-    this.router.navigate(['dashboard']);
+    this.toast.add(
+      'Hello World toast,toast, Hello World toast,toast, Hello World toast,toast, Hello World toast,toast,'
+    );
+    //   if (!this.form.valid) {
+    //     this.form.markAllAsTouched();
+    //     return;
+    //   }
+    //   this.isLoading = true;
+    //   this.auth.login(this.form.value.username ?? '', this.form.value.password ?? '').subscribe({
+    //     next: () => {
+    //       this.isLoading = false;
+    //     },
+    //     error: () => console.log('Login failed'),
+    //   });
+    //   // this.router.navigate(['dashboard']);
   }
 }
