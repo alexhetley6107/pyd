@@ -2,6 +2,13 @@
   @for (t of toasts(); track t.id) {
   <div class="toast" [ngClass]="{ hide: !t.isOpen }">
     <div class="toast_content">
+      @if (t.type === 'error') {
+      <img class="icon" src="/svg/error.svg" alt="" />
+
+      } @if (t.type === 'success') {
+      <img class="icon" src="/svg/success.svg" alt="" />
+
+      }
       <div class="message">
         {{ t.message }}
       </div>

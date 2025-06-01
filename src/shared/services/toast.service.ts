@@ -1,9 +1,11 @@
 import { Injectable, signal } from '@angular/core';
 
+type ToastType = 'success' | 'error';
+
 export interface Toast {
   id: string;
   message: string;
-  type: 'success' | 'error';
+  type: ToastType;
   isOpen: boolean;
 }
 
@@ -15,11 +17,11 @@ export class ToastService {
 
   public readonly toasts = this._toasts;
 
-  add(message: string) {
+  add(message: string, options?: { type?: ToastType; isConstant?: boolean }) {
     const toast: Toast = {
       id: (Math.random() * 100).toString(),
       message,
-      type: 'success',
+      type: options?.type ?? 'success',
       isOpen: false,
     };
     this._toasts.update((items) => [...items, toast]);
@@ -29,6 +31,8 @@ export class ToastService {
         items.map((t) => (t.id !== toast.id ? t : { ...t, isOpen: true }))
       );
     }, 0);
+
+    if (options?.isConstant) return;
     setTimeout(() => {
       this.remove(toast.id);
     }, 4000);

@@ -48,9 +48,7 @@ export class LoginComponent {
   }
 
   handleSubmit() {
-    this.toast.add(
-      'Hello World toast,toast, Hello World toast,toast, Hello World toast,toast, Hello World toast,toast,'
-    );
+    this.toast.add('Hello World toast,toast, ');
     //   if (!this.form.valid) {
     //     this.form.markAllAsTouched();
     //     return;
