@@ -48,18 +48,29 @@ export class LoginComponent {
   }
 
   handleSubmit() {
-    this.toast.add('Hello World toast,toast, ');
-    //   if (!this.form.valid) {
-    //     this.form.markAllAsTouched();
-    //     return;
-    //   }
-    //   this.isLoading = true;
-    //   this.auth.login(this.form.value.username ?? '', this.form.value.password ?? '').subscribe({
-    //     next: () => {
-    //       this.isLoading = false;
-    //     },
-    //     error: () => console.log('Login failed'),
-    //   });
-    //   // this.router.navigate(['dashboard']);
+    if (!this.form.valid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    this.isLoading = true;
+
+    const userName = this.form.value.username ?? '';
+    const password = this.form.value.password ?? '';
+
+    this.auth.login(userName, password).subscribe({
+      next: (res) => {
+        // localStorage.setItem('token', res.token);
+        // this.router.navigate(['/dashboard']);
+        this.toast.add('Successfully logged in');
+        this.router.navigate(['dashboard']);
+      },
+      error: (err) => {
+        this.toast.add(err.error.message, { type: 'error' });
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
   }
 }

@@ -9,6 +9,7 @@ import { CalendarComponent } from '@/pages/calendar/calendar.component';
 import { AgileBoardComponent } from '@/pages/agile-board/agile-board.component';
 import { BacklogComponent } from '@/pages/backlog/backlog.component';
 import { NotFoundComponent } from '@/pages/not-found/not-found.component';
+import { AuthGuard } from '@/shared/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -25,10 +26,10 @@ export const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'agile-board', component: AgileBoardComponent },
-      { path: 'calendar', component: CalendarComponent },
-      { path: 'backlog', component: BacklogComponent },
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+      { path: 'agile-board', component: AgileBoardComponent, canActivate: [AuthGuard] },
+      { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
+      { path: 'backlog', component: BacklogComponent, canActivate: [AuthGuard] },
     ],
   },
   { path: '**', component: NotFoundComponent },
