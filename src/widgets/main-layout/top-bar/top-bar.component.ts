@@ -12,6 +12,17 @@ export class TopBarComponent {
   router = inject(Router);
   auth = inject(AuthService);
 
+  get letters() {
+    const user = this.auth.getUser();
+
+    if (!user) return 'U';
+
+    return user?.userName
+      .split(' ')
+      .map((name) => name[0])
+      .join('');
+  }
+
   handleLogout() {
     this.auth.logout();
     this.router.navigate(['login']);
