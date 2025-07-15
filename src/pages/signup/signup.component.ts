@@ -11,6 +11,8 @@ import {
 } from '@angular/forms';
 import { getError } from '@/shared/helpers/formErrors';
 import { matchPasswords, passwordStrengthValidator } from '@/shared/helpers/matchPasswords';
+import { AuthService } from '@/shared/services/auth.service';
+import { ToastService } from '@/shared/services/toast.service';
 
 @Component({
   selector: 'page-signup',
@@ -20,6 +22,8 @@ import { matchPasswords, passwordStrengthValidator } from '@/shared/helpers/matc
 })
 export class SignupComponent {
   router = inject(Router);
+  auth = inject(AuthService);
+  toast = inject(ToastService);
 
   isLoading = false;
 
@@ -71,14 +75,29 @@ export class SignupComponent {
   }
 
   handleSubmit() {
-    console.log(this.form.value);
-
     if (!this.form.valid) {
       this.form.markAllAsTouched();
       return;
     }
 
-    // this.isLoading = !this.isLoading;
-    this.router.navigate(['dashboard']);
+    this.isLoading = true;
+
+    const userName = this.form.value.username ?? '';
+    const email = this.form.value.email ?? '';
+    const password = this.form.value.password ?? '';
+
+    this.auth.signup(userName, email, password).subscribe({
+      next: (res) => {
+        this.toast.add(`Welcome ${res.userName}`);
+        this.router.navigate(['dashboard']);
+      },
+      error: (err) => {
+        this.toast.add(err.error.message, { type: 'error' });
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
   }
 }

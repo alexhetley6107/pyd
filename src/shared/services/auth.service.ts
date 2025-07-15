@@ -2,20 +2,29 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { User } from '../types/user';
+import { API } from '../constants/api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly API_URL = 'http://localhost:5001/api/auth';
-
   private user: User | null = null;
 
   constructor(private http: HttpClient) {}
 
   login(userName: string, password: string) {
     const body = { userName, password };
-    return this.http.post<User>(`${this.API_URL}/login`, body).pipe(
+    return this.http.post<User>(API.login, body).pipe(
+      tap((user) => {
+        this.user = user;
+        localStorage.setItem('token', user.loginInfo.token);
+      })
+    );
+  }
+
+  signup(userName: string, email: string, password: string) {
+    const body = { userName, email, password };
+    return this.http.post<User>(API.signup, body).pipe(
       tap((user) => {
         this.user = user;
         localStorage.setItem('token', user.loginInfo.token);

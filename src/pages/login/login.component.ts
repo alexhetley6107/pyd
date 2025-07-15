@@ -11,7 +11,6 @@ import {
 } from '@angular/forms';
 import { getError } from '@/shared/helpers/formErrors';
 import { AuthService } from '@/shared/services/auth.service';
-import { tap } from 'rxjs';
 import { ToastService } from '@/shared/services/toast.service';
 
 @Component({
@@ -59,9 +58,7 @@ export class LoginComponent {
 
     this.auth.login(userName, password).subscribe({
       next: (res) => {
-        // localStorage.setItem('token', res.token);
-        // this.router.navigate(['/dashboard']);
-        this.toast.add('Successfully logged in');
+        this.toast.add(`Welcome ${res.userName}`);
         this.router.navigate(['dashboard']);
       },
       error: (err) => {
