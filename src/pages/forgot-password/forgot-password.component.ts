@@ -10,6 +10,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { getError } from '@/shared/helpers/formErrors';
+import { AuthService } from '@/shared/services/auth.service';
 
 @Component({
   selector: 'page-forgot-password',
@@ -19,6 +20,7 @@ import { getError } from '@/shared/helpers/formErrors';
 })
 export class ForgotPasswordComponent {
   router = inject(Router);
+  auth = inject(AuthService);
 
   isLoading = false;
 
@@ -29,6 +31,13 @@ export class ForgotPasswordComponent {
   constructor(private fb: NonNullableFormBuilder) {}
 
   ngOnInit(): void {
+    const isAuth = this.auth.isAuthenticated();
+
+    if (isAuth) {
+      this.router.navigate(['dashboard']);
+      return;
+    }
+
     this.form = this.fb.group({
       email: this.fb.control('', [Validators.required, Validators.email]),
     });
