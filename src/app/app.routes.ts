@@ -10,6 +10,8 @@ import { AgileBoardComponent } from '@/pages/agile-board/agile-board.component';
 import { BacklogComponent } from '@/pages/backlog/backlog.component';
 import { NotFoundComponent } from '@/pages/not-found/not-found.component';
 import { AuthGuard } from '@/shared/guards/auth.guard';
+import { SettingComponent } from '@/pages/setting/setting.component';
+import { ResetPasswordComponent } from '@/pages/reset-password/reset-password.component';
 
 export const routes: Routes = [
   {
@@ -20,6 +22,7 @@ export const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
+      { path: 'reset-password', component: ResetPasswordComponent },
     ],
   },
   {
@@ -30,6 +33,7 @@ export const routes: Routes = [
       { path: 'agile-board', component: AgileBoardComponent, canActivate: [AuthGuard] },
       { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
       { path: 'backlog', component: BacklogComponent, canActivate: [AuthGuard] },
+      { path: 'setting', component: SettingComponent, canActivate: [AuthGuard] },
     ],
   },
   { path: '**', component: NotFoundComponent },

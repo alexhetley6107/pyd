@@ -32,6 +32,16 @@ export class AuthService {
     );
   }
 
+  resetPassword(password: string) {
+    const body = { password };
+    return this.http.post<User>(API.signup, body).pipe(
+      tap((user) => {
+        this.user = user;
+        localStorage.setItem('token', user.loginInfo.token);
+      })
+    );
+  }
+
   logout() {
     localStorage.removeItem('token');
   }
