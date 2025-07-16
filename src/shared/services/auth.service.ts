@@ -32,6 +32,10 @@ export class AuthService {
     );
   }
 
+  forgotPassword(email: string) {
+    return this.http.post<User>(API.forgotPassword, { email });
+  }
+
   resetPassword(password: string) {
     const body = { password };
     return this.http.post<User>(API.signup, body).pipe(

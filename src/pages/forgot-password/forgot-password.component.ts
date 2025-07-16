@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { getError } from '@/shared/helpers/formErrors';
 import { AuthService } from '@/shared/services/auth.service';
+import { ToastService } from '@/shared/services/toast.service';
 
 @Component({
   selector: 'page-forgot-password',
@@ -21,6 +22,7 @@ import { AuthService } from '@/shared/services/auth.service';
 export class ForgotPasswordComponent {
   router = inject(Router);
   auth = inject(AuthService);
+  toast = inject(ToastService);
 
   isLoading = false;
 
@@ -47,14 +49,25 @@ export class ForgotPasswordComponent {
   }
 
   handleSubmit() {
-    console.log(this.form.value);
-
     if (!this.form.valid) {
       this.form.markAllAsTouched();
       return;
     }
+    this.isLoading = true;
 
-    // this.isLoading = !this.isLoading;
-    this.router.navigate(['dashboard']);
+    const email = this.form.value.email ?? '';
+
+    this.auth.forgotPassword(email).subscribe({
+      next: () => {
+        this.toast.add(`Check your email to reset your password`);
+      },
+      error: (err) => {
+        this.toast.add(err.error.message, { type: 'error' });
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
   }
 }
