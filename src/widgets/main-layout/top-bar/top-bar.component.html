@@ -1,5 +1,15 @@
 <div class="topbar">
   <img src="/svg/notification.svg" alt="" />
 
-  <div class="circle" (click)="handleLogout()">{{ letters }}</div>
+  <ui-popover>
+    <div class="circle" popover-anchor>{{ letters }}</div>
+
+    <div popover-content>
+      <div class="menu_items">
+        @for (m of menuItems; track m.label) {
+        <div class="item" (click)="m.action()">{{ m.label }}</div>
+        }
+      </div>
+    </div>
+  </ui-popover>
 </div>

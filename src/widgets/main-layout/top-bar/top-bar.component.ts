@@ -1,10 +1,12 @@
 import { AuthService } from '@/shared/services/auth.service';
+import { PopoverComponent } from '@/shared/ui/popover/popover.component';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'top-bar',
-  imports: [],
+  imports: [PopoverComponent],
+  standalone: true,
   templateUrl: './top-bar.component.html',
   styleUrl: './top-bar.component.scss',
 })
@@ -23,8 +25,19 @@ export class TopBarComponent {
       .join('');
   }
 
-  handleLogout() {
-    this.auth.logout();
-    this.router.navigate(['login']);
-  }
+  menuItems = [
+    {
+      label: 'Setting',
+      action: () => {
+        this.router.navigate(['setting']);
+      },
+    },
+    {
+      label: 'Log out',
+      action: () => {
+        this.auth.logout();
+        this.router.navigate(['login']);
+      },
+    },
+  ];
 }

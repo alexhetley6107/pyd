@@ -1,0 +1,9 @@
+<div (click)="togglePopover()" class="wrapper">
+  <ng-content select="[popover-anchor]"></ng-content>
+
+  @if (open) {
+  <div class="popover-content">
+    <ng-content select="[popover-content]"></ng-content>
+  </div>
+  }
+</div>

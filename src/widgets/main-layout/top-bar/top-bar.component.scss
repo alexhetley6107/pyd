@@ -6,21 +6,29 @@
   align-items: center;
   justify-content: end;
   gap: 12px;
+  padding-right: 12px;
 
   img {
     width: 30px;
     height: 30px;
   }
+}
 
-  .circle {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid var(--blue-color);
-    margin-right: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--blue-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.menu_items {
+  div {
+    margin: 10px 15px;
     cursor: pointer;
+    font-size: 18px;
   }
 }
