@@ -12,7 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -32,7 +32,7 @@ export class ResetPasswordComponent {
     confirmPassword: FormControl<string>;
   }>;
 
-  constructor(private fb: NonNullableFormBuilder) {}
+  constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     const isAuth = this.auth.isAuthenticated();
@@ -76,20 +76,25 @@ export class ResetPasswordComponent {
 
     this.isLoading = true;
 
-    const password = this.form.value.password ?? '';
+    const token = this.route.snapshot.queryParamMap.get('token') ?? '';
+    const newPassword = this.form.value.password ?? '';
 
-    this.auth.resetPassword(password).subscribe({
-      // next: (res) => {
-      //   this.toast.add(`Welcome ${res.userName}`);
-      //   this.router.navigate(['dashboard']);
-      // },
-      // error: (err) => {
-      //   this.toast.add(err.error.message, { type: 'error' });
-      //   this.isLoading = false;
-      // },
-      // complete: () => {
-      //   this.isLoading = false;
-      // },
+    this.auth.resetPassword(token, newPassword).subscribe({
+      next: (res) => {
+        this.toast.add(res.message);
+        this.form.reset();
+
+        setTimeout(() => {
+          this.router.navigate(['login']);
+        }, 2000);
+      },
+      error: (err) => {
+        this.toast.add(err.error.message, { type: 'error' });
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
     });
   }
 }

@@ -60,6 +60,7 @@ export class ForgotPasswordComponent {
     this.auth.forgotPassword(email).subscribe({
       next: () => {
         this.toast.add(`Check your email to reset your password`);
+        this.form.reset();
       },
       error: (err) => {
         this.toast.add(err.error.message, { type: 'error' });

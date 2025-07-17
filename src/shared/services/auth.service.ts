@@ -36,14 +36,9 @@ export class AuthService {
     return this.http.post<User>(API.forgotPassword, { email });
   }
 
-  resetPassword(password: string) {
-    const body = { password };
-    return this.http.post<User>(API.signup, body).pipe(
-      tap((user) => {
-        this.user = user;
-        localStorage.setItem('token', user.loginInfo.token);
-      })
-    );
+  resetPassword(token: string, newPassword: string) {
+    const body = { token, newPassword };
+    return this.http.post<{ message: string }>(API.resetPassword, body);
   }
 
   logout() {
