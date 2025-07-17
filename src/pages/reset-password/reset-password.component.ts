@@ -26,6 +26,7 @@ export class ResetPasswordComponent {
   toast = inject(ToastService);
 
   isLoading = false;
+  isDone = false;
 
   form!: FormGroup<{
     password: FormControl<string>;
@@ -86,7 +87,7 @@ export class ResetPasswordComponent {
 
         setTimeout(() => {
           this.router.navigate(['login']);
-        }, 2000);
+        }, 5000);
       },
       error: (err) => {
         this.toast.add(err.error.message, { type: 'error' });
@@ -94,6 +95,7 @@ export class ResetPasswordComponent {
       },
       complete: () => {
         this.isLoading = false;
+        this.isDone = true;
       },
     });
   }
