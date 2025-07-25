@@ -1,9 +1,11 @@
-<p>Boards</p>
+<div class="flex justify-between align-center">
+  <div class=""><p>Boards</p></div>
 
-<h1 class="">Agile Boards</h1>
+  <div class="flex justify-between">
+    <ui-input placeholder="board"></ui-input>
 
-<div class="t">
-  @for (s of statuses; track s.id) {
-  <p>{{ s.name }}</p>
-  }
+    <ui-button size="lg">Add</ui-button>
+  </div>
 </div>
+
+<h2 class="">Agile Boards</h2>

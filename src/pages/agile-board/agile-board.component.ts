@@ -1,27 +1,36 @@
+import { BoardService } from '@/shared/services/board.service';
 import { StatusService } from '@/shared/services/status.service';
-import { Status } from '@/shared/types/board';
+import { Board, Status } from '@/shared/types/board';
+import { ButtonComponent } from '@/shared/ui/button/button.component';
+import { InputComponent } from '@/shared/ui/input/input.component';
 import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-agile-board',
-  imports: [],
+  imports: [ButtonComponent, InputComponent],
   templateUrl: './agile-board.component.html',
   styleUrl: './agile-board.component.scss',
 })
 export class AgileBoardComponent {
+  boardService = inject(BoardService);
   statusService = inject(StatusService);
 
-  loadStatuses() {
-    const isLoaded = this.statusService.statuses.length;
-    if (isLoaded) return;
+  loadSBoardsInfo() {
+    const isStatuses = this.statusService.statuses.length;
+    const isBoards = this.boardService.boards.length;
 
+    if (isStatuses && isBoards) return;
+
+    this.boardService.getAll().subscribe();
     this.statusService.getAll().subscribe();
   }
 
   ngOnInit() {
-    this.loadStatuses();
+    this.loadSBoardsInfo();
   }
-
+  get boards(): Board[] {
+    return this.boardService.boards;
+  }
   get statuses(): Status[] {
     return this.statusService.statuses;
   }

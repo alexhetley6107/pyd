@@ -3,6 +3,7 @@ import { booleanAttribute, Component, EventEmitter, Input, Output } from '@angul
 
 type ButtonVariant = 'filled' | 'outlined';
 type ButtonType = 'button' | 'submit';
+type ButtonSize = 'sm' | 'md' | 'lg';
 
 @Component({
   selector: 'ui-button',
@@ -18,6 +19,7 @@ export class ButtonComponent {
 
   @Input() variant: ButtonVariant = 'filled';
   @Input() type: ButtonType = 'button';
+  @Input() size: ButtonSize = 'md';
 
   @Output() onClick = new EventEmitter<void>();
 
