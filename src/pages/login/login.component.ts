@@ -66,7 +66,7 @@ export class LoginComponent {
     this.auth.login(userName, password).subscribe({
       next: (res) => {
         this.toast.add(`Welcome ${res.userName}`);
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['agile-board']);
       },
       error: (err) => {
         this.toast.add(err.error.message, { type: 'error' });

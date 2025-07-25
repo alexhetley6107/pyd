@@ -1,2 +1,9 @@
-<p>agile-board works!</p>
-<div class="t"></div>
+<p>Boards</p>
+
+<h1 class="">Agile Boards</h1>
+
+<div class="t">
+  @for (s of statuses; track s.id) {
+  <p>{{ s.name }}</p>
+  }
+</div>
