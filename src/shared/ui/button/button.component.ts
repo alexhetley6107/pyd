@@ -15,7 +15,7 @@ type ButtonSize = 'sm' | 'md' | 'lg';
 export class ButtonComponent {
   @Input({ transform: booleanAttribute }) fullWidth: boolean = false;
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
-  @Input() loading: boolean = false;
+  @Input({ transform: booleanAttribute }) loading: boolean = false;
 
   @Input() variant: ButtonVariant = 'filled';
   @Input() type: ButtonType = 'button';

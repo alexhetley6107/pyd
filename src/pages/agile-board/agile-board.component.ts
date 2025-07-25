@@ -1,13 +1,12 @@
+import { BoardsSelectorComponent } from '@/features/boards-selector/boards-selector.component';
 import { BoardService } from '@/shared/services/board.service';
 import { StatusService } from '@/shared/services/status.service';
 import { Board, Status } from '@/shared/types/board';
-import { ButtonComponent } from '@/shared/ui/button/button.component';
-import { InputComponent } from '@/shared/ui/input/input.component';
 import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-agile-board',
-  imports: [ButtonComponent, InputComponent],
+  imports: [BoardsSelectorComponent],
   templateUrl: './agile-board.component.html',
   styleUrl: './agile-board.component.scss',
 })
