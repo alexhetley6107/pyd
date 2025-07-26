@@ -28,16 +28,11 @@ export class TopBarComponent {
   menuItems = [
     {
       label: 'Setting',
-      action: () => {
-        this.router.navigate(['setting']);
-      },
+      action: () => this.router.navigate(['setting']),
     },
     {
       label: 'Log out',
-      action: () => {
-        this.auth.logout();
-        this.router.navigate(['login']);
-      },
+      action: () => this.auth.logout(),
     },
   ];
 }

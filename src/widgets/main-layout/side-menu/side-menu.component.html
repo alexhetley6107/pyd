@@ -10,7 +10,11 @@
   <nav class="links" (click)="onLinkClick()">
     <ul>
       @for (l of links; track l.path) {
-      <li>
+      <li
+        [ngClass]="{
+        only_mobile: l.onlyMobile,
+      }"
+      >
         <a [routerLink]="l.path" routerLinkActive="active" #rla="routerLinkActive">
           <img [src]="'svg/' + l.icon + (rla.isActive ? 'red' : 'blue') + '.svg'" alt="" />
           <span [class.active]="rla.isActive">
@@ -25,6 +29,8 @@
   <button class="collapse_btn" (click)="toggleCollapse()">
     <img src="/svg/chevron_left.svg" alt="" />
   </button>
+
+  <button class="logout" (click)="logout()">Log Out</button>
 </div>
 
 <div class="burger" (click)="toggleCollapse()">

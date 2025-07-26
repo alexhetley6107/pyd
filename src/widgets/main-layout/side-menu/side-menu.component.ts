@@ -1,9 +1,9 @@
+import { MOBILE_WIDTH } from '@/shared/constants';
+import { AuthService } from '@/shared/services/auth.service';
 import { LogoComponent } from '@/shared/ui/logo/logo.component';
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-
-const MOBILE_WIDTH = 768;
 
 @Component({
   selector: 'side-menu',
@@ -13,7 +13,9 @@ const MOBILE_WIDTH = 768;
   standalone: true,
 })
 export class SideMenuComponent {
-  isCollapsed = false;
+  auth = inject(AuthService);
+
+  isCollapsed = true;
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
@@ -27,7 +29,8 @@ export class SideMenuComponent {
   }
 
   ngOnInit() {
-    this.onLinkClick();
+    const shouldOpen = window.innerWidth > MOBILE_WIDTH;
+    if (shouldOpen) this.isCollapsed = false;
   }
 
   links = [
@@ -35,5 +38,11 @@ export class SideMenuComponent {
     { title: 'Calendar', path: ['/calendar'], icon: 'calendar_' },
     { title: 'Agile Board', path: ['/agile-board'], icon: 'agile_' },
     { title: 'Backlog', path: ['/backlog'], icon: 'backlog_' },
+    { title: 'Setting', path: ['/setting'], icon: 'dashboard_', onlyMobile: true },
   ];
+
+  logout() {
+    this.auth.logout();
+    this.isCollapsed = true;
+  }
 }

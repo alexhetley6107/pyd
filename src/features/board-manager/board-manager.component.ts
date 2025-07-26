@@ -9,7 +9,7 @@ import { BoardModalComponent } from '../board-modal/board-modal.component';
   styleUrl: './board-manager.component.scss',
 })
 export class BoardManagerComponent {
-  isAddModal = true;
+  isAddModal = false;
 
   toggleAddModal() {
     this.isAddModal = !this.isAddModal;
