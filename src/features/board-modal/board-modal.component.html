@@ -1,0 +1,12 @@
+<ui-modal [open]="open" (closeModal)="onCloseModal()">
+  <div class="board-modal column gap-10">
+    <h3 class="text-center">{{ title }}</h3>
+    <ui-input placeholder="Board name"></ui-input>
+
+    <div class="flex gap-10 w-full">
+      <ui-button fullWidth (onClick)="onCloseModal()">Save</ui-button>
+
+      <ui-button fullWidth (onClick)="onCloseModal()" variant="outlined">Cancel</ui-button>
+    </div>
+  </div>
+</ui-modal>

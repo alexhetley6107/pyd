@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BoardsSelectorComponent } from './boards-selector.component';
+import { BoardModalComponent } from './board-modal.component';
 
-describe('BoardsSelectorComponent', () => {
-  let component: BoardsSelectorComponent;
-  let fixture: ComponentFixture<BoardsSelectorComponent>;
+describe('BoardModalComponent', () => {
+  let component: BoardModalComponent;
+  let fixture: ComponentFixture<BoardModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BoardsSelectorComponent]
+      imports: [BoardModalComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BoardsSelectorComponent);
+    fixture = TestBed.createComponent(BoardModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

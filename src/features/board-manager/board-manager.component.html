@@ -1,1 +1,11 @@
-<p>board-manager works!</p>
+<div class="flex justify-between align-center" style="gap: 8px">
+  <div class="flex align-center">
+    <p>Agile Boards /</p>
+
+    <p>/ First Project</p>
+  </div>
+
+  <ui-button size="sm" (onClick)="toggleAddModal()">New Board</ui-button>
+</div>
+
+<board-modal [open]="isAddModal" (closeModal)="toggleAddModal()"></board-modal>

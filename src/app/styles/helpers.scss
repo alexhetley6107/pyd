@@ -2,6 +2,11 @@
   display: flex;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
 .justify-between {
   justify-content: space-between;
 }
@@ -16,4 +21,12 @@
 
 .align-center {
   align-items: center;
+}
+
+.gap-10 {
+  gap: 10px;
+}
+
+.w-full {
+  width: 100%;
 }
