@@ -28,7 +28,7 @@ export class SignupComponent {
   isLoading = false;
 
   form!: FormGroup<{
-    username: FormControl<string>;
+    nickname: FormControl<string>;
     email: FormControl<string>;
     password: FormControl<string>;
     confirmPassword: FormControl<string>;
@@ -46,7 +46,7 @@ export class SignupComponent {
 
     this.form = this.fb.group(
       {
-        username: this.fb.control('', [
+        nickname: this.fb.control('', [
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(20),
@@ -63,8 +63,8 @@ export class SignupComponent {
       { validators: matchPasswords('password', 'confirmPassword') }
     );
   }
-  get usernameError(): string | null {
-    return getError(this.form.get('username'), 'Username');
+  get nicknameError(): string | null {
+    return getError(this.form.get('nickname'), 'nickname');
   }
   get emailError(): string | null {
     return getError(this.form.get('email'), 'Email');
@@ -89,13 +89,13 @@ export class SignupComponent {
 
     this.isLoading = true;
 
-    const userName = this.form.value.username ?? '';
+    const nickname = this.form.value.nickname ?? '';
     const email = this.form.value.email ?? '';
     const password = this.form.value.password ?? '';
 
-    this.auth.signup(userName, email, password).subscribe({
+    this.auth.signup(nickname, email, password).subscribe({
       next: (res) => {
-        this.toast.add(`Welcome ${res.userName}`);
+        this.toast.add(`Welcome ${res.nickname}`);
         this.router.navigate(['dashboard']);
       },
       error: (err) => {

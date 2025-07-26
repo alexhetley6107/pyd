@@ -27,7 +27,7 @@ export class LoginComponent {
   isLoading = false;
 
   form!: FormGroup<{
-    username: FormControl<string>;
+    login: FormControl<string>;
     password: FormControl<string>;
   }>;
 
@@ -42,12 +42,12 @@ export class LoginComponent {
     }
 
     this.form = this.fb.group({
-      username: this.fb.control('', [Validators.required]),
+      login: this.fb.control('', [Validators.required]),
       password: this.fb.control('', [Validators.required]),
     });
   }
-  get usernameError(): string | null {
-    return getError(this.form.get('username'), 'Username');
+  get loginError(): string | null {
+    return getError(this.form.get('login'), 'login');
   }
   get passwordError(): string | null {
     return getError(this.form.get('password'), 'Password');
@@ -60,12 +60,12 @@ export class LoginComponent {
     }
     this.isLoading = true;
 
-    const userName = this.form.value.username ?? '';
+    const login = this.form.value.login ?? '';
     const password = this.form.value.password ?? '';
 
-    this.auth.login(userName, password).subscribe({
+    this.auth.login(login, password).subscribe({
       next: (res) => {
-        this.toast.add(`Welcome ${res.userName}`);
+        this.toast.add(`Welcome ${res.nickname}`);
         this.router.navigate(['agile-board']);
       },
       error: (err) => {

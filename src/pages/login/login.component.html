@@ -7,7 +7,11 @@
   <h1 class="">Login</h1>
 
   <div class="">
-    <ui-input formControlName="username" placeholder="Username" [error]="usernameError"></ui-input>
+    <ui-input
+      formControlName="login"
+      placeholder="Nickname Or Email"
+      [error]="loginError"
+    ></ui-input>
     <ui-input
       formControlName="password"
       placeholder="Password"

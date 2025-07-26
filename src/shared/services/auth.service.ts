@@ -12,8 +12,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(userName: string, password: string) {
-    const body = { userName, password };
+  login(login: string, password: string) {
+    const body = { login, password };
     return this.http.post<User>(API.login, body).pipe(
       tap((user) => {
         this.user = user;
@@ -22,8 +22,8 @@ export class AuthService {
     );
   }
 
-  signup(userName: string, email: string, password: string) {
-    const body = { userName, email, password };
+  signup(nickname: string, email: string, password: string) {
+    const body = { nickname, email, password };
     return this.http.post<User>(API.signup, body).pipe(
       tap((user) => {
         this.user = user;

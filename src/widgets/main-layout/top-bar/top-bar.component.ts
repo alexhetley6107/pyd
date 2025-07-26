@@ -19,7 +19,7 @@ export class TopBarComponent {
 
     if (!user) return 'U';
 
-    return user?.userName
+    return user?.nickname
       .split(' ')
       .map((name) => name[0].toLocaleUpperCase())
       .join('');
