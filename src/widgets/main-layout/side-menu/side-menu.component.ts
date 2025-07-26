@@ -26,6 +26,10 @@ export class SideMenuComponent {
     }
   }
 
+  ngOnInit() {
+    this.onLinkClick();
+  }
+
   links = [
     { title: 'Dashboard', path: ['/dashboard'], icon: 'dashboard_' },
     { title: 'Calendar', path: ['/calendar'], icon: 'calendar_' },

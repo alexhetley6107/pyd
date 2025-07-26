@@ -12,8 +12,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(login: string, password: string) {
-    const body = { login, password };
+  login(body: { login: string; password: string }) {
     return this.http.post<User>(API.login, body).pipe(
       tap((user) => {
         this.user = user;

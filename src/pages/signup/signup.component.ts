@@ -64,7 +64,7 @@ export class SignupComponent {
     );
   }
   get nicknameError(): string | null {
-    return getError(this.form.get('nickname'), 'nickname');
+    return getError(this.form.get('nickname'), 'Nickname');
   }
   get emailError(): string | null {
     return getError(this.form.get('email'), 'Email');

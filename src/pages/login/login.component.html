@@ -20,7 +20,13 @@
     ></ui-input>
   </div>
   <div class="flex justify-between">
-    <span>Remember me</span>
+    <div class="remember">
+      <label>
+        <input type="checkbox" [checked]="isRememberMe" (change)="toggleRememberMe($event)" />
+        <span>Remember me</span>
+      </label>
+    </div>
+
     <a routerLink="/forgot-password">Forgot password?</a>
   </div>
 

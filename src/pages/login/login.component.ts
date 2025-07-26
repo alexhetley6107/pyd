@@ -12,11 +12,13 @@ import {
 import { getError } from '@/shared/helpers/formErrors';
 import { AuthService } from '@/shared/services/auth.service';
 import { ToastService } from '@/shared/services/toast.service';
+import { decryptObject, encryptObject } from '@/shared/utils/encrypt';
 
 @Component({
   selector: 'page-login',
   imports: [ButtonComponent, RouterLink, InputComponent, ReactiveFormsModule],
   templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
   standalone: true,
 })
 export class LoginComponent {
@@ -25,6 +27,7 @@ export class LoginComponent {
   toast = inject(ToastService);
 
   isLoading = false;
+  isRememberMe = false;
 
   form!: FormGroup<{
     login: FormControl<string>;
@@ -41,11 +44,27 @@ export class LoginComponent {
       return;
     }
 
+    const initials = { login: '', password: '' };
+
+    const savedCreds = localStorage.getItem('rememberMe');
+    if (savedCreds) {
+      this.isRememberMe = true;
+      const decryptedCreds = decryptObject(savedCreds);
+      initials.login = decryptedCreds?.login ?? '';
+      initials.password = decryptedCreds?.password ?? '';
+    }
+
     this.form = this.fb.group({
-      login: this.fb.control('', [Validators.required]),
-      password: this.fb.control('', [Validators.required]),
+      login: this.fb.control(initials.login, [Validators.required]),
+      password: this.fb.control(initials.password, [Validators.required]),
     });
   }
+
+  toggleRememberMe(e: Event) {
+    const input = e.target as HTMLInputElement;
+    this.isRememberMe = input.checked;
+  }
+
   get loginError(): string | null {
     return getError(this.form.get('login'), 'login');
   }
@@ -62,11 +81,17 @@ export class LoginComponent {
 
     const login = this.form.value.login ?? '';
     const password = this.form.value.password ?? '';
+    const body = { login, password };
 
-    this.auth.login(login, password).subscribe({
+    this.auth.login(body).subscribe({
       next: (res) => {
-        this.toast.add(`Welcome ${res.nickname}`);
+        if (this.isRememberMe) {
+          localStorage.setItem('rememberMe', encryptObject(body));
+        } else {
+          localStorage.removeItem('rememberMe');
+        }
         this.router.navigate(['agile-board']);
+        this.toast.add(`Welcome ${res.nickname}`);
       },
       error: (err) => {
         this.toast.add(err.error.message, { type: 'error' });
