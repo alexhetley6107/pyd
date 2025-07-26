@@ -1,12 +1,14 @@
-const API_URL = 'http://localhost:5001/api';
+import { ENV } from '@/environments/environment';
+
+const URL = ENV.API_URL;
 
 export const API = {
-  login: `${API_URL}/auth/login`,
-  signup: `${API_URL}/auth/signup`,
-  forgotPassword: `${API_URL}/auth/forgot-password`,
-  resetPassword: `${API_URL}/auth/reset-password`,
+  login: `${URL}/auth/login`,
+  signup: `${URL}/auth/signup`,
+  forgotPassword: `${URL}/auth/forgot-password`,
+  resetPassword: `${URL}/auth/reset-password`,
 
-  board: `${API_URL}/board`,
-  status: `${API_URL}/status`,
-  task: `${API_URL}/task`,
+  board: `${URL}/board`,
+  status: `${URL}/status`,
+  task: `${URL}/task`,
 };
