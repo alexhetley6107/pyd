@@ -19,4 +19,12 @@ export class BoardService {
       })
     );
   }
+
+  create(body: { name: string }) {
+    return this.http.post<Board>(API.board, body).pipe(
+      tap((board) => {
+        this.boards = [...this.boards, board];
+      })
+    );
+  }
 }

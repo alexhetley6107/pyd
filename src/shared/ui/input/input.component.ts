@@ -52,6 +52,8 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   handleBlur(): void {
+    this.value = this.value.trim();
+    this.onChange(this.value);
     this.onTouched();
   }
 }

@@ -1,12 +1,19 @@
 <ui-modal [open]="open" (closeModal)="onCloseModal()">
   <div class="board-modal column gap-10">
     <h3 class="text-center">{{ title }}</h3>
-    <ui-input placeholder="Board name"></ui-input>
+    <form
+      [formGroup]="form"
+      (ngSubmit)="handleSubmit()"
+      (keydown.enter)="handleSubmit()"
+      class="auth-form"
+    >
+      <ui-input placeholder="Board name" formControlName="name" [error]="nameError"></ui-input>
 
-    <div class="flex gap-10 w-full">
-      <ui-button fullWidth (onClick)="onCloseModal()">Save</ui-button>
+      <div class="flex gap-10 w-full">
+        <ui-button fullWidth type="submit" [loading]="isLoading">Save</ui-button>
 
-      <ui-button fullWidth (onClick)="onCloseModal()" variant="outlined">Cancel</ui-button>
-    </div>
+        <ui-button fullWidth (onClick)="onCloseModal()" variant="outlined">Cancel</ui-button>
+      </div>
+    </form>
   </div>
 </ui-modal>
