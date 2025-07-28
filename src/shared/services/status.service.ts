@@ -19,4 +19,28 @@ export class StatusService {
       })
     );
   }
+
+  create(body: { name: string }) {
+    return this.http.post<Status>(API.status, body).pipe(
+      tap((s) => {
+        this.statuses = [...this.statuses, s];
+      })
+    );
+  }
+
+  change(body: { id: string; order: number }) {
+    return this.http.patch<Status>(API.status, body).pipe(
+      tap((status) => {
+        this.statuses = this.statuses.map((s) => (s.id === status.id ? status : s));
+      })
+    );
+  }
+
+  delete(id: string) {
+    return this.http.delete(`${API.status}/${id}`).pipe(
+      tap(() => {
+        this.statuses = this.statuses.filter((b) => b.id !== id);
+      })
+    );
+  }
 }

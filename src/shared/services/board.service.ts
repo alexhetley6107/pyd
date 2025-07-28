@@ -10,12 +10,18 @@ import { tap } from 'rxjs';
 export class BoardService {
   constructor(private http: HttpClient) {}
 
+  openedBoard: Board | null = null;
   boards: Board[] = [];
+
+  openBoard(b: Board) {
+    this.openedBoard = b;
+  }
 
   getAll() {
     return this.http.get<Board[]>(API.board).pipe(
       tap((boards) => {
         this.boards = boards;
+        this.openedBoard = boards?.[0] ?? null;
       })
     );
   }
@@ -24,6 +30,22 @@ export class BoardService {
     return this.http.post<Board>(API.board, body).pipe(
       tap((board) => {
         this.boards = [...this.boards, board];
+      })
+    );
+  }
+
+  change(body: { id: string; name: string }) {
+    return this.http.patch<Board>(API.board, body).pipe(
+      tap((board) => {
+        this.boards = this.boards.map((b) => (b.id === board.id ? board : b));
+      })
+    );
+  }
+
+  delete(id: string) {
+    return this.http.delete(`${API.board}/${id}`).pipe(
+      tap(() => {
+        this.boards = this.boards.filter((b) => b.id !== id);
       })
     );
   }
