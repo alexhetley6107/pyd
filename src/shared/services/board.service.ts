@@ -34,9 +34,10 @@ export class BoardService {
     );
   }
 
-  change(body: { id: string; name: string }) {
+  update(body: { id: string; name: string }) {
     return this.http.patch<Board>(API.board, body).pipe(
       tap((board) => {
+        this.openedBoard = board;
         this.boards = this.boards.map((b) => (b.id === board.id ? board : b));
       })
     );

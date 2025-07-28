@@ -4,7 +4,16 @@ import { ToastService } from '@/shared/services/toast.service';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { ModalComponent } from '@/shared/ui/modal/modal.component';
-import { booleanAttribute, Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+  booleanAttribute,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -13,7 +22,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-type BoardModalVariant = 'create' | 'edit';
+type BoardModalAction = 'create' | 'edit';
 
 @Component({
   selector: 'board-modal',
@@ -21,12 +30,13 @@ type BoardModalVariant = 'create' | 'edit';
   templateUrl: './board-modal.component.html',
   styleUrl: './board-modal.component.scss',
 })
-export class BoardModalComponent {
+export class BoardModalComponent implements OnChanges {
   toast = inject(ToastService);
   boardService = inject(BoardService);
 
   @Input({ transform: booleanAttribute }) open: boolean = false;
-  @Input() variant: BoardModalVariant = 'create';
+  @Input() action: BoardModalAction = 'create';
+
   @Output() closeModal = new EventEmitter<void>();
 
   isLoading = false;
@@ -36,7 +46,7 @@ export class BoardModalComponent {
 
   constructor(private fb: NonNullableFormBuilder) {}
   get title(): string {
-    return this.variant === 'create' ? 'Create board' : 'Edit board';
+    return this.action === 'create' ? 'Create board' : 'Edit board';
   }
   get nameError(): string | null {
     return getError(this.form.get('name'), 'Name');
@@ -46,6 +56,18 @@ export class BoardModalComponent {
     this.form = this.fb.group({
       name: this.fb.control('', [Validators.required]),
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const modalOpened = Boolean(changes['open'].currentValue);
+
+    if (modalOpened) {
+      const initialName = modalOpened ? this.boardService?.openedBoard?.name : '';
+
+      this.form = this.fb.group({
+        name: this.fb.control(initialName ?? '', [Validators.required]),
+      });
+    }
   }
 
   onCloseModal() {
@@ -62,14 +84,19 @@ export class BoardModalComponent {
     }
     this.isLoading = true;
 
-    const body = { name: this.form.value.name ?? '' };
+    const method = this.action === 'create' ? 'create' : 'update';
+    const payload: any = {
+      name: this.form.value.name ?? '',
+      ...(this.action === 'create' ? {} : { id: this.boardService?.openedBoard?.id ?? '' }),
+    };
 
-    this.boardService.create(body).subscribe({
+    this.boardService[method](payload).subscribe({
       next: () => {
-        const message = `Board ${body.name} successfully created.`;
+        const message =
+          this.action === 'create' ? `Board successfully created.` : `Board successfully updated.`;
         this.toast.add(message);
       },
-      error: (err) => {
+      error: (err: any) => {
         this.toast.add(err.error.message, { type: 'error' });
         this.isLoading = false;
       },
