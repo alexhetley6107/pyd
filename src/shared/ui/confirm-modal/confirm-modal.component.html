@@ -1,0 +1,11 @@
+<ui-modal [open]="open" (closeModal)="onCloseModal()">
+  <div class="confirm_modal">
+    <h3 class="title text-center">{{ title }}</h3>
+
+    <div class="flex gap-10 w-full">
+      <ui-button fullWidth (onClick)="onConfirm()" [loading]="isLoading">Confirm</ui-button>
+
+      <ui-button fullWidth (onClick)="onCloseModal()" variant="outlined">Cancel</ui-button>
+    </div>
+  </div>
+</ui-modal>

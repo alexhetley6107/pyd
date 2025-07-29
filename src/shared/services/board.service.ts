@@ -47,6 +47,7 @@ export class BoardService {
     return this.http.delete(`${API.board}/${id}`).pipe(
       tap(() => {
         this.boards = this.boards.filter((b) => b.id !== id);
+        this.openedBoard = this.boards?.[0] ?? null;
       })
     );
   }

@@ -1,0 +1,15 @@
+.confirm_modal {
+  width: 300px;
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
+
+  * {
+    width: 100%;
+  }
+
+  .title {
+    margin-bottom: 20px;
+  }
+}
