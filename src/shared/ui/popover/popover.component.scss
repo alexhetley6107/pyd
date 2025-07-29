@@ -16,3 +16,11 @@
   top: calc(100% + 10px);
   right: 0;
 }
+
+.menu_items {
+  .menu_item {
+    margin: 10px 15px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+}

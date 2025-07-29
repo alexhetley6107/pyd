@@ -22,7 +22,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-type BoardModalAction = 'create' | 'edit';
+type BoardModalAction = 'create' | 'update';
 
 @Component({
   selector: 'board-modal',
@@ -62,7 +62,7 @@ export class BoardModalComponent implements OnChanges {
     const modalOpened = Boolean(changes['open'].currentValue);
 
     if (modalOpened) {
-      const initialName = modalOpened ? this.boardService?.openedBoard?.name : '';
+      const initialName = this.action === 'create' ? '' : this.boardService?.openedBoard?.name;
 
       this.form = this.fb.group({
         name: this.fb.control(initialName ?? '', [Validators.required]),
@@ -84,13 +84,12 @@ export class BoardModalComponent implements OnChanges {
     }
     this.isLoading = true;
 
-    const method = this.action === 'create' ? 'create' : 'update';
     const payload: any = {
       name: this.form.value.name ?? '',
       ...(this.action === 'create' ? {} : { id: this.boardService?.openedBoard?.id ?? '' }),
     };
 
-    this.boardService[method](payload).subscribe({
+    this.boardService[this.action](payload).subscribe({
       next: () => {
         const message =
           this.action === 'create' ? `Board successfully created.` : `Board successfully updated.`;

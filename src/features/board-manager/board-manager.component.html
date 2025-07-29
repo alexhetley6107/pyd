@@ -2,10 +2,30 @@
   <div class="flex align-center">
     <p>Agile Boards /</p>
 
-    <p>/ First Project</p>
+    <p>/ {{ boardName }}</p>
+
+    <ui-popover>
+      <div popover-anchor class="icon_more flex align-center">
+        <img src="/svg/more.svg" alt="" />
+      </div>
+
+      <div popover-content>
+        <div class="menu_items">
+          @for (m of moreMenuItems; track m.label) {
+          <div class="menu_item" (click)="m.action()">{{ m.label }}</div>
+          }
+        </div>
+      </div>
+    </ui-popover>
   </div>
 
   <ui-button size="sm" (onClick)="toggleAddModal()">New Board</ui-button>
 </div>
 
+<div class="add_task">
+  <ui-button size="sm" variant="outlined" (onClick)="toggleAddModal()">Add Task</ui-button>
+</div>
+
 <board-modal [open]="isAddModal" (closeModal)="toggleAddModal()"></board-modal>
+
+<board-modal [open]="isEditModal" (closeModal)="toggleEditModal()" action="update"></board-modal>

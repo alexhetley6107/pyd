@@ -40,3 +40,11 @@ a {
   flex-direction: column;
   gap: 7px;
 }
+
+.menu_items {
+  .menu_item {
+    margin: 10px 15px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+}
