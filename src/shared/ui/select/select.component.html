@@ -1,0 +1,17 @@
+<div class="select">
+  <ui-popover>
+    <div popover-anchor class="flex align-center">
+      <img src="/svg/chevron_left.svg" [ngClass]="{ opened: open }" alt="" />
+
+      <p>{{ selected?.label }}</p>
+    </div>
+
+    <div popover-content>
+      <div class="menu_items">
+        @for (m of options; track m.value) {
+        <div class="menu_item">{{ m.label }}</div>
+        }
+      </div>
+    </div>
+  </ui-popover>
+</div>

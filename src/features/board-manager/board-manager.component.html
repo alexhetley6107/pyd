@@ -1,22 +1,32 @@
 <div class="flex justify-between align-center" style="gap: 8px">
   <div class="flex align-center">
-    <p>Agile Boards: /</p>
+    <h4 class="mr-10">Agile Boards</h4>
 
-    <p>/ {{ boardName }}</p>
+    @if(isBoardSelect){
+    <div class="flex align-center">
+      <ui-select
+        [options]="boardSelectOptions"
+        [selected]="selectedBoardOption"
+        placeholder="Select board"
+      ></ui-select>
 
-    <ui-popover>
-      <div popover-anchor class="icon_more flex align-center">
-        <img src="/svg/more.svg" alt="" />
-      </div>
-
-      <div popover-content>
-        <div class="menu_items">
-          @for (m of moreMenuItems; track m.label) {
-          <div class="menu_item" (click)="m.action()">{{ m.label }}</div>
-          }
+      <ui-popover>
+        <div popover-anchor class="icon_more flex align-center">
+          <img src="/svg/more.svg" alt="" />
         </div>
-      </div>
-    </ui-popover>
+
+        <div popover-content>
+          <div class="menu_items">
+            @for (m of selectedBoardActions; track m.text) {
+            <div class="menu_item" (click)="m.action()">{{ m.text }}</div>
+            }
+          </div>
+        </div>
+      </ui-popover>
+    </div>
+    } @else {
+    <p class="">No Boards</p>
+    }
   </div>
 
   <ui-button size="sm" (onClick)="toggleAddModal()">New Board</ui-button>

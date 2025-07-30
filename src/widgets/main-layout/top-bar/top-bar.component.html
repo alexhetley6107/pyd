@@ -7,8 +7,8 @@
 
       <div popover-content>
         <div class="menu_items">
-          @for (m of menuItems; track m.label) {
-          <div class="menu_item" (click)="m.action()">{{ m.label }}</div>
+          @for (m of menuItems; track m.text) {
+          <div class="menu_item" (click)="m.action()">{{ m.text }}</div>
           }
         </div>
       </div>

@@ -1,0 +1,10 @@
+.select {
+  img {
+    transform: rotate(-90deg);
+    width: 30px;
+    height: 30px;
+  }
+  img.opened {
+    transform: rotate(90deg);
+  }
+}

@@ -1,4 +1,5 @@
 import { AuthService } from '@/shared/services/auth.service';
+import { ActionOption } from '@/shared/types/ui';
 import { PopoverComponent } from '@/shared/ui/popover/popover.component';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
@@ -25,13 +26,13 @@ export class TopBarComponent {
       .join('');
   }
 
-  menuItems = [
+  menuItems: ActionOption[] = [
     {
-      label: 'Setting',
+      text: 'Setting',
       action: () => this.router.navigate(['setting']),
     },
     {
-      label: 'Log out',
+      text: 'Log out',
       action: () => this.auth.logout(),
     },
   ];
