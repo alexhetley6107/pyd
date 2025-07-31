@@ -6,6 +6,7 @@ import { PopoverComponent } from '@/shared/ui/popover/popover.component';
 import { BoardDeleteModalComponent } from '../board-delete-modal/board-delete-modal.component';
 import { SelectComponent } from '@/shared/ui/select/select.component';
 import { ActionOption, SelectOption } from '@/shared/types/ui';
+import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 
 @Component({
   selector: 'board-manager',
@@ -15,6 +16,7 @@ import { ActionOption, SelectOption } from '@/shared/types/ui';
     PopoverComponent,
     BoardDeleteModalComponent,
     SelectComponent,
+    SkeletonComponent,
   ],
   templateUrl: './board-manager.component.html',
   styleUrl: './board-manager.component.scss',

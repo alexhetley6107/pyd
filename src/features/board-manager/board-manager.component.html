@@ -36,6 +36,8 @@
   <ui-button size="sm" variant="outlined" (onClick)="toggleAddModal()">Add Task</ui-button>
 </div>
 
+<ui-skeleton width="1000px" height="200px"></ui-skeleton>
+
 <board-modal [open]="isAddModal" (closeModal)="toggleAddModal()"></board-modal>
 
 <board-modal [open]="isEditModal" (closeModal)="toggleEditModal()" action="update"></board-modal>
