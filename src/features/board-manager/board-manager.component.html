@@ -1,31 +1,37 @@
 <div class="flex justify-between align-center" style="gap: 8px">
   <div class="flex align-center">
-    <h4 class="mr-10">Agile Boards</h4>
+    <h4 class="mr-10">Agile Boards:</h4>
 
-    @if(isBoardSelect){
-    <div class="flex align-center">
-      <ui-select
-        [options]="boardSelectOptions"
-        [selected]="selectedBoardOption"
-        placeholder="Select board"
-      ></ui-select>
-
-      <ui-popover>
-        <div popover-anchor class="icon_more flex align-center">
-          <img src="/svg/more.svg" alt="" />
-        </div>
-
-        <div popover-content>
-          <div class="menu_items">
-            @for (m of selectedBoardActions; track m.text) {
-            <div class="menu_item" (click)="m.action()">{{ m.text }}</div>
-            }
-          </div>
-        </div>
-      </ui-popover>
-    </div>
+    @if(isFetching){
+    <ui-skeleton width="120px" height="30px"></ui-skeleton>
     } @else {
-    <p class="">No Boards</p>
+    <div class="">
+      @if(isBoardSelect){
+      <div class="flex align-center">
+        <ui-select
+          [options]="boardSelectOptions"
+          [selected]="selectedBoardOption"
+          placeholder="Select board"
+        ></ui-select>
+
+        <ui-popover>
+          <div popover-anchor class="icon_more flex align-center">
+            <img src="/svg/more.svg" alt="" />
+          </div>
+
+          <div popover-content>
+            <div class="menu_items">
+              @for (m of selectedBoardActions; track m.text) {
+              <div class="menu_item" (click)="m.action()">{{ m.text }}</div>
+              }
+            </div>
+          </div>
+        </ui-popover>
+      </div>
+      } @else {
+      <p class="">No Boards</p>
+      }
+    </div>
     }
   </div>
 
@@ -33,7 +39,11 @@
 </div>
 
 <div class="add_task">
+  @if(isFetching) {
+  <ui-skeleton width="82px" height="27px"></ui-skeleton>
+  } @else {
   <add-task></add-task>
+  }
 </div>
 
 <!-- <ui-skeleton width="1000px" height="200px"></ui-skeleton> -->

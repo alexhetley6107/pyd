@@ -35,6 +35,10 @@ export class BoardManagerComponent {
     return this.boardService.boards.length > 0;
   }
 
+  get isFetching(): boolean {
+    return this.boardService.isFetching;
+  }
+
   get boardSelectOptions(): SelectOption[] {
     return this.boardService.boards.map((board) => ({
       label: board.name,

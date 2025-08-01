@@ -10,12 +10,17 @@ import { tap } from 'rxjs';
 export class StatusService {
   constructor(private http: HttpClient) {}
 
+  isFetching = false;
+
   statuses: Status[] = [];
 
   getAll() {
+    this.isFetching = true;
+
     return this.http.get<Status[]>(API.status).pipe(
       tap((statuses) => {
         this.statuses = statuses;
+        this.isFetching = false;
       })
     );
   }

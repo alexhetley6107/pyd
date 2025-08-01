@@ -10,6 +10,8 @@ import { tap } from 'rxjs';
 export class BoardService {
   constructor(private http: HttpClient) {}
 
+  isFetching = false;
+
   openedBoard: Board | null = null;
   boards: Board[] = [];
 
@@ -18,10 +20,12 @@ export class BoardService {
   }
 
   getAll() {
+    this.isFetching = true;
     return this.http.get<Board[]>(API.board).pipe(
       tap((boards) => {
         this.boards = boards;
         this.openedBoard = boards?.[0] ?? null;
+        this.isFetching = false;
       })
     );
   }
