@@ -7,18 +7,18 @@ import { BoardDeleteModalComponent } from '../board-delete-modal/board-delete-mo
 import { SelectComponent } from '@/shared/ui/select/select.component';
 import { ActionOption, SelectOption } from '@/shared/types/ui';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
-import { AddTaskComponent } from '../add-task/add-task.component';
+import { TaskModalComponent } from '../task-modal/task-modal.component';
 
 @Component({
   selector: 'board-manager',
   imports: [
-    AddTaskComponent,
     ButtonComponent,
     BoardModalComponent,
     PopoverComponent,
     BoardDeleteModalComponent,
     SelectComponent,
     SkeletonComponent,
+    TaskModalComponent,
   ],
   templateUrl: './board-manager.component.html',
   styleUrl: './board-manager.component.scss',

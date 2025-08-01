@@ -1,3 +1,4 @@
+@use 'variables';
 @use 'fonts';
 @use 'helpers';
 @use 'animation';
@@ -9,16 +10,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-:root {
-  --white-color: #eef0f2;
-  --blue-color: #143447;
-  --red-color: #ff0763;
-
-  --gray-color: #c4c4c4;
-  --error-color: #ff0000;
-  --success-color: #04d744;
 }
 
 body,
