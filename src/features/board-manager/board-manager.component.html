@@ -33,10 +33,10 @@
 </div>
 
 <div class="add_task">
-  <ui-button size="sm" variant="outlined" (onClick)="toggleAddModal()">Add Task</ui-button>
+  <add-task></add-task>
 </div>
 
-<ui-skeleton width="1000px" height="200px"></ui-skeleton>
+<!-- <ui-skeleton width="1000px" height="200px"></ui-skeleton> -->
 
 <board-modal [open]="isAddModal" (closeModal)="toggleAddModal()"></board-modal>
 
