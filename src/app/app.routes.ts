@@ -12,6 +12,7 @@ import { NotFoundComponent } from '@/pages/not-found/not-found.component';
 import { AuthGuard } from '@/shared/guards/auth.guard';
 import { SettingComponent } from '@/pages/setting/setting.component';
 import { ResetPasswordComponent } from '@/pages/reset-password/reset-password.component';
+import { PlanDayComponent } from '@/pages/plan-day/plan-day.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,7 @@ export const routes: Routes = [
       { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
       { path: 'backlog', component: BacklogComponent, canActivate: [AuthGuard] },
       { path: 'setting', component: SettingComponent, canActivate: [AuthGuard] },
+      { path: 'plan-day', component: PlanDayComponent, canActivate: [AuthGuard] },
     ],
   },
   { path: '**', component: NotFoundComponent },
