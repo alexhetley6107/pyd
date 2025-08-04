@@ -2,7 +2,14 @@
   <ng-content select="[popover-anchor]"></ng-content>
 
   @if (open) {
-  <div class="popover-content">
+  <div
+    class="popover-content"
+    [ngClass]="{  
+      'popover': type === 'popover', 
+      'tooltip': type === 'tooltip',
+      'select': type === 'select',
+    }"
+  >
     <ng-content select="[popover-content]"></ng-content>
   </div>
   }

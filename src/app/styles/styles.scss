@@ -38,5 +38,9 @@ a {
     margin: 10px 15px;
     cursor: pointer;
     font-size: 18px;
+
+    text-wrap: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 }

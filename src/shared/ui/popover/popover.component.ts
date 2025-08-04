@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener, OnDestroy } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnDestroy } from '@angular/core';
+
+type PopoverType = 'popover' | 'select' | 'tooltip';
 
 @Component({
   selector: 'ui-popover',
@@ -9,6 +11,8 @@ import { Component, ElementRef, HostListener, OnDestroy } from '@angular/core';
   styleUrls: ['./popover.component.scss'],
 })
 export class PopoverComponent implements OnDestroy {
+  @Input() type: PopoverType = 'popover';
+
   open = false;
 
   private documentClickListener = this.handleDocumentClick.bind(this);

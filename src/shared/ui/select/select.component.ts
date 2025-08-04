@@ -1,7 +1,9 @@
 import { SelectOption } from '@/shared/types/ui';
-import { booleanAttribute, Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PopoverComponent } from '../popover/popover.component';
 import { NgClass } from '@angular/common';
+
+type ArrowPlacement = 'left' | 'right';
 
 @Component({
   selector: 'ui-select',
@@ -13,21 +15,11 @@ export class SelectComponent {
   @Input() options: SelectOption[] = [];
   @Input() selected: SelectOption | null = null;
   @Input() placeholder: string = '';
+  @Input() arrowPlacement: ArrowPlacement = 'right';
 
-  @Input({ transform: booleanAttribute }) withSearch: boolean = false;
+  @Output() onSelect = new EventEmitter<string>();
 
-  open = false;
-  search = '';
-
-  toggleSelect() {
-    this.open = !this.open;
-  }
-
-  changeSearch(value: string) {
-    this.search = value;
-  }
-
-  ngOnChanges() {
-    console.log(this.options);
+  handleSelect(id: string) {
+    this.onSelect.emit(id);
   }
 }

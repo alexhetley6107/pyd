@@ -10,6 +10,7 @@
   font-weight: 600;
   border: 1px solid var(--red-color);
   position: relative;
+  white-space: nowrap;
 
   &.full_width {
     width: 100%;

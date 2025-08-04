@@ -15,8 +15,8 @@ export class BoardService {
   openedBoard: Board | null = null;
   boards: Board[] = [];
 
-  openBoard(b: Board) {
-    this.openedBoard = b;
+  openBoard(boardId: string) {
+    this.openedBoard = this.boards.find((b) => b.id === boardId) ?? null;
   }
 
   getAll() {
