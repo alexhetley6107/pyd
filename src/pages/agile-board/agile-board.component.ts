@@ -1,3 +1,4 @@
+import { BoardColumnsComponent } from '@/features/board-columns/board-columns.component';
 import { BoardManagerComponent } from '@/features/board-manager/board-manager.component';
 import { BoardService } from '@/shared/services/board.service';
 import { StatusService } from '@/shared/services/status.service';
@@ -6,7 +7,7 @@ import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-agile-board',
-  imports: [BoardManagerComponent],
+  imports: [BoardManagerComponent, BoardColumnsComponent],
   templateUrl: './agile-board.component.html',
   styleUrl: './agile-board.component.scss',
 })
