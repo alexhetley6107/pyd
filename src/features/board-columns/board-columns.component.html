@@ -1,4 +1,16 @@
+<div class="sticky-header">
+  @for (c of columns; track c.id) {
+
+  <p class="header">
+    {{ c.name }}
+  </p>
+  <div class="divider"></div>
+
+  }
+</div>
+
 <div class="container">
+  @for (c of columns; track c.id) {
   <div class="column">
     <div class="box"></div>
     <div class="box"></div>
@@ -18,11 +30,7 @@
     <div class="box"></div>
     <div class="box"></div>
   </div>
-  <div class="column"></div>
 
-  <div class="column"></div>
-  <div class="column"></div>
-  <div class="column"></div>
-  <div class="column"></div>
-  <div class="column"></div>
+  <div class="divider"></div>
+  }
 </div>
