@@ -2,7 +2,7 @@
   <div class="logo flex align-center">
     <ui-logo size="sm"></ui-logo>
     <h3>Plan your day</h3>
-    <div class="close" (click)="toggleCollapse()">
+    <div class="close" (click)="toggleMenu()">
       <img src="/svg/close.svg" alt="" />
     </div>
   </div>
@@ -26,13 +26,13 @@
     </ul>
   </nav>
 
-  <button class="collapse_btn" (click)="toggleCollapse()">
+  <button class="collapse_btn" (click)="toggleMenu()">
     <img src="/svg/chevron_left.svg" alt="" />
   </button>
 
   <button class="logout" (click)="logout()">Log Out</button>
 </div>
 
-<div class="burger" (click)="toggleCollapse()">
+<div class="burger" (click)="toggleMenu()">
   <img src="/svg/burger.svg" alt="" />
 </div>

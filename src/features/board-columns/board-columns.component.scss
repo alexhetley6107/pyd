@@ -1,12 +1,32 @@
 :host {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  height: calc(100svh - 60px - 24px - 74px);
+  max-height: calc(100svh - 60px - 24px - 74px);
 
-  border: 1px solid grey;
+  width: calc(100vw - var(--menu-close-width) - 2 * var(--page-padding));
 
-  width: 100%;
-
-  height: 100%;
   flex-grow: 1;
+  border: 1px solid grey;
+  overflow: scroll;
+
+  &.menu-opened {
+    width: calc(100vw - var(--menu-open-width) - 2 * var(--page-padding));
+  }
+
+  .container {
+    display: flex;
+    overflow: scroll;
+    width: fit-content;
+
+    .column {
+      // margin: 10px;
+      width: 500px !important;
+      height: auto;
+      border: 3px solid red;
+      .box {
+        width: 50px;
+        height: 50px;
+        border: 3px solid blue;
+      }
+    }
+  }
 }

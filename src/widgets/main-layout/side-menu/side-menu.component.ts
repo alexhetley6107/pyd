@@ -1,5 +1,6 @@
 import { MOBILE_WIDTH } from '@/shared/constants';
 import { AuthService } from '@/shared/services/auth.service';
+import { SideMenuService } from '@/shared/services/side-menu.service';
 import { LogoComponent } from '@/shared/ui/logo/logo.component';
 import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
@@ -14,23 +15,26 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class SideMenuComponent {
   auth = inject(AuthService);
+  menu = inject(SideMenuService);
 
-  isCollapsed = true;
+  get isCollapsed() {
+    return !this.menu.isOpen;
+  }
 
-  toggleCollapse() {
-    this.isCollapsed = !this.isCollapsed;
+  toggleMenu() {
+    this.menu.toggleMenu();
   }
 
   onLinkClick() {
     const shouldClose = window.innerWidth <= MOBILE_WIDTH;
     if (shouldClose) {
-      this.toggleCollapse();
+      this.toggleMenu();
     }
   }
 
   ngOnInit() {
-    const shouldOpen = window.innerWidth > MOBILE_WIDTH;
-    if (shouldOpen) this.isCollapsed = false;
+    const shouldOpen = window.innerWidth < MOBILE_WIDTH;
+    if (shouldOpen) this.menu.closeMenu();
   }
 
   links = [
@@ -43,6 +47,6 @@ export class SideMenuComponent {
 
   logout() {
     this.auth.logout();
-    this.isCollapsed = true;
+    this.menu.openMenu();
   }
 }

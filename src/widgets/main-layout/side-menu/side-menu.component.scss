@@ -1,5 +1,5 @@
 .side-menu {
-  width: 220px;
+  width: var(--menu-open-width);
   height: 100%;
   border-right: 1px solid var(--gray-color);
 
@@ -83,7 +83,7 @@
   }
 
   &.collapsed {
-    width: 50px;
+    width: var(--menu-close-width);
 
     .collapse_btn {
       img {
