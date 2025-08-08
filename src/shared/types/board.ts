@@ -16,9 +16,8 @@ export type Task = {
   title: string;
   description: string;
   priority: string;
-  date: string;
-
-  boardId: string;
-  statusId: string;
+  date: string | null;
+  boardId: string | null;
+  statusId: string | null;
   userId: string;
 };

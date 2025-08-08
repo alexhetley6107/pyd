@@ -1,11 +1,16 @@
 <ui-modal [open]="open" (closeModal)="onCloseModal()">
-  <form class="task-modal column gap-10">
+  <form
+    class="task-modal column gap-10"
+    [formGroup]="form"
+    (ngSubmit)="handleSubmit()"
+    (keydown.enter)="handleSubmit()"
+  >
     <h3 class="text-center">Task details</h3>
     <div class="fields">
       <div class="inputs">
         <!-- formControlName="login" -->
-        <ui-input placeholder="Title"></ui-input>
-        <ui-input placeholder="Description"></ui-input>
+        <ui-input placeholder="Title" formControlName="title" [error]="titleError"></ui-input>
+        <ui-input placeholder="Description" formControlName="description"></ui-input>
       </div>
       <div class="selects">
         <ui-select placeholder="Select board" [options]="boardOptions"></ui-select>
@@ -15,7 +20,7 @@
     </div>
 
     <div class="flex gap-10 w-full">
-      <ui-button fullWidth (onClick)="onCloseModal()">Save</ui-button>
+      <ui-button fullWidth type="submit">Save</ui-button>
 
       <ui-button fullWidth variant="outlined" (onClick)="onCloseModal()">Close</ui-button>
     </div>
