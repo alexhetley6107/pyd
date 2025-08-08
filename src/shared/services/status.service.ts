@@ -19,9 +19,7 @@ export class StatusService {
 
     return this.http.get<Status[]>(API.status).pipe(
       tap((statuses) => {
-        // this.statuses = statuses;
-        this.statuses = [{ id: 'backlog', name: 'Backlog', order: 0, userId: '' }, ...statuses];
-
+        this.statuses = statuses;
         this.isFetching = false;
       })
     );

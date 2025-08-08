@@ -1,6 +1,10 @@
 <div class="select">
   <ui-popover [type]="'select'">
     <div popover-anchor class="body flex align-center" [ngClass]="arrowPlacement">
+      @if (!selected) {
+      <p>{{ placeholder }}</p>
+
+      }
       <p>{{ selected?.label }}</p>
 
       <img src="/svg/chevron_left.svg" alt="" />

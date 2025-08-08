@@ -29,7 +29,7 @@ export class BoardManagerComponent {
   isAddModal = false;
   isEditModal = false;
   isDeleteModal = false;
-  isTaskModal = false;
+  isTaskModal = true;
 
   get isBoardSelect(): boolean {
     return this.boardService.boards.length > 0;

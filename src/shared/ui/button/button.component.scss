@@ -1,3 +1,11 @@
+:host {
+  width: auto;
+
+  &.full_width {
+    width: 100%;
+  }
+}
+
 .button {
   padding: 10px 20px;
   background-color: var(--red-color);

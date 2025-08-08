@@ -1,9 +1,23 @@
 <ui-modal [open]="open" (closeModal)="onCloseModal()">
-  <div class="task-modal column gap-10">
+  <form class="task-modal column gap-10">
     <h3 class="text-center">Task details</h3>
-    <div class="form">
-      <!-- formControlName="login" -->
-      <ui-input placeholder="Title"></ui-input>
+    <div class="fields">
+      <div class="inputs">
+        <!-- formControlName="login" -->
+        <ui-input placeholder="Title"></ui-input>
+        <ui-input placeholder="Description"></ui-input>
+      </div>
+      <div class="selects">
+        <ui-select placeholder="Select board" [options]="boardOptions"></ui-select>
+        <ui-select placeholder="Select column" [options]="columnOptions"></ui-select>
+        <ui-select placeholder="Select proirity" [options]="priorityOptions"></ui-select>
+      </div>
     </div>
-  </div>
+
+    <div class="flex gap-10 w-full">
+      <ui-button fullWidth (onClick)="onCloseModal()">Save</ui-button>
+
+      <ui-button fullWidth variant="outlined" (onClick)="onCloseModal()">Close</ui-button>
+    </div>
+  </form>
 </ui-modal>

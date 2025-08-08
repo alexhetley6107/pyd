@@ -1,5 +1,12 @@
 import { NgClass } from '@angular/common';
-import { booleanAttribute, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  booleanAttribute,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+} from '@angular/core';
 
 type ButtonVariant = 'filled' | 'outlined';
 type ButtonType = 'button' | 'submit';
@@ -25,5 +32,10 @@ export class ButtonComponent {
 
   handleClick() {
     this.onClick.emit();
+  }
+
+  @HostBinding('class.full_width')
+  get fullWidthClass(): boolean {
+    return this.fullWidth;
   }
 }

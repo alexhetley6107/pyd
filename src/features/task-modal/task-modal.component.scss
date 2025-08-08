@@ -9,7 +9,32 @@
     width: 100%;
   }
 
-  .form {
-    width: 500px;
+  .fields {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    .inputs {
+      width: 60%;
+    }
+
+    .selects {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+
+      .inputs {
+        width: 100%;
+      }
+
+      .selects {
+        width: 100%;
+      }
+    }
   }
 }
