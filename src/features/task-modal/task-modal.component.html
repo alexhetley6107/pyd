@@ -8,14 +8,25 @@
     <h3 class="text-center">Task details</h3>
     <div class="fields">
       <div class="inputs">
-        <!-- formControlName="login" -->
         <ui-input placeholder="Title" formControlName="title" [error]="titleError"></ui-input>
         <ui-input placeholder="Description" formControlName="description"></ui-input>
       </div>
       <div class="selects">
-        <ui-select placeholder="Select board" [options]="boardOptions"></ui-select>
-        <ui-select placeholder="Select column" [options]="columnOptions"></ui-select>
-        <ui-select placeholder="Select proirity" [options]="priorityOptions"></ui-select>
+        <ui-selector
+          formControlName="boardId"
+          placeholder="Select board"
+          [options]="boardOptions"
+        ></ui-selector>
+        <ui-selector
+          formControlName="statusId"
+          placeholder="Select column"
+          [options]="columnOptions"
+        ></ui-selector>
+        <ui-selector
+          formControlName="priority"
+          placeholder="Select proirity"
+          [options]="priorityOptions"
+        ></ui-selector>
       </div>
     </div>
 

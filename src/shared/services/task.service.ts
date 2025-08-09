@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { API } from '../constants/api';
 import { Task } from '../types/board';
 import { tap } from 'rxjs';
@@ -13,8 +13,13 @@ export class TaskService {
   constructor(private http: HttpClient) {}
 
   isFetching = false;
-
   tasks: Task[] = [];
+
+  openedTask = signal<Task | null>(null);
+
+  openTask(taskId: string) {
+    this.openedTask.set(this.tasks.find((t) => t.id === taskId) ?? null);
+  }
 
   getAll(queries: TaskQueries = {}) {
     this.isFetching = true;

@@ -18,10 +18,20 @@ import {
 } from '@angular/forms';
 import { TaskService } from '@/shared/services/task.service';
 import { TaskDto } from '@/shared/types/dto';
+import { SelectorComponent } from '@/shared/ui/selector/selector.component';
+
+type ModatType = 'create' | 'edit';
 
 @Component({
   selector: 'task-modal',
-  imports: [ModalComponent, InputComponent, ButtonComponent, SelectComponent, ReactiveFormsModule],
+  imports: [
+    ModalComponent,
+    InputComponent,
+    ButtonComponent,
+    SelectComponent,
+    ReactiveFormsModule,
+    SelectorComponent,
+  ],
   templateUrl: './task-modal.component.html',
   styleUrl: './task-modal.component.scss',
 })
@@ -47,19 +57,20 @@ export class TaskModalComponent {
   constructor(private fb: NonNullableFormBuilder) {}
 
   ngOnInit(): void {
+    const openedBoardId = this.boardService.openedBoard()?.id ?? '';
+    const firstStatusId = this.statusService.statuses[0]?.id ?? '';
     this.form = this.fb.group({
       title: this.fb.control('', [Validators.required]),
       description: this.fb.control(''),
-      boardId: this.fb.control(''),
-      statusId: this.fb.control(''),
-      priority: this.fb.control(''),
+      boardId: this.fb.control(openedBoardId),
+      statusId: this.fb.control(firstStatusId),
+      priority: this.fb.control('MEDIUM'),
     });
   }
 
   onCloseModal() {
-    // if (this.isLoading) return;
-
-    // this.form.reset();
+    if (this.isLoading) return;
+    this.form.reset();
     this.closeModal.emit();
   }
 

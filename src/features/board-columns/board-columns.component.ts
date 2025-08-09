@@ -2,9 +2,9 @@ import { BoardService } from '@/shared/services/board.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
 import { StatusService } from '@/shared/services/status.service';
 import { TaskService } from '@/shared/services/task.service';
-import { Board, Status } from '@/shared/types/board';
+import { Status } from '@/shared/types/board';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
-import { Component, effect, HostBinding, inject, SimpleChanges } from '@angular/core';
+import { Component, effect, HostBinding, inject } from '@angular/core';
 
 @Component({
   selector: 'board-columns',
