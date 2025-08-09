@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { API } from '../constants/api';
 import { Board } from '../types/board';
 import { tap } from 'rxjs';
@@ -12,11 +12,13 @@ export class BoardService {
 
   isFetching = false;
 
-  openedBoard: Board | null = null;
   boards: Board[] = [];
 
+  openedBoard = signal<Board | null>(null);
+
   openBoard(boardId: string) {
-    this.openedBoard = this.boards.find((b) => b.id === boardId) ?? null;
+    const board = this.boards.find((b) => b.id === boardId) ?? null;
+    this.openedBoard.set(board);
   }
 
   getAll() {
@@ -24,7 +26,7 @@ export class BoardService {
     return this.http.get<Board[]>(API.board).pipe(
       tap((boards) => {
         this.boards = boards;
-        this.openedBoard = boards?.[0] ?? null;
+        this.openedBoard.set(boards?.[0] ?? null);
         this.isFetching = false;
       })
     );
@@ -33,7 +35,7 @@ export class BoardService {
   create(body: { name: string }) {
     return this.http.post<Board>(API.board, body).pipe(
       tap((board) => {
-        this.openedBoard = board;
+        this.openedBoard.set(board);
         this.boards = [...this.boards, board];
       })
     );
@@ -42,7 +44,7 @@ export class BoardService {
   update(body: { id: string; name: string }) {
     return this.http.patch<Board>(API.board, body).pipe(
       tap((board) => {
-        this.openedBoard = board;
+        this.openedBoard.set(board);
         this.boards = this.boards.map((b) => (b.id === board.id ? board : b));
       })
     );
@@ -52,7 +54,7 @@ export class BoardService {
     return this.http.delete(`${API.board}/${id}`).pipe(
       tap(() => {
         this.boards = this.boards.filter((b) => b.id !== id);
-        this.openedBoard = this.boards?.[0] ?? null;
+        this.openedBoard.set(this.boards?.[0] ?? null);
       })
     );
   }

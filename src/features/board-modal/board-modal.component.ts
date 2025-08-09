@@ -62,7 +62,7 @@ export class BoardModalComponent implements OnChanges {
     const modalOpened = Boolean(changes['open'].currentValue);
 
     if (modalOpened) {
-      const initialName = this.action === 'create' ? '' : this.boardService?.openedBoard?.name;
+      const initialName = this.action === 'create' ? '' : this.boardService?.openedBoard()?.name;
 
       this.form = this.fb.group({
         name: this.fb.control(initialName ?? '', [Validators.required]),
@@ -86,7 +86,7 @@ export class BoardModalComponent implements OnChanges {
 
     const payload: any = {
       name: this.form.value.name ?? '',
-      ...(this.action === 'create' ? {} : { id: this.boardService?.openedBoard?.id ?? '' }),
+      ...(this.action === 'create' ? {} : { id: this.boardService?.openedBoard()?.id ?? '' }),
     };
 
     this.boardService[this.action](payload).subscribe({

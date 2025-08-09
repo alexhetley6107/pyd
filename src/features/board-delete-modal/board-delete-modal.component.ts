@@ -26,7 +26,7 @@ export class BoardDeleteModalComponent {
   onDeleteBoard() {
     this.isLoading = true;
 
-    const id = this.boardService?.openedBoard?.id ?? '';
+    const id = this.boardService?.openedBoard()?.id ?? '';
 
     this.boardService.delete(id).subscribe({
       next: () => {

@@ -2,9 +2,9 @@ import { BoardService } from '@/shared/services/board.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
 import { StatusService } from '@/shared/services/status.service';
 import { TaskService } from '@/shared/services/task.service';
-import { Status } from '@/shared/types/board';
+import { Board, Status } from '@/shared/types/board';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
-import { Component, HostBinding, inject } from '@angular/core';
+import { Component, effect, HostBinding, inject, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'board-columns',
@@ -17,6 +17,15 @@ export class BoardColumnsComponent {
   statusService = inject(StatusService);
   boardService = inject(BoardService);
   taskService = inject(TaskService);
+
+  constructor() {
+    effect(() => {
+      const boardId = this.boardService.openedBoard()?.id;
+      if (!boardId) return;
+
+      this.taskService.getAll({ boardId }).subscribe();
+    });
+  }
 
   @HostBinding('class.menu-opened')
   get menuOpened(): boolean {

@@ -29,7 +29,7 @@ export class BoardManagerComponent {
   isAddModal = false;
   isEditModal = false;
   isDeleteModal = false;
-  isTaskModal = true;
+  isTaskModal = false;
 
   get isBoardSelect(): boolean {
     return this.boardService.boards.length > 0;
@@ -48,7 +48,7 @@ export class BoardManagerComponent {
 
   get selectedBoardOption(): SelectOption | null {
     return (
-      this.boardSelectOptions.find((o) => o.value === this.boardService?.openedBoard?.id) ?? null
+      this.boardSelectOptions.find((o) => o.value === this.boardService?.openedBoard()?.id) ?? null
     );
   }
 

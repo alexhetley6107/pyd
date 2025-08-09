@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API } from '../constants/api';
 import { Task } from '../types/board';
 import { tap } from 'rxjs';
-import { TaskDto } from '../types/dto';
+import { TaskDto, TaskQueries } from '../types/dto';
+import { getHttpParams } from '../utils/getHttpParams';
 
 @Injectable({
   providedIn: 'root',
@@ -15,10 +16,12 @@ export class TaskService {
 
   tasks: Task[] = [];
 
-  getAll() {
+  getAll(queries: TaskQueries = {}) {
     this.isFetching = true;
 
-    return this.http.get<Task[]>(API.task).pipe(
+    const params = getHttpParams(queries);
+
+    return this.http.get<Task[]>(API.task, { params }).pipe(
       tap((tasks) => {
         this.tasks = tasks;
         this.isFetching = false;
