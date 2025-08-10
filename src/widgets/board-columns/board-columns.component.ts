@@ -2,13 +2,17 @@ import { BoardService } from '@/shared/services/board.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
 import { StatusService } from '@/shared/services/status.service';
 import { TaskService } from '@/shared/services/task.service';
-import { Status } from '@/shared/types/board';
+import { Status, Task } from '@/shared/types/board';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 import { Component, effect, HostBinding, inject } from '@angular/core';
+import { TaskItemComponent } from './task-item/task-item.component';
+
+type Column = Status & { taskIds: string[] };
+type TaskMap = Record<string, Task>;
 
 @Component({
   selector: 'board-columns',
-  imports: [SkeletonComponent],
+  imports: [SkeletonComponent, TaskItemComponent],
   templateUrl: './board-columns.component.html',
   styleUrl: './board-columns.component.scss',
 })
@@ -41,7 +45,20 @@ export class BoardColumnsComponent {
     );
   }
 
-  get columns(): Status[] {
-    return this.statusService.statuses;
+  get columns(): Column[] {
+    return this.statusService.statuses.map((s) => ({
+      ...s,
+      taskIds: this.taskService.tasks.filter((t) => t.statusId === s.id).map((t) => t.id),
+    }));
+  }
+
+  get taskMap(): TaskMap {
+    const mapx = this.taskService.tasks.reduce((acc, task) => {
+      acc[task.id] = task;
+      return acc;
+    }, {} as TaskMap);
+    console.log(mapx);
+
+    return mapx;
   }
 }

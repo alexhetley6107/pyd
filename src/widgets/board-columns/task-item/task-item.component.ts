@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Task } from './../../../shared/types/board';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-task-item',
+  selector: 'task-item',
   imports: [],
   templateUrl: './task-item.component.html',
-  styleUrl: './task-item.component.scss'
+  styleUrl: './task-item.component.scss',
 })
 export class TaskItemComponent {
-
+  @Input() task: Task | null = null;
 }

@@ -15,34 +15,18 @@
   <p class="header">
     {{ c.name }}
   </p>
-  <div class="divider"></div>
 
   }
 </div>
 
 <div class="container">
-  @for (c of columns; track c.id) {
+  @for (col of columns; track col.id) {
   <div class="column">
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
+    @for (taskId of col.taskIds; track taskId) {
+    <task-item [task]="taskMap[taskId]"></task-item>
+    }
   </div>
-
-  <div class="divider"></div>
   }
 </div>
+
 }
