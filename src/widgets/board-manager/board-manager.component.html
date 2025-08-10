@@ -55,4 +55,8 @@
 
 <board-delete-modal [open]="isDeleteModal" (closeModal)="toggleDeleteModal()"></board-delete-modal>
 
-<task-modal [open]="isTaskModal" (closeModal)="toggleTaskModal()"></task-modal>
+<task-modal
+  [open]="isTaskModal"
+  (closeModal)="toggleTaskModal()"
+  action="create-for-borad"
+></task-modal>

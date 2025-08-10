@@ -27,8 +27,9 @@ import { TaskService } from '@/shared/services/task.service';
 import { TaskDto } from '@/shared/types/dto';
 import { SelectorComponent } from '@/shared/ui/selector/selector.component';
 import { TextareaComponent } from '@/shared/ui/textarea/textarea.component';
+import { ConfirmModalComponent } from '@/shared/ui/confirm-modal/confirm-modal.component';
 
-type ModatType = 'create' | 'edit';
+type ModalAction = 'create-for-backlog' | 'create-for-board' | 'edit-task';
 
 @Component({
   selector: 'task-modal',
@@ -39,6 +40,7 @@ type ModatType = 'create' | 'edit';
     ReactiveFormsModule,
     SelectorComponent,
     TextareaComponent,
+    ConfirmModalComponent,
   ],
   templateUrl: './task-modal.component.html',
   styleUrl: './task-modal.component.scss',
@@ -49,10 +51,14 @@ export class TaskModalComponent {
   statusService = inject(StatusService);
   taskService = inject(TaskService);
 
+  @Input() action: ModalAction = 'create-for-backlog';
+
   @Input({ transform: booleanAttribute }) open: boolean = false;
   @Output() closeModal = new EventEmitter<void>();
 
   isLoading = false;
+  isDeleting = false;
+  isDeleteModalOpen = false;
 
   form!: FormGroup<{
     title: FormControl<string>;
@@ -69,16 +75,20 @@ export class TaskModalComponent {
   }
   ngOnChanges(changes: SimpleChanges) {
     const modalOpened = Boolean(changes['open'].currentValue);
+    if (!modalOpened) return;
 
-    if (modalOpened) {
-      this.setInitialValues();
-    }
+    this.setInitialValues();
   }
 
   onCloseModal() {
     if (this.isLoading) return;
     this.form.reset();
     this.closeModal.emit();
+  }
+
+  toggleDeleteModal() {
+    if (this.isDeleting) return;
+    this.isDeleteModalOpen = !this.isDeleteModalOpen;
   }
 
   get boardOptions(): SelectOption[] {
@@ -110,6 +120,10 @@ export class TaskModalComponent {
 
   get titleError(): string | null {
     return getError(this.form.get('title'), 'Title');
+  }
+
+  get isDeleteIcon(): boolean {
+    return this.action === 'edit-task';
   }
 
   handleSubmit() {
@@ -145,14 +159,55 @@ export class TaskModalComponent {
   }
 
   setInitialValues() {
-    const openedBoardId = this.boardService.openedBoard()?.id ?? '';
-    const firstStatusId = this.statusService.statuses[0]?.id ?? '';
+    let titleValue = '';
+    let descValue = '';
+
+    let boardValue = '';
+    let statusValue = '';
+    let priorityValue = '';
+
+    if (this.action === 'create-for-board') {
+      boardValue = this.boardService.openedBoard()?.id ?? '';
+      statusValue = this.statusService.statuses[0]?.id ?? '';
+    }
+
+    if (this.action === 'edit-task') {
+      const task = this.taskService.openedTask();
+
+      titleValue = task?.title ?? '';
+      descValue = task?.description ?? '';
+      boardValue = task?.boardId ?? '';
+      statusValue = task?.statusId ?? '';
+      priorityValue = task?.priority ?? '';
+    }
+
     this.form = this.fb.group({
-      title: this.fb.control('', [Validators.required]),
-      description: this.fb.control(''),
-      boardId: this.fb.control(''),
-      statusId: this.fb.control(''),
-      priority: this.fb.control(''),
+      title: this.fb.control(titleValue, [Validators.required]),
+      description: this.fb.control(descValue),
+      boardId: this.fb.control(boardValue),
+      statusId: this.fb.control(statusValue),
+      priority: this.fb.control(priorityValue),
+    });
+  }
+
+  onDeleteTask() {
+    this.isDeleting = true;
+
+    const id = this.taskService?.openedTask()?.id ?? '';
+
+    this.taskService.delete(id).subscribe({
+      next: () => {
+        this.toast.add(`Task successfully deleted.`);
+      },
+      error: (err: any) => {
+        this.toast.add(err.error.message, { type: 'error' });
+        this.isDeleting = false;
+      },
+      complete: () => {
+        this.isDeleting = false;
+        this.onCloseModal();
+        this.toggleDeleteModal();
+      },
     });
   }
 }

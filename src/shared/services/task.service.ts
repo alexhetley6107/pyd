@@ -41,4 +41,13 @@ export class TaskService {
       })
     );
   }
+
+  delete(id: string) {
+    return this.http.delete(`${API.task}/${id}`).pipe(
+      tap(() => {
+        this.tasks = this.tasks.filter((t) => t.id !== id);
+        this.openedTask.set(null);
+      })
+    );
+  }
 }

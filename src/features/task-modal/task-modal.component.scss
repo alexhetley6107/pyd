@@ -9,6 +9,12 @@
     width: 100%;
   }
 
+  .delete img {
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+  }
+
   .fields {
     width: 100%;
     display: flex;
