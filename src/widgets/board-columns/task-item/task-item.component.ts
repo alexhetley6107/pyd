@@ -12,4 +12,8 @@ export class TaskItemComponent {
   @Input() task: Task | null = null;
 
   @Output() onClickTask = new EventEmitter<void>();
+
+  handleClick() {
+    this.onClickTask.emit();
+  }
 }

@@ -6,13 +6,14 @@ import { Status, Task } from '@/shared/types/board';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 import { Component, effect, HostBinding, inject } from '@angular/core';
 import { TaskItemComponent } from './task-item/task-item.component';
+import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
 
 type Column = Status & { taskIds: string[] };
 type TaskMap = Record<string, Task>;
 
 @Component({
   selector: 'board-columns',
-  imports: [SkeletonComponent, TaskItemComponent],
+  imports: [SkeletonComponent, TaskItemComponent, TaskModalComponent],
   templateUrl: './board-columns.component.html',
   styleUrl: './board-columns.component.scss',
 })
@@ -21,6 +22,8 @@ export class BoardColumnsComponent {
   statusService = inject(StatusService);
   boardService = inject(BoardService);
   taskService = inject(TaskService);
+
+  isTaskModal = false;
 
   constructor() {
     effect(() => {
@@ -53,12 +56,18 @@ export class BoardColumnsComponent {
   }
 
   get taskMap(): TaskMap {
-    const mapx = this.taskService.tasks.reduce((acc, task) => {
+    return this.taskService.tasks.reduce((acc, task) => {
       acc[task.id] = task;
       return acc;
     }, {} as TaskMap);
-    console.log(mapx);
+  }
 
-    return mapx;
+  openTask(taskId: string) {
+    this.taskService.openTask(taskId);
+    this.toggleTaskModal();
+  }
+
+  toggleTaskModal() {
+    this.isTaskModal = !this.isTaskModal;
   }
 }
