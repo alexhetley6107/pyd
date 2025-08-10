@@ -8,7 +8,15 @@ import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { ModalComponent } from '@/shared/ui/modal/modal.component';
 import { SelectComponent } from '@/shared/ui/select/select.component';
-import { booleanAttribute, Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+  booleanAttribute,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -28,7 +36,6 @@ type ModatType = 'create' | 'edit';
     ModalComponent,
     InputComponent,
     ButtonComponent,
-    SelectComponent,
     ReactiveFormsModule,
     SelectorComponent,
   ],
@@ -57,15 +64,14 @@ export class TaskModalComponent {
   constructor(private fb: NonNullableFormBuilder) {}
 
   ngOnInit(): void {
-    const openedBoardId = this.boardService.openedBoard()?.id ?? '';
-    const firstStatusId = this.statusService.statuses[0]?.id ?? '';
-    this.form = this.fb.group({
-      title: this.fb.control('', [Validators.required]),
-      description: this.fb.control(''),
-      boardId: this.fb.control(openedBoardId),
-      statusId: this.fb.control(firstStatusId),
-      priority: this.fb.control('MEDIUM'),
-    });
+    this.setInitialValues();
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    const modalOpened = Boolean(changes['open'].currentValue);
+
+    if (modalOpened) {
+      this.setInitialValues();
+    }
   }
 
   onCloseModal() {
@@ -128,6 +134,18 @@ export class TaskModalComponent {
       complete: () => {
         this.isLoading = false;
       },
+    });
+  }
+
+  setInitialValues() {
+    const openedBoardId = this.boardService.openedBoard()?.id ?? '';
+    const firstStatusId = this.statusService.statuses[0]?.id ?? '';
+    this.form = this.fb.group({
+      title: this.fb.control('', [Validators.required]),
+      description: this.fb.control(''),
+      boardId: this.fb.control(openedBoardId),
+      statusId: this.fb.control(firstStatusId),
+      priority: this.fb.control('MEDIUM'),
     });
   }
 }
