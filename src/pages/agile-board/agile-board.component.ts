@@ -1,5 +1,5 @@
-import { BoardColumnsComponent } from '@/features/board-columns/board-columns.component';
-import { BoardManagerComponent } from '@/features/board-manager/board-manager.component';
+import { BoardColumnsComponent } from '@/widgets/board-columns/board-columns.component';
+import { BoardManagerComponent } from '@/widgets/board-manager/board-manager.component';
 import { BoardService } from '@/shared/services/board.service';
 import { StatusService } from '@/shared/services/status.service';
 import { Board, Status } from '@/shared/types/board';

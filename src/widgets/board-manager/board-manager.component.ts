@@ -1,13 +1,13 @@
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { Component, inject } from '@angular/core';
-import { BoardModalComponent } from '../board-modal/board-modal.component';
+import { BoardModalComponent } from '@/features/board-modal/board-modal.component';
+import { BoardDeleteModalComponent } from '@/features/board-delete-modal/board-delete-modal.component';
+import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
 import { BoardService } from '@/shared/services/board.service';
 import { PopoverComponent } from '@/shared/ui/popover/popover.component';
-import { BoardDeleteModalComponent } from '../board-delete-modal/board-delete-modal.component';
 import { SelectComponent } from '@/shared/ui/select/select.component';
 import { ActionOption, SelectOption } from '@/shared/types/ui';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
-import { TaskModalComponent } from '../task-modal/task-modal.component';
 
 @Component({
   selector: 'board-manager',
