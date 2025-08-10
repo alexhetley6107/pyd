@@ -42,6 +42,15 @@ export class TaskService {
     );
   }
 
+  update(body: TaskDto) {
+    return this.http.patch<Task>(API.task, body).pipe(
+      tap((task) => {
+        this.openedTask.set(null);
+        this.tasks = this.tasks.map((t) => (t.id === task.id ? task : t));
+      })
+    );
+  }
+
   delete(id: string) {
     return this.http.delete(`${API.task}/${id}`).pipe(
       tap(() => {

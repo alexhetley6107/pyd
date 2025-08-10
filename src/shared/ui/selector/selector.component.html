@@ -1,5 +1,5 @@
 <div #container class="select-container" tabindex="1" (click)="toggleOpen()">
-  <div class="selected-value" [class.placeholder]="!selectedLabel">
+  <div class="selected-value" [class.placeholder]="!value">
     {{ selectedLabel || placeholder }}
   </div>
   <img src="/svg/chevron_left.svg" class="arrow" [class.open]="open" />

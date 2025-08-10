@@ -69,7 +69,7 @@ export class SelectorComponent implements ControlValueAccessor {
 
   get selectedLabel(): string {
     const selected = this.options.find((o) => o.value === this.value);
-    return selected?.label ?? '';
+    return selected?.value ? selected.label : this.placeholder;
   }
 
   @HostListener('document:click', ['$event.target'])

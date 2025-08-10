@@ -45,7 +45,7 @@
     </div>
 
     <div class="flex gap-10 w-full">
-      <ui-button fullWidth type="submit">Save</ui-button>
+      <ui-button fullWidth type="submit" [loading]="isLoading">Save</ui-button>
 
       <ui-button fullWidth variant="outlined" (onClick)="onCloseModal()">Close</ui-button>
     </div>

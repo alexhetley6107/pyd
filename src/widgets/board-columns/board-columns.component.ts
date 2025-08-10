@@ -30,6 +30,9 @@ export class BoardColumnsComponent {
       const boardId = this.boardService.openedBoard()?.id;
       if (!boardId) return;
 
+      const tasks = this.taskService.tasks.filter((t) => t.boardId === boardId);
+      if (tasks.length) return;
+
       this.taskService.getAll({ boardId }).subscribe();
     });
   }
@@ -56,10 +59,13 @@ export class BoardColumnsComponent {
   }
 
   get taskMap(): TaskMap {
-    return this.taskService.tasks.reduce((acc, task) => {
-      acc[task.id] = task;
-      return acc;
-    }, {} as TaskMap);
+    return this.taskService.tasks
+      .filter((t) => t.boardId)
+      .filter((t) => t.statusId)
+      .reduce((acc, task) => {
+        acc[task.id] = task;
+        return acc;
+      }, {} as TaskMap);
   }
 
   openTask(taskId: string) {

@@ -91,9 +91,7 @@ export class BoardModalComponent implements OnChanges {
 
     this.boardService[this.action](payload).subscribe({
       next: () => {
-        const message =
-          this.action === 'create' ? `Board successfully created.` : `Board successfully updated.`;
-        this.toast.add(message);
+        this.toast.add(`Board successfully ${this.action}d`);
       },
       error: (err: any) => {
         this.toast.add(err.error.message, { type: 'error' });

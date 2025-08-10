@@ -19,8 +19,13 @@
   }
 }
 
+.selected-value {
+  text-transform: capitalize;
+}
+
 .selected-value.placeholder {
   color: var(--gray-color);
+  text-transform: capitalize;
 }
 
 .arrow {

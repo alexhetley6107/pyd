@@ -126,38 +126,6 @@ export class TaskModalComponent {
     return this.action === 'edit-task';
   }
 
-  handleSubmit() {
-    if (!this.form.valid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
-    this.isLoading = true;
-
-    const body: TaskDto = {
-      title: this.form.value.title || '',
-      description: this.form.value.description || '',
-      boardId: this.form.value.boardId || null,
-      statusId: this.form.value.statusId || null,
-      priority: this.form.value.priority || '',
-      date: null,
-    };
-
-    this.taskService.create(body).subscribe({
-      next: () => {
-        this.toast.add(`Task successfully created`);
-        this.onCloseModal();
-      },
-      error: (err) => {
-        this.toast.add(err.error.message, { type: 'error' });
-        this.isLoading = false;
-      },
-      complete: () => {
-        this.isLoading = false;
-      },
-    });
-  }
-
   setInitialValues() {
     let titleValue = '';
     let descValue = '';
@@ -207,6 +175,49 @@ export class TaskModalComponent {
         this.isDeleting = false;
         this.onCloseModal();
         this.toggleDeleteModal();
+      },
+    });
+  }
+
+  handleSubmit() {
+    if (!this.form.valid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    if (!this.form.touched && this.action === 'edit-task') {
+      this.onCloseModal();
+      return;
+    }
+
+    this.isLoading = true;
+
+    const body: TaskDto = {
+      title: this.form.value.title || '',
+      description: this.form.value.description || '',
+      boardId: this.form.value.boardId || null,
+      statusId: this.form.value.statusId || null,
+      priority: this.form.value.priority || '',
+      date: null,
+    };
+
+    if (this.action === 'edit-task') {
+      body.id = this.taskService.openedTask()?.id ?? '';
+    }
+
+    const action = this.action === 'edit-task' ? 'update' : 'create';
+
+    this.taskService[action](body).subscribe({
+      next: () => {
+        this.toast.add(`Task successfully ${action}d`);
+      },
+      error: (err) => {
+        this.toast.add(err.error.message, { type: 'error' });
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+        this.onCloseModal();
       },
     });
   }
