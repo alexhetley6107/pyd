@@ -125,7 +125,7 @@ export class TaskModalComponent {
     };
 
     this.taskService.create(body).subscribe({
-      next: (res) => {
+      next: () => {
         this.toast.add(`Task successfully created`);
         this.onCloseModal();
       },

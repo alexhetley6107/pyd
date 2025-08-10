@@ -1,1 +1,8 @@
-<div class="wrapper"></div>
+<div class="wrapper">
+  <div class="prio_line" [ngClass]="task?.priority"></div>
+  <div class="content">
+    <p class="title">{{ task?.title }}</p>
+    <p class="desc">{{ task?.description }}</p>
+    <p class="priority">{{ task?.priority }}</p>
+  </div>
+</div>

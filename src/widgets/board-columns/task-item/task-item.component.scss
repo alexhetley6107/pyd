@@ -1,6 +1,79 @@
 .wrapper {
   box-shadow: var(--shadow);
   border-radius: 6px;
-  padding: 10px;
   height: 100px;
+  overflow: hidden;
+  display: flex;
+
+  .prio_line {
+    height: 100%;
+    min-width: 5px;
+
+    &.low {
+      background-color: rgba(76, 175, 80, 0.4); /* green */
+    }
+
+    &.medium {
+      background-color: rgba(255, 152, 0, 0.4); /* orange */
+    }
+
+    &.high {
+      background-color: rgba(244, 67, 54, 0.4); /* red */
+    }
+
+    &.urgent {
+      background-color: rgba(211, 47, 47, 0.4); /* dark red */
+    }
+
+    &.critical {
+      background-color: rgba(156, 39, 176, 0.4); /* purple */
+    }
+
+    &.blocker {
+      background-color: rgba(0, 0, 0, 0.5); /* black */
+    }
+
+    &.optional {
+      background-color: rgba(33, 150, 243, 0.4); /* blue */
+    }
+
+    &.low,
+    &.medium,
+    &.high,
+    &.urgent,
+    &.critical,
+    &.blocker,
+    &.optional {
+      transition: background-color 0.3s ease;
+      border-radius: 4px;
+    }
+  }
+
+  .content {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+
+    .title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .desc {
+      color: var(--gray-color);
+      max-height: 40px;
+      white-space: wrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .priority {
+      color: var(--grey-color);
+      font-size: 10px;
+      text-transform: capitalize;
+    }
+  }
 }
