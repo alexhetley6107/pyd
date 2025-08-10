@@ -27,6 +27,7 @@ import {
 import { TaskService } from '@/shared/services/task.service';
 import { TaskDto } from '@/shared/types/dto';
 import { SelectorComponent } from '@/shared/ui/selector/selector.component';
+import { TextareaComponent } from '@/shared/ui/textarea/textarea.component';
 
 type ModatType = 'create' | 'edit';
 
@@ -38,6 +39,7 @@ type ModatType = 'create' | 'edit';
     ButtonComponent,
     ReactiveFormsModule,
     SelectorComponent,
+    TextareaComponent,
   ],
   templateUrl: './task-modal.component.html',
   styleUrl: './task-modal.component.scss',

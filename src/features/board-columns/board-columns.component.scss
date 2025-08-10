@@ -4,15 +4,16 @@
 
   width: calc(100vw - var(--menu-close-width) - 2 * var(--page-padding));
 
-  overflow: scroll;
   position: relative;
   border-radius: var(--radius-5);
+  overflow: hidden;
 
   &.menu-opened {
     width: calc(100vw - var(--menu-open-width) - 2 * var(--page-padding));
   }
   &.loaded {
     border: 1px solid var(--gray-color);
+    overflow: scroll;
   }
 
   @media (max-width: 768px) {

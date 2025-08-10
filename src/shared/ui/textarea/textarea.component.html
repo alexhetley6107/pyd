@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <textarea
+    [placeholder]="placeholder"
+    [rows]="rows"
+    [value]="value"
+    (input)="handleInput($event)"
+    (blur)="handleBlur()"
+  ></textarea>
+
+  <div class="error">
+    <span *ngIf="error">* {{ error }}</span>
+  </div>
+</div>

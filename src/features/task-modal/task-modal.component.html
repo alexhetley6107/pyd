@@ -1,15 +1,19 @@
 <ui-modal [open]="open" (closeModal)="onCloseModal()">
   <form
-    class="task-modal column gap-10"
+    class="task-modal"
     [formGroup]="form"
     (ngSubmit)="handleSubmit()"
     (keydown.enter)="handleSubmit()"
   >
-    <h3 class="text-center">Task details</h3>
+    <h3 class="text-center mb-10">Task details</h3>
     <div class="fields">
       <div class="inputs">
         <ui-input placeholder="Title" formControlName="title" [error]="titleError"></ui-input>
-        <ui-input placeholder="Description" formControlName="description"></ui-input>
+        <ui-textarea
+          placeholder="Description"
+          formControlName="description"
+          [rows]="8"
+        ></ui-textarea>
       </div>
       <div class="selects">
         <ui-selector
@@ -27,6 +31,7 @@
           placeholder="Select proirity"
           [options]="priorityOptions"
         ></ui-selector>
+        <ui-input placeholder="Date"></ui-input>
       </div>
     </div>
 
