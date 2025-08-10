@@ -17,9 +17,9 @@ export class SelectComponent {
   @Input() placeholder: string = '';
   @Input() arrowPlacement: ArrowPlacement = 'right';
 
-  @Output() onSelect = new EventEmitter<string>();
+  @Output() onSelect = new EventEmitter<string | null>();
 
-  handleSelect(id: string) {
+  handleSelect(id: string | null) {
     this.onSelect.emit(id);
   }
 }

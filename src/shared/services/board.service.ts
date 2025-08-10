@@ -16,7 +16,7 @@ export class BoardService {
 
   openedBoard = signal<Board | null>(null);
 
-  openBoard(boardId: string) {
+  openBoard(boardId: string | null) {
     const board = this.boards.find((b) => b.id === boardId) ?? null;
     this.openedBoard.set(board);
   }

@@ -7,7 +7,6 @@ import { SelectOption } from '@/shared/types/ui';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { ModalComponent } from '@/shared/ui/modal/modal.component';
-import { SelectComponent } from '@/shared/ui/select/select.component';
 import {
   booleanAttribute,
   Component,
@@ -82,25 +81,31 @@ export class TaskModalComponent {
     this.closeModal.emit();
   }
 
-  get columnOptions(): SelectOption[] {
-    return this.statusService.statuses.map((s) => ({
-      label: s.name,
-      value: s.id,
-    }));
-  }
-
   get boardOptions(): SelectOption[] {
-    return this.boardService.boards.map((b) => ({
+    const options = this.boardService.boards.map((b) => ({
       label: b.name,
       value: b.id,
     }));
+
+    return [{ label: 'None', value: '' }, ...options];
+  }
+
+  get columnOptions(): SelectOption[] {
+    const options = this.statusService.statuses.map((b) => ({
+      label: b.name,
+      value: b.id,
+    }));
+
+    return [{ label: 'None', value: '' }, ...options];
   }
 
   get priorityOptions(): SelectOption[] {
-    return TaskPriorities.map((p) => ({
-      label: p,
-      value: p,
+    const options = TaskPriorities.map((b) => ({
+      label: b,
+      value: b,
     }));
+
+    return [{ label: 'None', value: '' }, ...options];
   }
 
   get titleError(): string | null {
@@ -120,7 +125,7 @@ export class TaskModalComponent {
       description: this.form.value.description || '',
       boardId: this.form.value.boardId || null,
       statusId: this.form.value.statusId || null,
-      priority: this.form.value.priority || 'LOW',
+      priority: this.form.value.priority || '',
       date: null,
     };
 
@@ -145,9 +150,9 @@ export class TaskModalComponent {
     this.form = this.fb.group({
       title: this.fb.control('', [Validators.required]),
       description: this.fb.control(''),
-      boardId: this.fb.control(openedBoardId),
-      statusId: this.fb.control(firstStatusId),
-      priority: this.fb.control('MEDIUM'),
+      boardId: this.fb.control(''),
+      statusId: this.fb.control(''),
+      priority: this.fb.control(''),
     });
   }
 }

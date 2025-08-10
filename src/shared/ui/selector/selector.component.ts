@@ -1,3 +1,4 @@
+import { SelectOption } from '@/shared/types/ui';
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -9,11 +10,6 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
-export interface SelectOption {
-  label: string;
-  value: string | number;
-}
 
 @Component({
   selector: 'ui-selector',
@@ -35,13 +31,13 @@ export class SelectorComponent implements ControlValueAccessor {
 
   @ViewChild('container', { static: true }) container!: ElementRef<HTMLDivElement>;
 
-  value: string | number | null = null;
+  value: string | null = null;
   open = false;
 
-  onChange: (value: string | number | null) => void = () => {};
+  onChange: (value: string | null) => void = () => {};
   onTouched: () => void = () => {};
 
-  writeValue(value: string | number | null): void {
+  writeValue(value: string | null): void {
     this.value = value;
     this.cd.detectChanges();
   }
@@ -73,7 +69,7 @@ export class SelectorComponent implements ControlValueAccessor {
 
   get selectedLabel(): string {
     const selected = this.options.find((o) => o.value === this.value);
-    return selected ? selected.label : '';
+    return selected?.label ?? '';
   }
 
   @HostListener('document:click', ['$event.target'])

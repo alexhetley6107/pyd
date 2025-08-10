@@ -1,4 +1,4 @@
-<div #container class="select-container" tabindex="0" (click)="toggleOpen()">
+<div #container class="select-container" tabindex="1" (click)="toggleOpen()">
   <div class="selected-value" [class.placeholder]="!selectedLabel">
     {{ selectedLabel || placeholder }}
   </div>
@@ -10,6 +10,7 @@
     <li
       (click)="select(option)"
       [class.selected]="option.value === value"
+      ngClass="{ nullable: !!option.value, selected: option.value === value }"
       role="option"
       [attr.aria-selected]="option.value === value"
       tabindex="-1"

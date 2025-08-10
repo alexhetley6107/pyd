@@ -76,7 +76,7 @@ export class BoardManagerComponent {
     this.isTaskModal = !this.isTaskModal;
   }
 
-  onOpenBoard(boardId: string) {
+  onOpenBoard(boardId: string | null) {
     this.boardService.openBoard(boardId);
   }
 }
