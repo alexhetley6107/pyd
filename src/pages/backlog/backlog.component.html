@@ -1,1 +1,8 @@
-<p>backlog works!</p>
+<div class="flex align-center justify-between">
+  <h3 class="mr-10">Backlog</h3>
+  <ui-button (onClick)="toggleNewTaskModal()" variant="outlined" size="sm">Add Task</ui-button>
+</div>
+
+<task-modal [open]="isNewTaskModal" (closeModal)="toggleNewTaskModal()"></task-modal>
+
+<backlog-filters></backlog-filters>
