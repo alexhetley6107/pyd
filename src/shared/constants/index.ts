@@ -1,5 +1,3 @@
-import { SelectOption } from '../types/ui';
-
 export const MOBILE_WIDTH = 768;
 
 export const TaskPriorities = [
@@ -12,4 +10,4 @@ export const TaskPriorities = [
   'optional',
 ] as const;
 
-export const NoneOption: SelectOption = { value: null, label: 'None' };
+export const mediumStatus = 'medium';

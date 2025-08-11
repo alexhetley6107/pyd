@@ -18,6 +18,6 @@ export type Task = {
   priority: string;
   date: string | null;
   boardId: string | null;
-  statusId: string | null;
+  statusId: string;
   userId: string;
 };

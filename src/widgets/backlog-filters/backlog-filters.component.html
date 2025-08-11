@@ -1,1 +1,13 @@
-<p>backlog-filters works!</p>
+<form class="filters" [formGroup]="form">
+  <ui-selector [options]="boardOptions" placeholder="Board" formControlName="boardId"></ui-selector>
+  <ui-selector
+    [options]="statusOptions"
+    placeholder="Status"
+    formControlName="statusId"
+  ></ui-selector>
+  <ui-selector
+    [options]="priorityOptions"
+    placeholder="Priority"
+    formControlName="priority"
+  ></ui-selector>
+</form>

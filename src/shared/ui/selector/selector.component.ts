@@ -57,6 +57,9 @@ export class SelectorComponent implements ControlValueAccessor {
   close() {
     this.open = false;
     this.onTouched();
+    setTimeout(() => {
+      this.open = false;
+    }, 0);
   }
 
   select(option: SelectOption) {

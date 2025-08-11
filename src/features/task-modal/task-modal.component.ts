@@ -1,5 +1,5 @@
 import { getError } from '@/shared/helpers/formErrors';
-import { TaskPriorities } from './../../shared/constants/index';
+import { mediumStatus, TaskPriorities } from './../../shared/constants/index';
 import { BoardService } from '@/shared/services/board.service';
 import { StatusService } from '@/shared/services/status.service';
 import { ToastService } from '@/shared/services/toast.service';
@@ -97,25 +97,21 @@ export class TaskModalComponent {
       value: b.id,
     }));
 
-    return [{ label: 'None', value: '' }, ...options];
+    return [{ label: 'No board', value: '' }, ...options];
   }
 
   get columnOptions(): SelectOption[] {
-    const options = this.statusService.statuses.map((b) => ({
+    return this.statusService.statuses.map((b) => ({
       label: b.name,
       value: b.id,
     }));
-
-    return [{ label: 'None', value: '' }, ...options];
   }
 
   get priorityOptions(): SelectOption[] {
-    const options = TaskPriorities.map((b) => ({
+    return TaskPriorities.map((b) => ({
       label: b,
       value: b,
     }));
-
-    return [{ label: 'None', value: '' }, ...options];
   }
 
   get titleError(): string | null {
@@ -131,22 +127,21 @@ export class TaskModalComponent {
     let descValue = '';
 
     let boardValue = '';
-    let statusValue = '';
-    let priorityValue = '';
+    let statusValue = this.statusService.statuses[0]?.id ?? '';
+
+    let priorityValue = mediumStatus;
 
     if (this.action === 'create-for-board') {
       boardValue = this.boardService.openedBoard()?.id ?? '';
-      statusValue = this.statusService.statuses[0]?.id ?? '';
     }
 
-    if (this.action === 'edit-task') {
-      const task = this.taskService.openedTask();
-
-      titleValue = task?.title ?? '';
-      descValue = task?.description ?? '';
-      boardValue = task?.boardId ?? '';
-      statusValue = task?.statusId ?? '';
-      priorityValue = task?.priority ?? '';
+    const task = this.taskService.openedTask();
+    if (task && this.action === 'edit-task') {
+      titleValue = task.title;
+      descValue = task.description;
+      boardValue = task.boardId ?? '';
+      statusValue = task.statusId;
+      priorityValue = task.priority;
     }
 
     this.form = this.fb.group({
@@ -196,7 +191,7 @@ export class TaskModalComponent {
       title: this.form.value.title || '',
       description: this.form.value.description || '',
       boardId: this.form.value.boardId || null,
-      statusId: this.form.value.statusId || null,
+      statusId: this.form.value.statusId || '',
       priority: this.form.value.priority || '',
       date: null,
     };

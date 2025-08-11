@@ -90,7 +90,7 @@ export class LoginComponent {
         } else {
           localStorage.removeItem('rememberMe');
         }
-        this.router.navigate(['agile-board']);
+        this.router.navigate(['backlog']);
         this.toast.add(`Welcome ${res.nickname}`);
       },
       error: (err) => {
