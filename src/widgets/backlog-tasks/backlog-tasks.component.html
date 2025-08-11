@@ -1,24 +1,14 @@
-<div class="wrapper">
-  @if (isFetching) {
-  <ui-skeleton width="250px" height="100px"></ui-skeleton>
-  <ui-skeleton width="250px" height="100px"></ui-skeleton>
-  <ui-skeleton width="250px" height="100px"></ui-skeleton>
+@if (isFetching) {
+<ui-skeleton width="250px" height="100px"></ui-skeleton>
+<ui-skeleton width="250px" height="100px"></ui-skeleton>
+<ui-skeleton width="250px" height="100px"></ui-skeleton>
 
-  } @else {
-
-  <div class="w-full">
-    @if (tasks.length === 0) {
-    <p class="text-center">No tasks</p>
-    } @else {
-    <div class="">
-      @for (task of tasks; track task.id) {
-      <task-item [task]="task"></task-item>
-      }
-    </div>
-
-    }
-  </div>
-  }
+} @else { @if (tasks.length === 0) {
+<p class="text-center">No tasks</p>
+} @else { @for (task of tasks; track task.id) {
+<div class="task">
+  <task-item [task]="task" (onClickTask)="toggleTaskModal()"></task-item>
 </div>
+} } }
 
 <task-modal [open]="isTaskModal" (closeModal)="toggleTaskModal()" action="edit-task"></task-modal>

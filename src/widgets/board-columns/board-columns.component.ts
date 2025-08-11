@@ -68,11 +68,6 @@ export class BoardColumnsComponent {
       }, {} as TaskMap);
   }
 
-  openTask(taskId: string) {
-    this.taskService.openTask(taskId);
-    this.toggleTaskModal();
-  }
-
   toggleTaskModal() {
     this.isTaskModal = !this.isTaskModal;
   }

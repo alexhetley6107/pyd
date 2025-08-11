@@ -23,7 +23,7 @@
   @for (col of columns; track col.id) {
   <div class="column">
     @for (taskId of col.taskIds; track taskId) {
-    <task-item [task]="taskMap[taskId]" (onClickTask)="openTask(taskId)"></task-item>
+    <task-item [task]="taskMap[taskId]" (onClickTask)="toggleTaskModal()"></task-item>
     }
   </div>
   }

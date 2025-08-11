@@ -56,6 +56,8 @@
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
+    word-wrap: break-word; /* перенос слов, если очень длинные */
+    overflow-wrap: break-word;
 
     .title {
       white-space: nowrap;
@@ -66,9 +68,12 @@
     .desc {
       color: var(--gray-color);
       max-height: 40px;
+      max-width: 100%;
       white-space: wrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      word-wrap: break-word; /* перенос слов, если очень длинные */
+      overflow-wrap: break-word;
     }
 
     .priority {
