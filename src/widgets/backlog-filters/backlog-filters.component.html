@@ -1,4 +1,11 @@
 <form class="filters" [formGroup]="form">
+  @if (isFetching) {
+  <ui-skeleton width="250px" height="41px"></ui-skeleton>
+  <ui-skeleton width="250px" height="41px"></ui-skeleton>
+  <ui-skeleton width="250px" height="41px"></ui-skeleton>
+
+  } @else {
+
   <ui-selector [options]="boardOptions" placeholder="Board" formControlName="boardId"></ui-selector>
   <ui-selector
     [options]="statusOptions"
@@ -10,4 +17,5 @@
     placeholder="Priority"
     formControlName="priority"
   ></ui-selector>
+  }
 </form>

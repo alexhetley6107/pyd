@@ -1,5 +1,5 @@
+import { Task } from '@/shared/types/board';
 import { NgClass } from '@angular/common';
-import { Task } from './../../../shared/types/board';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({

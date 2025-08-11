@@ -5,6 +5,7 @@ import { TaskService } from '@/shared/services/task.service';
 import { TaskQueries } from '@/shared/types/dto';
 import { SelectOption } from '@/shared/types/ui';
 import { SelectorComponent } from '@/shared/ui/selector/selector.component';
+import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 import { Component, inject } from '@angular/core';
 import {
   FormControl,
@@ -17,7 +18,7 @@ const allOption: SelectOption = { label: 'All variants', value: '' };
 
 @Component({
   selector: 'backlog-filters',
-  imports: [SelectorComponent, ReactiveFormsModule],
+  imports: [SelectorComponent, ReactiveFormsModule, SkeletonComponent],
   templateUrl: './backlog-filters.component.html',
   styleUrl: './backlog-filters.component.scss',
 })
@@ -33,6 +34,10 @@ export class BacklogFiltersComponent {
   }>;
 
   constructor(private fb: NonNullableFormBuilder) {}
+
+  get isFetching() {
+    return this.boardService.isFetching || this.statusService.isFetching;
+  }
 
   get boardOptions(): SelectOption[] {
     const options = this.boardService.boards.map((b) => ({
@@ -69,7 +74,6 @@ export class BacklogFiltersComponent {
     });
 
     this.form.valueChanges.subscribe((value) => {
-      console.log(value);
       this.getTasks();
     });
   }

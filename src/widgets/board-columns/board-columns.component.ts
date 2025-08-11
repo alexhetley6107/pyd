@@ -5,7 +5,7 @@ import { TaskService } from '@/shared/services/task.service';
 import { Status, Task } from '@/shared/types/board';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 import { Component, effect, HostBinding, inject } from '@angular/core';
-import { TaskItemComponent } from './task-item/task-item.component';
+import { TaskItemComponent } from '@/features/task-item/task-item.component';
 import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
 
 type Column = Status & { taskIds: string[] };
