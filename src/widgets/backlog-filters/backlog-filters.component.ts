@@ -73,9 +73,11 @@ export class BacklogFiltersComponent {
       priority: this.fb.control(''),
     });
 
-    this.form.valueChanges.subscribe((value) => {
+    this.form.valueChanges.subscribe(() => {
       this.getTasks();
     });
+
+    this.getTasks();
   }
 
   getTasks() {

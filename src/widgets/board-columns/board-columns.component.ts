@@ -30,9 +30,6 @@ export class BoardColumnsComponent {
       const boardId = this.boardService.openedBoard()?.id;
       if (!boardId) return;
 
-      const tasks = this.taskService.tasks.filter((t) => t.boardId === boardId);
-      if (tasks.length) return;
-
       this.taskService.getAll({ boardId }).subscribe();
     });
   }
