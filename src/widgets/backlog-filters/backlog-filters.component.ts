@@ -4,6 +4,7 @@ import { StatusService } from '@/shared/services/status.service';
 import { TaskService } from '@/shared/services/task.service';
 import { TaskQueries } from '@/shared/types/dto';
 import { SelectOption } from '@/shared/types/ui';
+import { InputComponent } from '@/shared/ui/input/input.component';
 import { SelectorComponent } from '@/shared/ui/selector/selector.component';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 import { Component, inject } from '@angular/core';
@@ -13,12 +14,13 @@ import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 const allOption: SelectOption = { label: 'All variants', value: '' };
 
 @Component({
   selector: 'backlog-filters',
-  imports: [SelectorComponent, ReactiveFormsModule, SkeletonComponent],
+  imports: [SelectorComponent, ReactiveFormsModule, SkeletonComponent, InputComponent],
   templateUrl: './backlog-filters.component.html',
   styleUrl: './backlog-filters.component.scss',
 })
@@ -28,6 +30,7 @@ export class BacklogFiltersComponent {
   taskService = inject(TaskService);
 
   form!: FormGroup<{
+    search: FormControl<string>;
     boardId: FormControl<string>;
     statusId: FormControl<string>;
     priority: FormControl<string>;
@@ -68,20 +71,22 @@ export class BacklogFiltersComponent {
 
   ngOnInit() {
     this.form = this.fb.group({
+      search: this.fb.control(''),
       boardId: this.fb.control(''),
       statusId: this.fb.control(''),
       priority: this.fb.control(''),
     });
 
-    this.form.valueChanges.subscribe(() => {
-      this.getTasks();
-    });
+    this.form.valueChanges
+      .pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe(() => this.getTasks());
 
     this.getTasks();
   }
 
   getTasks() {
     const queries: TaskQueries = {
+      search: this.form.value.search,
       boardId: this.form.value.boardId,
       statusId: this.form.value.statusId,
       priority: this.form.value.priority,

@@ -5,6 +5,13 @@
   overflow: hidden;
   display: flex;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
 
   .prio_line {
     height: 100%;

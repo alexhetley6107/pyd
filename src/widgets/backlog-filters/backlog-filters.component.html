@@ -1,21 +1,29 @@
-<form class="filters" [formGroup]="form">
+<form class="" [formGroup]="form">
   @if (isFetching) {
   <ui-skeleton width="250px" height="41px"></ui-skeleton>
   <ui-skeleton width="250px" height="41px"></ui-skeleton>
   <ui-skeleton width="250px" height="41px"></ui-skeleton>
 
   } @else {
-
-  <ui-selector [options]="boardOptions" placeholder="Board" formControlName="boardId"></ui-selector>
-  <ui-selector
-    [options]="statusOptions"
-    placeholder="Status"
-    formControlName="statusId"
-  ></ui-selector>
-  <ui-selector
-    [options]="priorityOptions"
-    placeholder="Priority"
-    formControlName="priority"
-  ></ui-selector>
+  <div class="filters">
+    <ui-input placeholder="Search" formControlName="search"></ui-input>
+  </div>
+  <div class="filters">
+    <ui-selector
+      [options]="boardOptions"
+      placeholder="Board"
+      formControlName="boardId"
+    ></ui-selector>
+    <ui-selector
+      [options]="statusOptions"
+      placeholder="Status"
+      formControlName="statusId"
+    ></ui-selector>
+    <ui-selector
+      [options]="priorityOptions"
+      placeholder="Priority"
+      formControlName="priority"
+    ></ui-selector>
+  </div>
   }
 </form>
