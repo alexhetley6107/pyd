@@ -1,11 +1,13 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { booleanAttribute, Component, forwardRef, HostBinding, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 type InputTypeUnion = 'text' | 'email' | 'password';
+type InputSize = 'sm' | 'lg';
 
 @Component({
   selector: 'ui-input',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
   standalone: true,
@@ -21,6 +23,9 @@ export class InputComponent implements ControlValueAccessor {
   @Input() type: InputTypeUnion = 'text';
   @Input() placeholder: string = '';
   @Input() error: string | null = null;
+  @Input() size: InputSize = 'lg';
+  @Input({ transform: booleanAttribute }) @HostBinding('class.full_width') fullWidth: boolean =
+    false;
 
   isPasswordVisible = false;
   value: string = '';

@@ -8,8 +8,12 @@ import {
   HostListener,
   ViewChild,
   ChangeDetectorRef,
+  HostBinding,
+  booleanAttribute,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+type SelectorSize = 'sm' | 'lg';
 
 @Component({
   selector: 'ui-selector',
@@ -28,6 +32,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class SelectorComponent implements ControlValueAccessor {
   @Input() placeholder = 'Select...';
   @Input() options: SelectOption[] = [];
+  @Input() size: SelectorSize = 'lg';
+  @Input({ transform: booleanAttribute }) @HostBinding('class.full_width') fullWidth: boolean =
+    false;
 
   @ViewChild('container', { static: true }) container!: ElementRef<HTMLDivElement>;
 

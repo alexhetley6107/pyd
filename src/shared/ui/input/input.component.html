@@ -1,4 +1,10 @@
-<div class="wrapper">
+<div
+  class="wrapper"
+  [ngClass]="{
+    sm: size === 'sm',
+    lg: size === 'lg',
+  }"
+>
   <input
     [placeholder]="placeholder"
     [type]="isPasswordVisible ? 'text' : type"

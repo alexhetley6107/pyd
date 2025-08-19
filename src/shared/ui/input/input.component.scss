@@ -1,6 +1,21 @@
+:host {
+  width: auto;
+
+  &.full_width {
+    width: 100%;
+  }
+}
+
 .wrapper {
   width: 100%;
   position: relative;
+
+  &.sm {
+    input {
+      height: 29px;
+      font-size: 14px;
+    }
+  }
 
   input {
     width: 100%;

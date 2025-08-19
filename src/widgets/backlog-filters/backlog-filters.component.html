@@ -7,22 +7,39 @@
 
   } @else {
   <div class="filters">
-    <ui-input placeholder="Search" formControlName="search"></ui-input>
-    <ui-selector
-      [options]="boardOptions"
-      placeholder="Board"
-      formControlName="boardId"
-    ></ui-selector>
-    <ui-selector
-      [options]="statusOptions"
-      placeholder="Status"
-      formControlName="statusId"
-    ></ui-selector>
-    <ui-selector
-      [options]="priorityOptions"
-      placeholder="Priority"
-      formControlName="priority"
-    ></ui-selector>
+    <div class="selectors">
+      <div class="selector">
+        <ui-selector
+          [options]="boardOptions"
+          placeholder="Board"
+          formControlName="boardId"
+          [size]="'sm'"
+          fullWidth
+        ></ui-selector>
+      </div>
+      <div class="selector">
+        <ui-selector
+          [options]="statusOptions"
+          placeholder="Status"
+          formControlName="statusId"
+          [size]="'sm'"
+          fullWidth
+        ></ui-selector>
+      </div>
+      <div class="selector">
+        <ui-selector
+          [options]="priorityOptions"
+          placeholder="Priority"
+          formControlName="priority"
+          [size]="'sm'"
+          fullWidth
+        ></ui-selector>
+      </div>
+    </div>
+
+    <div class="search">
+      <ui-input placeholder="Search" formControlName="search" [size]="'sm'" fullWidth></ui-input>
+    </div>
   </div>
   }
 </form>

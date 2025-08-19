@@ -1,4 +1,13 @@
-<div #container class="select-container" tabindex="1" (click)="toggleOpen()">
+<div
+  #container
+  class="select-container"
+  tabindex="1"
+  (click)="toggleOpen()"
+  [ngClass]="{
+    sm: size === 'sm',
+    lg: size === 'lg',
+  }"
+>
   <div class="selected-value" [class.placeholder]="!value">
     {{ selectedLabel || placeholder }}
   </div>
