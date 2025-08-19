@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { NgIf, NgStyle } from '@angular/common';
+import { Component, HostBinding, Input } from '@angular/core';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'ui-skeleton',
@@ -8,7 +8,7 @@ import { NgIf, NgStyle } from '@angular/common';
   styleUrl: './skeleton.component.scss',
 })
 export class SkeletonComponent {
-  @Input() width = '100%';
-  @Input() height = '20px';
   @Input() borderRadius = '4px';
+  @Input() @HostBinding('style.width') width = '100%';
+  @Input() @HostBinding('style.height') height = '20px';
 }

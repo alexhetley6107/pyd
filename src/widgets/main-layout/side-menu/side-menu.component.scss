@@ -119,24 +119,6 @@
   }
 }
 
-.burger {
-  display: none;
-
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-
-  img {
-    width: 35px;
-    height: 35px;
-  }
-
-  @media (max-width: 768px) {
-    display: block;
-  }
-}
-
 .logout {
   display: none;
 

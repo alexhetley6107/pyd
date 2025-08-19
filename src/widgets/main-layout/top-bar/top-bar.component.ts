@@ -1,4 +1,5 @@
 import { AuthService } from '@/shared/services/auth.service';
+import { SideMenuService } from '@/shared/services/side-menu.service';
 import { ActionOption } from '@/shared/types/ui';
 import { PopoverComponent } from '@/shared/ui/popover/popover.component';
 import { Component, inject } from '@angular/core';
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 export class TopBarComponent {
   router = inject(Router);
   auth = inject(AuthService);
+  menu = inject(SideMenuService);
 
   get letters() {
     const user = this.auth.getUser();
@@ -36,4 +38,8 @@ export class TopBarComponent {
       action: () => this.auth.logout(),
     },
   ];
+
+  toggleMenu() {
+    this.menu.toggleMenu();
+  }
 }

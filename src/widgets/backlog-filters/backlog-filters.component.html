@@ -1,14 +1,13 @@
 <form class="" [formGroup]="form">
   @if (isFetching) {
-  <ui-skeleton width="250px" height="41px"></ui-skeleton>
-  <ui-skeleton width="250px" height="41px"></ui-skeleton>
-  <ui-skeleton width="250px" height="41px"></ui-skeleton>
+  <div class="filters">
+    <ui-skeleton width="200px" height="41px"></ui-skeleton>
+    <ui-skeleton width="200px" height="41px"></ui-skeleton>
+  </div>
 
   } @else {
   <div class="filters">
     <ui-input placeholder="Search" formControlName="search"></ui-input>
-  </div>
-  <div class="filters">
     <ui-selector
       [options]="boardOptions"
       placeholder="Board"

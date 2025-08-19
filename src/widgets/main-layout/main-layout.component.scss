@@ -13,7 +13,8 @@
     .container {
       padding: var(--page-padding);
       flex-grow: 1;
-      height: 100%;
+      height: calc(100% - 60px);
+      overflow: scroll;
     }
   }
 }
