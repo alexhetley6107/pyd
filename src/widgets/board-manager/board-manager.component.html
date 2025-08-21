@@ -8,13 +8,14 @@
     <div class="">
       @if(isBoardSelect){
       <div class="flex align-center">
-        <ui-select
-          [options]="boardSelectOptions"
-          [selected]="selectedBoardOption"
-          (onSelect)="onOpenBoard($event)"
-          [arrowPlacement]="'left'"
-          placeholder="Select board"
-        ></ui-select>
+        <form [formGroup]="form">
+          <ui-selector
+            [options]="boardSelectOptions"
+            placeholder="Select board"
+            size="sm"
+            formControlName="boardId"
+          ></ui-selector>
+        </form>
 
         <ui-popover>
           <div popover-anchor class="icon_more flex align-center">
