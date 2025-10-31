@@ -40,7 +40,7 @@ export class LoginComponent {
     const isAuth = this.auth.isAuthenticated();
 
     if (isAuth) {
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['backlog']);
       return;
     }
 

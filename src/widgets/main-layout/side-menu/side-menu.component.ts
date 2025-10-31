@@ -38,8 +38,6 @@ export class SideMenuComponent {
   }
 
   links = [
-    { title: 'Dashboard', path: ['/dashboard'], icon: 'dashboard_' },
-    { title: 'Calendar', path: ['/calendar'], icon: 'calendar_' },
     { title: 'Agile Board', path: ['/agile-board'], icon: 'agile_' },
     { title: 'Backlog', path: ['/backlog'], icon: 'backlog_' },
     { title: 'Setting', path: ['/setting'], icon: 'dashboard_', onlyMobile: true },
