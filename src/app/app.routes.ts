@@ -10,6 +10,9 @@ import { NotFoundComponent } from '@/pages/not-found/not-found.component';
 import { AuthGuard } from '@/shared/guards/auth.guard';
 import { SettingComponent } from '@/pages/setting/setting.component';
 import { ResetPasswordComponent } from '@/pages/reset-password/reset-password.component';
+import { BoardsComponent } from '@/pages/boards/boards.component';
+import { CreateBoardComponent } from '@/pages/create-board/create-board.component';
+import { CreateTaskComponent } from '@/pages/create-task/create-task.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +30,10 @@ export const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
+      { path: 'boards', component: BoardsComponent, canActivate: [AuthGuard] },
+      { path: 'create-board', component: CreateBoardComponent, canActivate: [AuthGuard] },
+      { path: 'create-task', component: CreateTaskComponent, canActivate: [AuthGuard] },
+
       { path: 'agile-board', component: AgileBoardComponent, canActivate: [AuthGuard] },
       { path: 'backlog', component: BacklogComponent, canActivate: [AuthGuard] },
       { path: 'setting', component: SettingComponent, canActivate: [AuthGuard] },

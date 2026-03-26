@@ -8,7 +8,7 @@
 
 .button {
   padding: 10px 20px;
-  background-color: var(--red-color);
+  background-color: var(--prime-color);
   color: var(--white-color);
   border: none;
   border-radius: 5px;
@@ -16,7 +16,7 @@
   width: auto;
   font-size: 18px;
   font-weight: 600;
-  border: 1px solid var(--red-color);
+  border: 1px solid var(--prime-color);
   position: relative;
   white-space: nowrap;
 
@@ -25,12 +25,12 @@
   }
 
   &.filled {
-    background-color: var(--red-color);
+    background-color: var(--prime-color);
     color: var(--white-color);
   }
 
   &.outlined {
-    color: var(--red-color);
+    color: var(--prime-color);
     background-color: var(--white-color);
   }
 
