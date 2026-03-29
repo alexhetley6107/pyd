@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private user: User | null = null;
+
   router = inject(Router);
 
   constructor(private http: HttpClient) {}
@@ -18,7 +19,6 @@ export class AuthService {
     return this.http.post<User>(API.login, body).pipe(
       tap((user) => {
         this.user = user;
-        localStorage.setItem('token', user.loginInfo.token);
       })
     );
   }
@@ -28,7 +28,6 @@ export class AuthService {
     return this.http.post<User>(API.signup, body).pipe(
       tap((user) => {
         this.user = user;
-        localStorage.setItem('token', user.loginInfo.token);
       })
     );
   }
@@ -42,20 +41,24 @@ export class AuthService {
     return this.http.post<{ message: string }>(API.resetPassword, body);
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    this.router.navigate(['login']);
+  refresh() {
+    return this.http.post(API.refresh, {});
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('token');
+  logout() {
+    this.http.post(API.logout, {}).subscribe();
+    this.router.navigate(['/login']);
+  }
+
+  getMe() {
+    return this.http.get(API.me);
   }
 
   isAuthenticated(): boolean {
-    return !!this.getToken();
+    return !!this.user;
   }
 
-  getUser(): User | null {
+  getUser() {
     return this.user;
   }
 }

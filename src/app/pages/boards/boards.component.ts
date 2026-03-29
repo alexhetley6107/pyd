@@ -1,11 +1,29 @@
-import { Component } from '@angular/core';
+import { BoardService } from '@/shared/services/board.service';
+import { Board } from '@/shared/types/board';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'boards',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './boards.component.html',
-  styleUrl: './boards.component.scss'
+  styleUrl: './boards.component.scss',
 })
 export class BoardsComponent {
+  boardService = inject(BoardService);
 
+  loadSBoardsInfo() {
+    // const isBoards = this.boardService.boards.length;
+
+    // if (isBoards) return;
+
+    this.boardService.getAll().subscribe();
+  }
+
+  ngOnInit() {
+    this.loadSBoardsInfo();
+  }
+  get boards(): Board[] {
+    return this.boardService.boards;
+  }
 }

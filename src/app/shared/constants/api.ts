@@ -7,6 +7,9 @@ export const API = {
   signup: `${URL}/auth/signup`,
   forgotPassword: `${URL}/auth/forgot-password`,
   resetPassword: `${URL}/auth/reset-password`,
+  me: `${URL}/auth/me`,
+  refresh: `${URL}/auth/refresh`,
+  logout: `${URL}/auth/logout`,
 
   board: `${URL}/board`,
   status: `${URL}/status`,

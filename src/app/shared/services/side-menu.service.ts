@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class SideMenuService {
-  isOpen = true;
+  isOpen = false;
 
   toggleMenu() {
     this.isOpen = !this.isOpen;

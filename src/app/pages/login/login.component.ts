@@ -37,12 +37,12 @@ export class LoginComponent {
   constructor(private fb: NonNullableFormBuilder) {}
 
   ngOnInit(): void {
-    const isAuth = this.auth.isAuthenticated();
+    // const isAuth = this.auth.isAuthenticated();
 
-    if (isAuth) {
-      this.router.navigate(['backlog']);
-      return;
-    }
+    // if (isAuth) {
+    //   this.router.navigate(['boards']);
+    //   return;
+    // }
 
     const initials = { login: '', password: '' };
 
@@ -90,7 +90,7 @@ export class LoginComponent {
         } else {
           localStorage.removeItem('rememberMe');
         }
-        this.router.navigate(['backlog']);
+        this.router.navigate(['boards']);
         this.toast.add(`Welcome ${res.nickname}`);
       },
       error: (err) => {
