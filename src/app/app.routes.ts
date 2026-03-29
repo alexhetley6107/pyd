@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { AuthLayoutComponent } from '../widgets/auth-layout/auth-layout.component';
-import { LoginComponent } from '../pages/login/login.component';
-import { SignupComponent } from '../pages/signup/signup.component';
-import { ForgotPasswordComponent } from '../pages/forgot-password/forgot-password.component';
-import { MainLayoutComponent } from '../widgets/main-layout/main-layout.component';
+import { AuthLayoutComponent } from './widgets/auth-layout/auth-layout.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { MainLayoutComponent } from './widgets/main-layout/main-layout.component';
 import { AgileBoardComponent } from '@/pages/agile-board/agile-board.component';
 import { BacklogComponent } from '@/pages/backlog/backlog.component';
 import { NotFoundComponent } from '@/pages/not-found/not-found.component';
