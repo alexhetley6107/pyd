@@ -2,24 +2,39 @@ import { AuthService } from '@/shared/services/auth.service';
 import { HttpInterceptorFn, HttpStatusCode } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, switchMap, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { API } from '@/shared/constants/api';
+
+let isRefreshing = false;
 
 export const authRefreshInterceptor: HttpInterceptorFn = (req, next) => {
-  const authService = inject(AuthService);
+  const auth = inject(AuthService);
+  const router = inject(Router);
+
+  const isRefreshReq = req.url.includes(API.refresh);
+  const isLogoutReq = req.url.includes(API.logout);
 
   return next(req).pipe(
     catchError((error) => {
-      if (authService.isGettingMe()) return throwError(() => error);
+      if (error.status !== HttpStatusCode.Unauthorized) return throwError(() => error);
+      if (auth.isGettingMe()) return throwError(() => error);
+      if (isRefreshing) return throwError(() => error);
+      if (isRefreshReq || isLogoutReq) return throwError(() => error);
 
-      if (error.status === HttpStatusCode.Unauthorized) {
-        return authService.refresh().pipe(
-          switchMap(() => next(req)),
-          catchError(() => {
-            authService.logout();
-            return throwError(() => error);
-          })
-        );
-      }
-      return throwError(() => error);
+      isRefreshing = true;
+
+      return auth.refresh().pipe(
+        switchMap(() => {
+          isRefreshing = false;
+          return next(req);
+        }),
+        catchError((refreshError) => {
+          isRefreshing = false;
+          auth.user.set(null);
+          router.navigate(['/login']);
+          return throwError(() => refreshError);
+        })
+      );
     })
   );
 };
