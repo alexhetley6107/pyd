@@ -4,6 +4,7 @@ import { ActionOption } from '@/shared/types/ui';
 import { PopoverComponent } from '@/shared/ui/popover/popover.component';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'top-bar',
@@ -18,7 +19,7 @@ export class TopBarComponent {
   menu = inject(SideMenuService);
 
   get letters() {
-    const user = this.auth.getUser();
+    const user = this.auth.user();
 
     if (!user) return 'U';
 
@@ -35,7 +36,15 @@ export class TopBarComponent {
     },
     {
       text: 'Log out',
-      action: () => this.auth.logout(),
+      action: () =>
+        this.auth
+          .logout()
+          .pipe(
+            tap(() => {
+              this.router.navigate(['login']);
+            })
+          )
+          .subscribe(),
     },
   ];
 

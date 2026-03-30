@@ -33,13 +33,6 @@ export class ForgotPasswordComponent {
   constructor(private fb: NonNullableFormBuilder) {}
 
   ngOnInit(): void {
-    const isAuth = this.auth.isAuthenticated();
-
-    if (isAuth) {
-      this.router.navigate(['dashboard']);
-      return;
-    }
-
     this.form = this.fb.group({
       email: this.fb.control('', [Validators.required, Validators.email]),
     });

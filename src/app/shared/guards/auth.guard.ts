@@ -1,18 +1,36 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+// auth.guard.ts
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { filter, map, take } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
+export const authGuard: CanActivateFn = () => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
 
-  canActivate(): boolean {
-    if (this.auth.isAuthenticated()) {
-      return true;
-    }
-    this.router.navigate(['/login']);
-    return false;
+  if (auth.isGettingMe()) {
+    return toObservable(auth.isGettingMe).pipe(
+      filter((isLoading) => !isLoading), // ждём false
+      take(1),
+      map(() => auth.isLoggedIn() || router.createUrlTree(['/login']))
+    );
   }
-}
+
+  return auth.isLoggedIn() || router.createUrlTree(['/login']);
+};
+
+export const publicGuard: CanActivateFn = () => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+
+  if (auth.isGettingMe()) {
+    return toObservable(auth.isGettingMe).pipe(
+      filter((isLoading) => !isLoading),
+      take(1),
+      map(() => !auth.isLoggedIn() || router.createUrlTree(['/boards']))
+    );
+  }
+
+  return !auth.isLoggedIn() || router.createUrlTree(['/boards']);
+};

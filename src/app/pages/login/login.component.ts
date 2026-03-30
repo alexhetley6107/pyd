@@ -37,13 +37,6 @@ export class LoginComponent {
   constructor(private fb: NonNullableFormBuilder) {}
 
   ngOnInit(): void {
-    // const isAuth = this.auth.isAuthenticated();
-
-    // if (isAuth) {
-    //   this.router.navigate(['boards']);
-    //   return;
-    // }
-
     const initials = { login: '', password: '' };
 
     const savedCreds = localStorage.getItem('rememberMe');

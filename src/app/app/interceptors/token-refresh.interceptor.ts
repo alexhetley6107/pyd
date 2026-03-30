@@ -8,6 +8,8 @@ export const authRefreshInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((error) => {
+      if (authService.isGettingMe()) return throwError(() => error);
+
       if (error.status === HttpStatusCode.Unauthorized) {
         return authService.refresh().pipe(
           switchMap(() => next(req)),

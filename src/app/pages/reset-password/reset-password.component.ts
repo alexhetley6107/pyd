@@ -33,16 +33,12 @@ export class ResetPasswordComponent {
     confirmPassword: FormControl<string>;
   }>;
 
-  constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute) {}
+  constructor(
+    private fb: NonNullableFormBuilder,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    const isAuth = this.auth.isAuthenticated();
-
-    if (isAuth) {
-      this.router.navigate(['dashboard']);
-      return;
-    }
-
     this.form = this.fb.group(
       {
         password: this.fb.control('', [

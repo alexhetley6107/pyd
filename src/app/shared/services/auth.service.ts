@@ -1,44 +1,46 @@
+// auth.service.ts
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { computed, inject, Injectable, signal } from '@angular/core';
+import { tap, finalize, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { User } from '../types/user';
 import { API } from '../constants/api';
-import { Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  private user: User | null = null;
+  private readonly http = inject(HttpClient);
 
-  router = inject(Router);
+  readonly isGettingMe = signal(true);
+  readonly user = signal<User | null>(null);
+  readonly isLoggedIn = computed(() => this.user() !== null);
 
-  constructor(private http: HttpClient) {}
+  getMe() {
+    return this.http.get<User>(API.me).pipe(
+      tap((user) => this.user.set(user)),
+      catchError(() => {
+        this.user.set(null);
+        return of(null);
+      }),
+      finalize(() => this.isGettingMe.set(false))
+    );
+  }
 
   login(body: { login: string; password: string }) {
-    return this.http.post<User>(API.login, body).pipe(
-      tap((user) => {
-        this.user = user;
-      })
-    );
+    return this.http.post<User>(API.login, body).pipe(tap((user) => this.user.set(user)));
   }
 
   signup(nickname: string, email: string, password: string) {
-    const body = { nickname, email, password };
-    return this.http.post<User>(API.signup, body).pipe(
-      tap((user) => {
-        this.user = user;
-      })
-    );
+    return this.http
+      .post<User>(API.signup, { nickname, email, password })
+      .pipe(tap((user) => this.user.set(user)));
   }
 
   forgotPassword(email: string) {
-    return this.http.post<User>(API.forgotPassword, { email });
+    return this.http.post(API.forgotPassword, { email });
   }
 
   resetPassword(token: string, newPassword: string) {
-    const body = { token, newPassword };
-    return this.http.post<{ message: string }>(API.resetPassword, body);
+    return this.http.post<{ message: string }>(API.resetPassword, { token, newPassword });
   }
 
   refresh() {
@@ -46,19 +48,6 @@ export class AuthService {
   }
 
   logout() {
-    this.http.post(API.logout, {}).subscribe();
-    this.router.navigate(['/login']);
-  }
-
-  getMe() {
-    return this.http.get(API.me);
-  }
-
-  isAuthenticated(): boolean {
-    return !!this.user;
-  }
-
-  getUser() {
-    return this.user;
+    return this.http.post(API.logout, {}).pipe(tap(() => this.user.set(null)));
   }
 }
