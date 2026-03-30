@@ -2,8 +2,8 @@ import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
 import { BoardService } from '@/shared/services/board.service';
 import { StatusService } from '@/shared/services/status.service';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
-import { BacklogFiltersComponent } from '@/widgets/backlog-filters/backlog-filters.component';
-import { BacklogTasksComponent } from '@/widgets/backlog-tasks/backlog-tasks.component';
+import { BacklogFiltersComponent } from '@/features/backlog-filters/backlog-filters.component';
+import { BacklogTasksComponent } from '@/features/backlog-tasks/backlog-tasks.component';
 import { Component, inject } from '@angular/core';
 
 @Component({

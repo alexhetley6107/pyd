@@ -1,4 +1,4 @@
-import { ToastProviderComponent } from '@/widgets/toast-provider/toast-provider.component';
+import { ToastProviderComponent } from '@/features/toast-provider/toast-provider.component';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckAuthLayoutComponent } from './layouts/check-auth-layout/check-auth-layout.component';
