@@ -16,14 +16,8 @@ export class AuthService {
 
   getMe() {
     return this.http.get<User | null>(API.me).pipe(
-      tap((user) => {
-        console.log({ user });
-
-        this.user.set(user);
-      }),
+      tap((user) => this.user.set(user)),
       catchError(() => {
-        console.log('999');
-
         this.user.set(null);
         return of(null);
       }),

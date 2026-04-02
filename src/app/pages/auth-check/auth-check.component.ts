@@ -17,7 +17,13 @@ export class AuthCheckComponent {
   ngOnInit() {
     this.auth.getMe().subscribe({
       next: () => {
-        this.router.navigate(['boards']);
+        const returnUrl = (this.location.getState() as { returnUrl: string }).returnUrl;
+
+        if (returnUrl) {
+          this.router.navigate([returnUrl]);
+          return;
+        }
+        this.router.navigate(['login']);
       },
       error: () => {
         this.router.navigate(['login']);

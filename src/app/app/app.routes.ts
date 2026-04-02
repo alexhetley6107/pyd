@@ -7,13 +7,14 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { AgileBoardComponent } from '@/pages/agile-board/agile-board.component';
 import { BacklogComponent } from '@/pages/backlog/backlog.component';
 import { NotFoundComponent } from '@/pages/not-found/not-found.component';
-import { authGuard, publicGuard } from '@/shared/guards/auth.guard';
+import { PrivateGuard } from '@/shared/guards/private.guard';
 import { SettingComponent } from '@/pages/setting/setting.component';
 import { ResetPasswordComponent } from '@/pages/reset-password/reset-password.component';
 import { BoardsComponent } from '@/pages/boards/boards.component';
 import { CreateBoardComponent } from '@/pages/create-board/create-board.component';
 import { CreateTaskComponent } from '@/pages/create-task/create-task.component';
 import { AuthCheckComponent } from '@/pages/auth-check/auth-check.component';
+import { PublicGuard } from '@/shared/guards/public.guard';
 
 export const routes: Routes = [
   {
@@ -23,7 +24,7 @@ export const routes: Routes = [
   {
     path: '',
     component: AuthLayoutComponent,
-    canActivate: [publicGuard],
+    canActivate: [PublicGuard],
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
@@ -35,7 +36,7 @@ export const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
-    canActivate: [authGuard],
+    canActivate: [PrivateGuard],
     children: [
       { path: 'boards', component: BoardsComponent },
       { path: 'create-board', component: CreateBoardComponent },
