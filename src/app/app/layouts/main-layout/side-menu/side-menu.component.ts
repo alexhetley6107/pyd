@@ -4,7 +4,8 @@ import { SideMenuService } from '@/shared/services/side-menu.service';
 import { LogoComponent } from '@/shared/ui/logo/logo.component';
 import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'side-menu',
@@ -16,6 +17,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class SideMenuComponent {
   auth = inject(AuthService);
   menu = inject(SideMenuService);
+  router = inject(Router);
 
   get isCollapsed() {
     return !this.menu.isOpen;
@@ -45,7 +47,14 @@ export class SideMenuComponent {
   ];
 
   logout() {
-    this.auth.logout();
+    this.auth
+      .logout()
+      .pipe(
+        tap(() => {
+          this.router.navigate(['login']);
+        })
+      )
+      .subscribe();
     this.menu.openMenu();
   }
 }

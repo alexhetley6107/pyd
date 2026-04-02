@@ -15,9 +15,15 @@ export class AuthService {
   readonly isLoggedIn = computed(() => this.user() !== null);
 
   getMe() {
-    return this.http.get<User>(API.me).pipe(
-      tap((user) => this.user.set(user)),
+    return this.http.get<User | null>(API.me).pipe(
+      tap((user) => {
+        console.log({ user });
+
+        this.user.set(user);
+      }),
       catchError(() => {
+        console.log('999');
+
         this.user.set(null);
         return of(null);
       }),

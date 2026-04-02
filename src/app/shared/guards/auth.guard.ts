@@ -10,11 +10,7 @@ export const authGuard: CanActivateFn = () => {
   const router = inject(Router);
 
   if (auth.isGettingMe()) {
-    return toObservable(auth.isGettingMe).pipe(
-      filter((isLoading) => !isLoading), // ждём false
-      take(1),
-      map(() => auth.isLoggedIn() || router.createUrlTree(['/login']))
-    );
+    return router.createUrlTree(['/me']);
   }
 
   return auth.isLoggedIn() || router.createUrlTree(['/login']);
@@ -25,11 +21,7 @@ export const publicGuard: CanActivateFn = () => {
   const router = inject(Router);
 
   if (auth.isGettingMe()) {
-    return toObservable(auth.isGettingMe).pipe(
-      filter((isLoading) => !isLoading),
-      take(1),
-      map(() => !auth.isLoggedIn() || router.createUrlTree(['/boards']))
-    );
+    return router.createUrlTree(['/me']);
   }
 
   return !auth.isLoggedIn() || router.createUrlTree(['/boards']);

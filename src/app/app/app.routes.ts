@@ -13,39 +13,37 @@ import { ResetPasswordComponent } from '@/pages/reset-password/reset-password.co
 import { BoardsComponent } from '@/pages/boards/boards.component';
 import { CreateBoardComponent } from '@/pages/create-board/create-board.component';
 import { CreateTaskComponent } from '@/pages/create-task/create-task.component';
-import { CheckAuthLayoutComponent } from './layouts/check-auth-layout/check-auth-layout.component';
+import { AuthCheckComponent } from '@/pages/auth-check/auth-check.component';
 
 export const routes: Routes = [
   {
+    path: 'me',
+    component: AuthCheckComponent,
+  },
+  {
     path: '',
-    component: CheckAuthLayoutComponent,
+    component: AuthLayoutComponent,
+    canActivate: [publicGuard],
     children: [
-      {
-        path: '',
-        component: AuthLayoutComponent,
-        canActivate: [publicGuard],
-        children: [
-          { path: '', redirectTo: 'login', pathMatch: 'full' },
-          { path: 'login', component: LoginComponent },
-          { path: 'signup', component: SignupComponent },
-          { path: 'forgot-password', component: ForgotPasswordComponent },
-          { path: 'reset-password', component: ResetPasswordComponent },
-        ],
-      },
-      {
-        path: '',
-        component: MainLayoutComponent,
-        canActivate: [authGuard],
-        children: [
-          { path: 'boards', component: BoardsComponent },
-          { path: 'create-board', component: CreateBoardComponent },
-          { path: 'create-task', component: CreateTaskComponent },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: 'login', component: LoginComponent },
+      { path: 'signup', component: SignupComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
+      { path: 'reset-password', component: ResetPasswordComponent },
+    ],
+  },
+  {
+    path: '',
+    component: MainLayoutComponent,
+    canActivate: [authGuard],
+    children: [
+      { path: 'boards', component: BoardsComponent },
+      { path: 'create-board', component: CreateBoardComponent },
+      { path: 'create-task', component: CreateTaskComponent },
 
-          // { path: 'agile-board', component: AgileBoardComponent },
-          // { path: 'backlog', component: BacklogComponent },
-          // { path: 'setting', component: SettingComponent },
-        ],
-      },
+      // { path: 'agile-board', component: AgileBoardComponent },
+      // { path: 'backlog', component: BacklogComponent },
+      // { path: 'setting', component: SettingComponent },
     ],
   },
   { path: '**', component: NotFoundComponent },
