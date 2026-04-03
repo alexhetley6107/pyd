@@ -1,14 +1,14 @@
 import { BoardService } from '@/shared/services/board.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
-import { StatusService } from '@/shared/services/status.service';
 import { TaskService } from '@/shared/services/task.service';
-import { Status, Task } from '@/shared/types/board';
+import { Task } from '@/shared/types/board';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 import { Component, effect, HostBinding, inject } from '@angular/core';
 import { TaskItemComponent } from '@/features/task-item/task-item.component';
 import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
+import { TaskStatuses } from '@/shared/constants';
 
-type Column = Status & { taskIds: string[] };
+type Column = { name: string; taskIds: string[] };
 type TaskMap = Record<string, Task>;
 
 @Component({
@@ -19,7 +19,6 @@ type TaskMap = Record<string, Task>;
 })
 export class BoardColumnsComponent {
   menu = inject(SideMenuService);
-  statusService = inject(StatusService);
   boardService = inject(BoardService);
   taskService = inject(TaskService);
 
@@ -41,17 +40,13 @@ export class BoardColumnsComponent {
 
   @HostBinding('class.loaded')
   get isLoaded(): boolean {
-    return !(
-      this.taskService.isFetching ||
-      this.statusService.isFetching ||
-      this.boardService.isFetching
-    );
+    return !(this.taskService.isFetching || this.boardService.isFetching);
   }
 
   get columns(): Column[] {
-    return this.statusService.statuses.map((s) => ({
-      ...s,
-      taskIds: this.taskService.tasks.filter((t) => t.statusId === s.id).map((t) => t.id),
+    return TaskStatuses.map((name) => ({
+      name,
+      taskIds: this.taskService.tasks.filter((t) => t.statusId === name).map((t) => t.id),
     }));
   }
 

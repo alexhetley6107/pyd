@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { ERoute } from '../constants/routes';
+import { AuthService } from '../../shared/services/auth.service';
+import { ERoute } from '../../shared/constants/routes';
 
 @Injectable({ providedIn: 'root' })
-export class PrivateGuard implements CanActivate {
+export class PublicGuard implements CanActivate {
   private auth = inject(AuthService);
   private router = inject(Router);
 
@@ -15,6 +15,6 @@ export class PrivateGuard implements CanActivate {
       });
     }
 
-    return this.auth.isLoggedIn() || this.router.navigateByUrl(ERoute.LOGIN);
+    return !this.auth.isLoggedIn() || this.router.navigateByUrl(ERoute.BOARDS);
   }
 }

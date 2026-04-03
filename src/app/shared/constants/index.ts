@@ -11,3 +11,5 @@ export const TaskPriorities = [
 ] as const;
 
 export const mediumStatus = 'medium';
+
+export const TaskStatuses = ['todo', 'in-progress', 'done'] as const;

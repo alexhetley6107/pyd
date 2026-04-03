@@ -9,10 +9,9 @@
       <h3 class="text-center w-full">Task details</h3>
 
       @if (isDeleteIcon) {
-
-      <div class="delete" (click)="toggleDeleteModal()">
-        <img src="/svg/delete.svg" alt="" />
-      </div>
+        <div class="delete" (click)="toggleDeleteModal()">
+          <img src="/svg/delete.svg" alt="" />
+        </div>
       }
     </div>
     <div class="fields">
@@ -30,11 +29,11 @@
           placeholder="Select board..."
           [options]="boardOptions"
         ></ui-selector>
-        <ui-selector
+        <!-- <ui-selector
           formControlName="statusId"
           placeholder="Select column..."
           [options]="columnOptions"
-        ></ui-selector>
+        ></ui-selector> -->
         <ui-selector
           formControlName="priority"
           placeholder="Select proirity..."

@@ -1,8 +1,8 @@
 import { BoardColumnsComponent } from '@/features/board-columns/board-columns.component';
 import { BoardManagerComponent } from '@/features/board-manager/board-manager.component';
 import { BoardService } from '@/shared/services/board.service';
-import { StatusService } from '@/shared/services/status.service';
-import { Board, Status } from '@/shared/types/board';
+
+import { Board } from '@/shared/types/board';
 import { Component, inject } from '@angular/core';
 
 @Component({
@@ -13,16 +13,13 @@ import { Component, inject } from '@angular/core';
 })
 export class AgileBoardComponent {
   boardService = inject(BoardService);
-  statusService = inject(StatusService);
 
   loadSBoardsInfo() {
-    const isStatuses = this.statusService.statuses.length;
     const isBoards = this.boardService.boards.length;
 
-    if (isStatuses && isBoards) return;
+    if (isBoards) return;
 
     this.boardService.getAll().subscribe();
-    this.statusService.getAll().subscribe();
   }
 
   ngOnInit() {
@@ -30,8 +27,5 @@ export class AgileBoardComponent {
   }
   get boards(): Board[] {
     return this.boardService.boards;
-  }
-  get statuses(): Status[] {
-    return this.statusService.statuses;
   }
 }

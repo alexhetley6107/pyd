@@ -82,8 +82,9 @@ export class SelectorComponent implements ControlValueAccessor {
     return selected?.value ? selected.label : this.placeholder;
   }
 
-  @HostListener('document:click', ['$event.target'])
-  onClickOutside(target: HTMLElement) {
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    const target = event.target as HTMLElement;
     if (this.open && !this.container.nativeElement.contains(target)) {
       this.close();
     }

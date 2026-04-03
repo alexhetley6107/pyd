@@ -1,6 +1,5 @@
-import { TaskPriorities } from '@/shared/constants';
+import { TaskPriorities, TaskStatuses } from '@/shared/constants';
 import { BoardService } from '@/shared/services/board.service';
-import { StatusService } from '@/shared/services/status.service';
 import { TaskService } from '@/shared/services/task.service';
 import { TaskQueries } from '@/shared/types/dto';
 import { SelectOption } from '@/shared/types/ui';
@@ -26,7 +25,6 @@ const allOption: SelectOption = { label: 'All variants', value: '' };
 })
 export class BacklogFiltersComponent {
   boardService = inject(BoardService);
-  statusService = inject(StatusService);
   taskService = inject(TaskService);
 
   form!: FormGroup<{
@@ -39,7 +37,7 @@ export class BacklogFiltersComponent {
   constructor(private fb: NonNullableFormBuilder) {}
 
   get isFetching() {
-    return this.boardService.isFetching || this.statusService.isFetching;
+    return this.boardService.isFetching;
   }
 
   get boardOptions(): SelectOption[] {
@@ -52,9 +50,9 @@ export class BacklogFiltersComponent {
   }
 
   get statusOptions(): SelectOption[] {
-    const options = this.statusService.statuses.map((b) => ({
-      label: b.name,
-      value: b.id,
+    const options = TaskStatuses.map((name) => ({
+      label: name,
+      value: name,
     }));
 
     return [allOption, ...options];

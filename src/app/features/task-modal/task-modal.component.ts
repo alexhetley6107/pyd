@@ -1,7 +1,6 @@
 import { getError } from '@/shared/helpers/formErrors';
 import { mediumStatus, TaskPriorities } from './../../shared/constants/index';
 import { BoardService } from '@/shared/services/board.service';
-import { StatusService } from '@/shared/services/status.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { SelectOption } from '@/shared/types/ui';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
@@ -48,7 +47,6 @@ type ModalAction = 'create-for-backlog' | 'create-for-board' | 'edit-task';
 export class TaskModalComponent {
   toast = inject(ToastService);
   boardService = inject(BoardService);
-  statusService = inject(StatusService);
   taskService = inject(TaskService);
 
   @Input() action: ModalAction = 'create-for-backlog';
@@ -100,12 +98,12 @@ export class TaskModalComponent {
     return [{ label: 'No board', value: '' }, ...options];
   }
 
-  get columnOptions(): SelectOption[] {
-    return this.statusService.statuses.map((b) => ({
-      label: b.name,
-      value: b.id,
-    }));
-  }
+  // get columnOptions(): SelectOption[] {
+  //   return this.statusService.statuses.map((b) => ({
+  //     label: b.name,
+  //     value: b.id,
+  //   }));
+  // }
 
   get priorityOptions(): SelectOption[] {
     return TaskPriorities.map((b) => ({
@@ -127,7 +125,7 @@ export class TaskModalComponent {
     let descValue = '';
 
     let boardValue = '';
-    let statusValue = this.statusService.statuses[0]?.id ?? '';
+    let statusValue = '';
 
     let priorityValue = mediumStatus;
 

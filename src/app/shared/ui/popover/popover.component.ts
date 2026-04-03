@@ -41,7 +41,7 @@ export class PopoverComponent implements OnDestroy {
     document.removeEventListener('click', this.documentClickListener);
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
+  @HostListener('document:keydown.escape')
   onEsc() {
     this.closePopover();
   }
