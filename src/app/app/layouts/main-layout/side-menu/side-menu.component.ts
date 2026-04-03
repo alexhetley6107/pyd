@@ -1,4 +1,5 @@
 import { MOBILE_WIDTH } from '@/shared/constants';
+import { ERoute } from '@/shared/constants/routes';
 import { AuthService } from '@/shared/services/auth.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
 import { LogoComponent } from '@/shared/ui/logo/logo.component';
@@ -40,10 +41,10 @@ export class SideMenuComponent {
   }
 
   links = [
-    { title: 'Agile Board', path: ['/agile-board'], icon: 'agile_' },
-    { title: 'Boards', path: ['/boards'], icon: 'backlog_' },
-    { title: 'Backlog', path: ['/backlog'], icon: 'backlog_' },
-    { title: 'Setting', path: ['/setting'], icon: 'dashboard_', onlyMobile: true },
+    { title: 'Agile Board', path: ERoute.AGILE_BOARD, icon: 'agile_' },
+    { title: 'Boards', path: ERoute.BOARDS, icon: 'backlog_' },
+    { title: 'Backlog', path: ERoute.BACKLOG, icon: 'backlog_' },
+    { title: 'Setting', path: ERoute.SETTING, icon: 'dashboard_', onlyMobile: true },
   ];
 
   logout() {
@@ -51,7 +52,7 @@ export class SideMenuComponent {
       .logout()
       .pipe(
         tap(() => {
-          this.router.navigate(['login']);
+          this.router.navigateByUrl(ERoute.LOGIN);
         })
       )
       .subscribe();

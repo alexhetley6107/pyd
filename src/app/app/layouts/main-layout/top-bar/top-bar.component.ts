@@ -1,3 +1,4 @@
+import { ERoute } from '@/shared/constants/routes';
 import { AuthService } from '@/shared/services/auth.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
 import { ActionOption } from '@/shared/types/ui';
@@ -32,7 +33,7 @@ export class TopBarComponent {
   menuItems: ActionOption[] = [
     {
       text: 'Setting',
-      action: () => this.router.navigate(['setting']),
+      action: () => this.router.navigateByUrl(ERoute.SETTING),
     },
     {
       text: 'Log out',
@@ -41,7 +42,7 @@ export class TopBarComponent {
           .logout()
           .pipe(
             tap(() => {
-              this.router.navigate(['login']);
+              this.router.navigateByUrl(ERoute.LOGIN);
             })
           )
           .subscribe(),

@@ -13,6 +13,7 @@ import { getError } from '@/shared/helpers/formErrors';
 import { AuthService } from '@/shared/services/auth.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { decryptObject, encryptObject } from '@/shared/utils/encrypt';
+import { ERoute } from '@/shared/constants/routes';
 
 @Component({
   selector: 'page-login',
@@ -83,7 +84,7 @@ export class LoginComponent {
         } else {
           localStorage.removeItem('rememberMe');
         }
-        this.router.navigate(['boards']);
+        this.router.navigateByUrl(ERoute.BOARDS);
         this.toast.add(`Welcome ${res.nickname}`);
       },
       error: (err) => {

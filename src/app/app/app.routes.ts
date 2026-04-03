@@ -15,10 +15,11 @@ import { CreateBoardComponent } from '@/pages/create-board/create-board.componen
 import { CreateTaskComponent } from '@/pages/create-task/create-task.component';
 import { AuthCheckComponent } from '@/pages/auth-check/auth-check.component';
 import { PublicGuard } from '@/shared/guards/public.guard';
+import { ERoute } from '@/shared/constants/routes';
 
 export const routes: Routes = [
   {
-    path: 'me',
+    path: ERoute.ME,
     component: AuthCheckComponent,
   },
   {
@@ -26,11 +27,11 @@ export const routes: Routes = [
     component: AuthLayoutComponent,
     canActivate: [PublicGuard],
     children: [
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { path: 'login', component: LoginComponent },
-      { path: 'signup', component: SignupComponent },
-      { path: 'forgot-password', component: ForgotPasswordComponent },
-      { path: 'reset-password', component: ResetPasswordComponent },
+      { path: '', redirectTo: ERoute.LOGIN, pathMatch: 'full' },
+      { path: ERoute.LOGIN, component: LoginComponent },
+      { path: ERoute.SIGNUP, component: SignupComponent },
+      { path: ERoute.FORGOT_PASSWORD, component: ForgotPasswordComponent },
+      { path: ERoute.RESET_PASSWORD, component: ResetPasswordComponent },
     ],
   },
   {
@@ -38,13 +39,13 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [PrivateGuard],
     children: [
-      { path: 'boards', component: BoardsComponent },
-      { path: 'create-board', component: CreateBoardComponent },
-      { path: 'create-task', component: CreateTaskComponent },
+      { path: ERoute.BOARDS, component: BoardsComponent },
+      { path: ERoute.CREATE_BOARD, component: CreateBoardComponent },
+      { path: ERoute.CREATE_TASK, component: CreateTaskComponent },
 
-      // { path: 'agile-board', component: AgileBoardComponent },
-      // { path: 'backlog', component: BacklogComponent },
-      // { path: 'setting', component: SettingComponent },
+      // { path: ERoute.AGILE_BOARD, component: AgileBoardComponent },
+      // { path: ERoute.BACKLOG, component: BacklogComponent },
+      // { path: ERoute.SETTING, component: SettingComponent },
     ],
   },
   { path: '**', component: NotFoundComponent },

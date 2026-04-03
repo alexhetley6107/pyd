@@ -1,3 +1,4 @@
+import { ERoute } from '@/shared/constants/routes';
 import { getError } from '@/shared/helpers/formErrors';
 import { matchPasswords, passwordStrengthValidator } from '@/shared/helpers/matchPasswords';
 import { AuthService } from '@/shared/services/auth.service';
@@ -82,7 +83,7 @@ export class ResetPasswordComponent {
         this.form.reset();
 
         setTimeout(() => {
-          this.router.navigate(['login']);
+          this.router.navigateByUrl(ERoute.LOGIN);
         }, 5000);
       },
       error: (err) => {

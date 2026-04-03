@@ -4,6 +4,7 @@ import { inject } from '@angular/core';
 import { catchError, switchMap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { API } from '@/shared/constants/api';
+import { ERoute } from '@/shared/constants/routes';
 
 let isRefreshing = false;
 
@@ -31,7 +32,7 @@ export const authRefreshInterceptor: HttpInterceptorFn = (req, next) => {
         catchError((refreshError) => {
           isRefreshing = false;
           auth.user.set(null);
-          router.navigate(['/login']);
+          router.navigateByUrl(ERoute.LOGIN);
           return throwError(() => refreshError);
         })
       );

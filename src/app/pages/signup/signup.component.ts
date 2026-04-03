@@ -13,6 +13,7 @@ import { getError } from '@/shared/helpers/formErrors';
 import { matchPasswords, passwordStrengthValidator } from '@/shared/helpers/matchPasswords';
 import { AuthService } from '@/shared/services/auth.service';
 import { ToastService } from '@/shared/services/toast.service';
+import { ERoute } from '@/shared/constants/routes';
 
 @Component({
   selector: 'page-signup',
@@ -89,7 +90,7 @@ export class SignupComponent {
     this.auth.signup(nickname, email, password).subscribe({
       next: (res) => {
         this.toast.add(`Welcome ${res.nickname}`);
-        this.router.navigate(['boards']);
+        this.router.navigateByUrl(ERoute.BOARDS);
       },
       error: (err) => {
         this.toast.add(err.error.message, { type: 'error' });

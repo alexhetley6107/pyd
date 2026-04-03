@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { ERoute } from '../constants/routes';
 
 @Injectable({ providedIn: 'root' })
 export class PrivateGuard implements CanActivate {
@@ -9,11 +10,11 @@ export class PrivateGuard implements CanActivate {
 
   canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.auth.isGettingMe()) {
-      return this.router.navigate(['/me'], {
+      return this.router.navigateByUrl(ERoute.ME, {
         state: { returnUrl: state.url },
       });
     }
 
-    return this.auth.isLoggedIn() || this.router.navigate(['/login']);
+    return this.auth.isLoggedIn() || this.router.navigateByUrl(ERoute.LOGIN);
   }
 }
