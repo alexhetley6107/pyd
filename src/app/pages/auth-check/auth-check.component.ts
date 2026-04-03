@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ERoute } from '@/shared/constants/routes';
 import { delay } from 'rxjs';
+import { LogoComponent } from '@/shared/ui/logo/logo.component';
 
 @Component({
   selector: 'auth-check',
-  imports: [],
+  imports: [LogoComponent],
   templateUrl: './auth-check.component.html',
   styleUrl: './auth-check.component.scss',
 })
