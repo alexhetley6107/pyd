@@ -19,6 +19,8 @@ export const authRefreshInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error) => {
       if (error.status !== HttpStatusCode.Unauthorized) return throwError(() => error);
       if (auth.isGettingMe()) return throwError(() => error);
+      if (!auth.isLoggedIn()) return throwError(() => error);
+
       if (isRefreshing) return throwError(() => error);
       if (isRefreshReq || isLogoutReq) return throwError(() => error);
 

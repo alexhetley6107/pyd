@@ -18,22 +18,19 @@ export class AuthCheckComponent {
   location = inject(Location);
 
   ngOnInit() {
-    this.auth
-      .getMe()
-      .pipe(delay(1000))
-      .subscribe({
-        next: () => {
-          const returnUrl = (this.location.getState() as { returnUrl: string }).returnUrl;
+    this.auth.getMe().subscribe({
+      next: () => {
+        const returnUrl = (this.location.getState() as { returnUrl: string }).returnUrl;
 
-          if (returnUrl) {
-            this.router.navigateByUrl(returnUrl);
-            return;
-          }
-          this.router.navigateByUrl(ERoute.LOGIN);
-        },
-        error: () => {
-          this.router.navigateByUrl(ERoute.LOGIN);
-        },
-      });
+        if (returnUrl) {
+          this.router.navigateByUrl(returnUrl);
+          return;
+        }
+        this.router.navigateByUrl(ERoute.LOGIN);
+      },
+      error: () => {
+        this.router.navigateByUrl(ERoute.LOGIN);
+      },
+    });
   }
 }

@@ -30,7 +30,7 @@ export class ToastService {
       this._toasts.update((items) =>
         items.map((t) => (t.id !== toast.id ? t : { ...t, isOpen: true }))
       );
-    }, 0);
+    }, 10);
 
     if (options?.isConstant) return;
     setTimeout(() => {
