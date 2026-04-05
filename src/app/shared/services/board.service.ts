@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { API } from '../constants/api';
 import { Board } from '../types/board';
-import { tap } from 'rxjs';
+import { tap, delay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +24,7 @@ export class BoardService {
   getAll() {
     this.isFetching = true;
     return this.http.get<Board[]>(API.board).pipe(
+      delay(1000),
       tap((boards) => {
         this.boards = boards;
         this.openedBoard.set(boards?.[0] ?? null);

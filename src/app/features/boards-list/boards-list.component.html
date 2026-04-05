@@ -1,0 +1,17 @@
+@if (isFetching) {
+  <ui-list-container>
+    @for (item of [1, 2, 3]; track item) {
+      <ui-skeleton height="180px" />
+    }
+  </ui-list-container>
+} @else {
+  @if (boards.length === 0) {
+    <p class="text-center">No boards</p>
+  } @else {
+    <ui-list-container>
+      @for (board of boards; track board.id) {
+        <board-item [board]="board" />
+      }
+    </ui-list-container>
+  }
+}

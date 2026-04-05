@@ -4,10 +4,11 @@ import { Task } from '@/shared/types/board';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 import { Component, inject, Input } from '@angular/core';
 import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
+import { ListContainerComponent } from '@/shared/ui/list-container/list-container.component';
 
 @Component({
   selector: 'backlog-tasks',
-  imports: [SkeletonComponent, TaskItemComponent, TaskModalComponent],
+  imports: [SkeletonComponent, TaskItemComponent, TaskModalComponent, ListContainerComponent],
   templateUrl: './backlog-tasks.component.html',
   styleUrl: './backlog-tasks.component.scss',
 })

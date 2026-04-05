@@ -1,2 +1,10 @@
-<p>boards works!</p>
-<a routerLink="/create-board">Create board</a>
+<div class="flex align-center justify-between">
+  <h3 class="mr-10">Boards</h3>
+  <ui-button (onClick)="navigateToCreateBoard()" variant="outlined" size="sm"
+    >Create Board</ui-button
+  >
+</div>
+
+<boards-search />
+
+<boards-list />
