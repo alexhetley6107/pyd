@@ -1,0 +1,37 @@
+.board {
+  box-shadow: var(--shadow);
+  border-radius: 6px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  height: 160px;
+
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  .name {
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 500;
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    border-bottom: 1px solid var(--gray-color);
+  }
+
+  .desc {
+    margin: 10px 14px;
+    color: var(--gray-color);
+    font-size: 14px;
+
+    display: -webkit-box;
+    line-clamp: 5;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

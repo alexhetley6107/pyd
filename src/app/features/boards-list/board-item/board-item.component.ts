@@ -1,5 +1,7 @@
+import { ERoute } from '@/shared/constants/routes';
 import { Board } from '@/shared/types/board';
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'board-item',
@@ -8,5 +10,11 @@ import { Component, input } from '@angular/core';
   styleUrl: './board-item.component.scss',
 })
 export class BoardItemComponent {
+  router = inject(Router);
+
   board = input<Board>();
+
+  navigateToBoard() {
+    this.router.navigate([ERoute.BOARDS, this.board()?.id]);
+  }
 }

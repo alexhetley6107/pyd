@@ -1,1 +1,6 @@
-<p>{{ board()?.name }}</p>
+<div class="board" (click)="navigateToBoard()">
+  <h3 class="name">{{ board()?.name }}</h3>
+  <p class="desc">
+    {{ board()?.description }}
+  </p>
+</div>

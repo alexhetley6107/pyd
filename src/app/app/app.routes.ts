@@ -17,6 +17,8 @@ import { AuthCheckComponent } from '@/pages/auth-check/auth-check.component';
 import { PublicGuard } from '@/app/guards/public.guard';
 import { ERoute } from '@/shared/constants/routes';
 import { DashboardComponent } from '@/pages/dashboard/dashboard.component';
+import { BoardViewComponent } from '@/pages/board-view/board-view.component';
+import { BoardDetailsComponent } from '@/pages/board-details/board-details.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +44,8 @@ export const routes: Routes = [
     children: [
       { path: ERoute.DASHBOARD, component: DashboardComponent },
       { path: ERoute.BOARDS, component: BoardsComponent },
+      { path: ERoute.BOARD, component: BoardViewComponent },
+      { path: ERoute.BOARD_DETAILS, component: BoardDetailsComponent },
       { path: ERoute.CREATE_BOARD, component: CreateBoardComponent },
       { path: ERoute.CREATE_TASK, component: CreateTaskComponent },
       { path: ERoute.AGILE_BOARD, component: AgileBoardComponent },
