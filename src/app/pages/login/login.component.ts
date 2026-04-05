@@ -84,7 +84,7 @@ export class LoginComponent {
         } else {
           localStorage.removeItem('rememberMe');
         }
-        this.router.navigateByUrl(ERoute.BOARDS);
+        this.router.navigateByUrl(ERoute.DASHBOARD);
         this.toast.add(`Welcome ${res.nickname}`);
       },
       error: (err) => {

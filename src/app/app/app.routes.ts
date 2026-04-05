@@ -16,6 +16,7 @@ import { CreateTaskComponent } from '@/pages/create-task/create-task.component';
 import { AuthCheckComponent } from '@/pages/auth-check/auth-check.component';
 import { PublicGuard } from '@/app/guards/public.guard';
 import { ERoute } from '@/shared/constants/routes';
+import { DashboardComponent } from '@/pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,7 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [PrivateGuard],
     children: [
+      { path: ERoute.DASHBOARD, component: DashboardComponent },
       { path: ERoute.BOARDS, component: BoardsComponent },
       { path: ERoute.CREATE_BOARD, component: CreateBoardComponent },
       { path: ERoute.CREATE_TASK, component: CreateTaskComponent },

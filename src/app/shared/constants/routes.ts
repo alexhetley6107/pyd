@@ -5,6 +5,7 @@ export enum ERoute {
   FORGOT_PASSWORD = 'forgot-password',
   RESET_PASSWORD = 'reset-password',
 
+  DASHBOARD = 'dashboard',
   BOARDS = 'boards',
   CREATE_BOARD = 'create-board',
   CREATE_TASK = 'create-task',

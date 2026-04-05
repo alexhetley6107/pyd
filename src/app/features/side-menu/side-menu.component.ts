@@ -41,6 +41,7 @@ export class SideMenuComponent {
   }
 
   links = [
+    { title: 'Dashboard', path: ERoute.DASHBOARD, icon: 'agile_' },
     { title: 'Agile Board', path: ERoute.AGILE_BOARD, icon: 'agile_' },
     { title: 'Boards', path: ERoute.BOARDS, icon: 'backlog_' },
     { title: 'Backlog', path: ERoute.BACKLOG, icon: 'backlog_' },

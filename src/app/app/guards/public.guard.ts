@@ -15,6 +15,6 @@ export class PublicGuard implements CanActivate {
       });
     }
 
-    return !this.auth.isLoggedIn() || this.router.navigateByUrl(ERoute.BOARDS);
+    return !this.auth.isLoggedIn() || this.router.navigateByUrl(ERoute.DASHBOARD);
   }
 }

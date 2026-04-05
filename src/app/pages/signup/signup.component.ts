@@ -90,7 +90,7 @@ export class SignupComponent {
     this.auth.signup(nickname, email, password).subscribe({
       next: (res) => {
         this.toast.add(`Welcome ${res.nickname}`);
-        this.router.navigateByUrl(ERoute.BOARDS);
+        this.router.navigateByUrl(ERoute.DASHBOARD);
       },
       error: (err) => {
         this.toast.add(err.error.message, { type: 'error' });
