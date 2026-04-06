@@ -3,10 +3,12 @@ import { ToastService } from '@/shared/services/toast.service';
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.component';
+import { ERoute } from '@/shared/constants/routes';
 
 @Component({
   selector: 'create-board',
-  imports: [RouterLink],
+  imports: [RouterLink, BreadcrumbsComponent],
   templateUrl: './create-board.component.html',
   styleUrl: './create-board.component.scss',
 })
@@ -30,4 +32,14 @@ export class CreateBoardComponent {
       description: this.fb.control('Some board description...', [Validators.required]),
     });
   }
+
+  links = [
+    {
+      text: 'Boards',
+      link: '/' + ERoute.BOARDS,
+    },
+    {
+      text: 'Create New',
+    },
+  ];
 }

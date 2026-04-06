@@ -44,3 +44,9 @@ a {
     text-overflow: ellipsis !important;
   }
 }
+
+.title {
+  color: var(--text-color);
+  font-size: 20px;
+  font-weight: 500;
+}

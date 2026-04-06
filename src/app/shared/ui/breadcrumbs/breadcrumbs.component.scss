@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  gap: 4px;
+  height: 27px;
+  align-items: center;
+
+  * {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--gray-color);
+    cursor: default;
+
+    &.title {
+      color: var(--text-color);
+    }
+
+    &.link {
+      cursor: pointer;
+    }
+    @media (hover: hover) {
+      &.link:hover {
+        color: var(--prime-color);
+      }
+    }
+  }
+}

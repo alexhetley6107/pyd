@@ -1,6 +1,6 @@
-<div class="board" (click)="navigateToBoard()">
+<a class="board" [routerLink]="board()?.id">
   <h3 class="name">{{ board()?.name }}</h3>
   <p class="desc">
     {{ board()?.description }}
   </p>
-</div>
+</a>

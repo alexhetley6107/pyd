@@ -7,3 +7,8 @@ export type ActionOption = {
   text: string;
   action: VoidFunction;
 };
+
+export type BreadCrumbItem = {
+  text: string;
+  link?: string;
+};
