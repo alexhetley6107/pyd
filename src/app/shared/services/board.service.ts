@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { API } from '../constants/api';
 import { Board } from '../types/board';
-import { tap, catchError, of, finalize } from 'rxjs';
+import { tap, catchError, of, finalize, delay } from 'rxjs';
 import { getHttpParams } from '../utils/getHttpParams';
 
 @Injectable({

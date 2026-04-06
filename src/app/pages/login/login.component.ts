@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { Router, RouterLink } from '@angular/router';
 import { InputComponent } from '@/shared/ui/input/input.component';
@@ -26,23 +26,22 @@ export class LoginComponent {
   router = inject(Router);
   auth = inject(AuthService);
   toast = inject(ToastService);
+  fb = inject(NonNullableFormBuilder);
 
-  isLoading = false;
-  isRememberMe = false;
+  isRememberMe = signal(false);
+  isLoading = signal(false);
 
   form!: FormGroup<{
     login: FormControl<string>;
     password: FormControl<string>;
   }>;
 
-  constructor(private fb: NonNullableFormBuilder) {}
-
   ngOnInit(): void {
     const initials = { login: '', password: '' };
 
     const savedCreds = localStorage.getItem('rememberMe');
     if (savedCreds) {
-      this.isRememberMe = true;
+      this.isRememberMe.set(true);
       const decryptedCreds = decryptObject(savedCreds);
       initials.login = decryptedCreds?.login ?? '';
       initials.password = decryptedCreds?.password ?? '';
@@ -56,7 +55,7 @@ export class LoginComponent {
 
   toggleRememberMe(e: Event) {
     const input = e.target as HTMLInputElement;
-    this.isRememberMe = input.checked;
+    this.isRememberMe.set(input.checked);
   }
 
   get loginError(): string | null {
@@ -71,7 +70,7 @@ export class LoginComponent {
       this.form.markAllAsTouched();
       return;
     }
-    this.isLoading = true;
+    this.isLoading.set(true);
 
     const login = this.form.value.login ?? '';
     const password = this.form.value.password ?? '';
@@ -79,20 +78,18 @@ export class LoginComponent {
 
     this.auth.login(body).subscribe({
       next: (res) => {
-        if (this.isRememberMe) {
+        if (this.isRememberMe()) {
           localStorage.setItem('rememberMe', encryptObject(body));
         } else {
           localStorage.removeItem('rememberMe');
         }
         this.router.navigateByUrl(ERoute.DASHBOARD);
         this.toast.showSuccess(`Welcome ${res.nickname}`);
+        this.isLoading.set(false);
       },
       error: (err) => {
         this.toast.showError(err.error.message);
-        this.isLoading = false;
-      },
-      complete: () => {
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
     });
   }

@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { BoardService } from '@/shared/services/board.service';
+import { ToastService } from '@/shared/services/toast.service';
+import { Component, inject, signal } from '@angular/core';
+import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'create-board',
@@ -7,4 +10,24 @@ import { RouterLink } from '@angular/router';
   templateUrl: './create-board.component.html',
   styleUrl: './create-board.component.scss',
 })
-export class CreateBoardComponent {}
+export class CreateBoardComponent {
+  router = inject(Router);
+  toast = inject(ToastService);
+  board = inject(BoardService);
+
+  fb = inject(NonNullableFormBuilder);
+
+  isLoading = signal(false);
+
+  form!: FormGroup<{
+    name: FormControl<string>;
+    description: FormControl<string>;
+  }>;
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      name: this.fb.control('New Board', [Validators.required]),
+      description: this.fb.control('Some board description...', [Validators.required]),
+    });
+  }
+}
