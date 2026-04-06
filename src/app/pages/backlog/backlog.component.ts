@@ -17,7 +17,7 @@ export class BacklogComponent {
   isNewTaskModal = false;
 
   get isFetching(): boolean {
-    return this.boardService.isFetching;
+    return this.boardService.isFetching();
   }
 
   loadSBoardsInfo() {

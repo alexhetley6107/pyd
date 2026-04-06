@@ -61,13 +61,13 @@ export class BoardModalComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const modalOpened = Boolean(changes['open'].currentValue);
 
-    if (modalOpened) {
-      const initialName = this.action === 'create' ? '' : this.boardService?.openedBoard()?.name;
+    // if (modalOpened) {
+    //   const initialName = this.action === 'create' ? '' : this.boardService?.openedBoard()?.name;
 
-      this.form = this.fb.group({
-        name: this.fb.control(initialName ?? '', [Validators.required]),
-      });
-    }
+    //   this.form = this.fb.group({
+    //     name: this.fb.control(initialName ?? '', [Validators.required]),
+    //   });
+    // }
   }
 
   onCloseModal() {
@@ -84,12 +84,12 @@ export class BoardModalComponent implements OnChanges {
     }
     this.isLoading = true;
 
-    const payload: any = {
-      name: this.form.value.name ?? '',
-      ...(this.action === 'create' ? {} : { id: this.boardService?.openedBoard()?.id ?? '' }),
-    };
+    // const payload: any = {
+    //   name: this.form.value.name ?? '',
+    //   ...(this.action === 'create' ? {} : { id: this.boardService?.openedBoard()?.id ?? '' }),
+    // };
 
-    this.boardService[this.action](payload).subscribe({
+    this.boardService[this.action]({} as any).subscribe({
       next: () => {
         this.toast.add(`Board successfully ${this.action}d`);
       },

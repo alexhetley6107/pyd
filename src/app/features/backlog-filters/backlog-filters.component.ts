@@ -37,11 +37,11 @@ export class BacklogFiltersComponent {
   constructor(private fb: NonNullableFormBuilder) {}
 
   get isFetching() {
-    return this.boardService.isFetching;
+    return this.boardService.isFetching();
   }
 
   get boardOptions(): SelectOption[] {
-    const options = this.boardService.boards.map((b) => ({
+    const options = this.boardService.boards().map((b) => ({
       label: b.name,
       value: b.id,
     }));

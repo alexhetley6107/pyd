@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { API } from '../constants/api';
 import { Board } from '../types/board';
 import { tap, delay } from 'rxjs';
@@ -8,27 +8,27 @@ import { tap, delay } from 'rxjs';
   providedIn: 'root',
 })
 export class BoardService {
-  constructor(private http: HttpClient) {}
+  http = inject(HttpClient);
 
-  isFetching = false;
+  isFetching = signal<boolean>(false);
 
-  boards: Board[] = [];
-
-  openedBoard = signal<Board | null>(null);
-
-  openBoard(boardId: string | null) {
-    const board = this.boards.find((b) => b.id === boardId) ?? null;
-    this.openedBoard.set(board);
-  }
+  boards = signal<Board[]>([]);
 
   getAll() {
-    this.isFetching = true;
+    this.isFetching.set(true);
     return this.http.get<Board[]>(API.board).pipe(
       delay(1000),
       tap((boards) => {
-        this.boards = boards;
-        this.openedBoard.set(boards?.[0] ?? null);
-        this.isFetching = false;
+        this.boards.set(boards);
+        this.isFetching.set(false);
+      })
+    );
+  }
+
+  getOne(id: string) {
+    return this.http.get<Board>(`${API.board}/${id}`).pipe(
+      tap((board) => {
+        this.boards.set([board]);
       })
     );
   }
@@ -36,8 +36,7 @@ export class BoardService {
   create(body: { name: string }) {
     return this.http.post<Board>(API.board, body).pipe(
       tap((board) => {
-        this.openedBoard.set(board);
-        this.boards = [...this.boards, board];
+        this.boards.set([...this.boards(), board]);
       })
     );
   }
@@ -45,8 +44,7 @@ export class BoardService {
   update(body: { id: string; name: string }) {
     return this.http.patch<Board>(API.board, body).pipe(
       tap((board) => {
-        this.openedBoard.set(board);
-        this.boards = this.boards.map((b) => (b.id === board.id ? board : b));
+        this.boards.update((boards) => boards.map((b) => (b.id === board.id ? board : b)));
       })
     );
   }
@@ -54,8 +52,7 @@ export class BoardService {
   delete(id: string) {
     return this.http.delete(`${API.board}/${id}`).pipe(
       tap(() => {
-        this.boards = this.boards.filter((b) => b.id !== id);
-        this.openedBoard.set(this.boards?.[0] ?? null);
+        this.boards.update((boards) => boards.filter((b) => b.id !== id));
       })
     );
   }

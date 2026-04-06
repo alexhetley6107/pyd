@@ -29,7 +29,7 @@ export class BoardsComponent {
     this.loadSBoardsInfo();
   }
   get boards(): Board[] {
-    return this.boardService.boards;
+    return this.boardService.boards();
   }
 
   navigateToCreateBoard() {

@@ -42,36 +42,36 @@ export class BoardManagerComponent {
     boardId: FormControl<string>;
   }>;
 
-  constructor(private fb: NonNullableFormBuilder) {
-    effect(() => {
-      const boardId = this.boardService.openedBoard()?.id;
-      if (!boardId) return;
-      this.form.patchValue({ boardId });
-    });
-  }
+  // constructor(private fb: NonNullableFormBuilder) {
+  //   effect(() => {
+  //     const boardId = this.boardService.openedBoard()?.id;
+  //     if (!boardId) return;
+  //     this.form.patchValue({ boardId });
+  //   });
+  // }
 
-  ngOnInit() {
-    this.form = this.fb.group({
-      boardId: this.fb.control(''),
-    });
+  // ngOnInit() {
+  //   this.form = this.fb.group({
+  //     boardId: this.fb.control(''),
+  //   });
 
-    this.form.valueChanges.subscribe((value) => {
-      if (value?.boardId) {
-        this.boardService.openBoard(value.boardId);
-      }
-    });
-  }
+  //   this.form.valueChanges.subscribe((value) => {
+  //     if (value?.boardId) {
+  //       // this.boardService.openBoard(value.boardId);
+  //     }
+  //   });
+  // }
 
   get isBoardSelect(): boolean {
     return this.boardService.boards.length > 0;
   }
 
   get isFetching(): boolean {
-    return this.boardService.isFetching;
+    return this.boardService.isFetching();
   }
 
   get boardSelectOptions(): SelectOption[] {
-    return this.boardService.boards.map((board) => ({
+    return this.boardService.boards().map((board) => ({
       label: board.name,
       value: board.id,
     }));

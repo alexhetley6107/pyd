@@ -15,10 +15,10 @@ export class BoardsListComponent {
   boardService = inject(BoardService);
 
   get isFetching(): boolean {
-    return this.boardService.isFetching;
+    return this.boardService.isFetching();
   }
 
   get boards(): Board[] {
-    return this.boardService.boards;
+    return this.boardService.boards();
   }
 }

@@ -24,14 +24,14 @@ export class BoardColumnsComponent {
 
   isTaskModal = false;
 
-  constructor() {
-    effect(() => {
-      const boardId = this.boardService.openedBoard()?.id;
-      if (!boardId) return;
+  // constructor() {
+  //   effect(() => {
+  //     const boardId = this.boardService.openedBoard()?.id;
+  //     if (!boardId) return;
 
-      this.taskService.getAll({ boardId }).subscribe();
-    });
-  }
+  //     this.taskService.getAll({ boardId }).subscribe();
+  //   });
+  // }
 
   @HostBinding('class.menu-opened')
   get menuOpened(): boolean {

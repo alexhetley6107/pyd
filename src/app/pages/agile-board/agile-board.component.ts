@@ -26,6 +26,6 @@ export class AgileBoardComponent {
     this.loadSBoardsInfo();
   }
   get boards(): Board[] {
-    return this.boardService.boards;
+    return this.boardService.boards();
   }
 }

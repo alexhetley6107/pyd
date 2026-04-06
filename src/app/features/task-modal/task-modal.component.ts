@@ -90,7 +90,7 @@ export class TaskModalComponent {
   }
 
   get boardOptions(): SelectOption[] {
-    const options = this.boardService.boards.map((b) => ({
+    const options = this.boardService.boards().map((b) => ({
       label: b.name,
       value: b.id,
     }));
@@ -129,9 +129,9 @@ export class TaskModalComponent {
 
     let priorityValue = mediumStatus;
 
-    if (this.action === 'create-for-board') {
-      boardValue = this.boardService.openedBoard()?.id ?? '';
-    }
+    // if (this.action === 'create-for-board') {
+    //   boardValue = this.boardService.openedBoard()?.id ?? '';
+    // }
 
     const task = this.taskService.openedTask();
     if (task && this.action === 'edit-task') {
