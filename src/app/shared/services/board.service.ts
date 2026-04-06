@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { API } from '../constants/api';
 import { Board } from '../types/board';
-import { tap, delay } from 'rxjs';
+import { tap, catchError, of, finalize } from 'rxjs';
+import { getHttpParams } from '../utils/getHttpParams';
 
 @Injectable({
   providedIn: 'root',
@@ -14,14 +15,19 @@ export class BoardService {
 
   boards = signal<Board[]>([]);
 
-  getAll() {
+  getAll(search?: string) {
+    const params = getHttpParams({ search });
+
     this.isFetching.set(true);
-    return this.http.get<Board[]>(API.board).pipe(
-      delay(1000),
+    return this.http.get<Board[]>(API.board, { params }).pipe(
       tap((boards) => {
         this.boards.set(boards);
-        this.isFetching.set(false);
-      })
+      }),
+      catchError(() => {
+        this.boards.set([]);
+        return of([]);
+      }),
+      finalize(() => this.isFetching.set(false))
     );
   }
 

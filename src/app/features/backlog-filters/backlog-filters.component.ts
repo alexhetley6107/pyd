@@ -78,8 +78,6 @@ export class BacklogFiltersComponent {
     this.form.valueChanges
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe(() => this.getTasks());
-
-    this.getTasks();
   }
 
   getTasks() {

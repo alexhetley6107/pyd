@@ -84,12 +84,14 @@ export class BoardModalComponent implements OnChanges {
     }
     this.isLoading = true;
 
-    // const payload: any = {
-    //   name: this.form.value.name ?? '',
-    //   ...(this.action === 'create' ? {} : { id: this.boardService?.openedBoard()?.id ?? '' }),
-    // };
+    const payload: any = {
+      name: this.form.value.name ?? '',
+      description: '',
+      // ...(this.action === 'create' ? {} : { id: this.boardService?.openedBoard()?.id ?? '' }),
+      // {}
+    };
 
-    this.boardService[this.action]({} as any).subscribe({
+    this.boardService[this.action](payload).subscribe({
       next: () => {
         this.toast.add(`Board successfully ${this.action}d`);
       },
