@@ -11,7 +11,7 @@
     flex-direction: column;
 
     .container {
-      padding: var(--page-padding);
+      padding: 12px 14px;
       flex-grow: 1;
       height: calc(100% - 60px);
       overflow: scroll;

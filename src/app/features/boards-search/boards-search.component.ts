@@ -4,6 +4,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { BoardService } from '@/shared/services/board.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ToastService } from '@/shared/services/toast.service';
 
 @Component({
   selector: 'boards-search',
@@ -13,6 +14,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class BoardsSearchComponent {
   boardService = inject(BoardService);
+  toast = inject(ToastService);
+
   private destroyRef = inject(DestroyRef);
 
   searchControl = new FormControl('');
@@ -25,6 +28,8 @@ export class BoardsSearchComponent {
         switchMap((query) => this.boardService.getAll(query ?? '')),
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe();
+      .subscribe({
+        error: (err) => this.toast.showError(err.error.message),
+      });
   }
 }

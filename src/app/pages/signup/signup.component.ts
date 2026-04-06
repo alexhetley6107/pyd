@@ -89,11 +89,11 @@ export class SignupComponent {
 
     this.auth.signup(nickname, email, password).subscribe({
       next: (res) => {
-        this.toast.add(`Welcome ${res.nickname}`);
+        this.toast.showSuccess(`Welcome ${res.nickname}`);
         this.router.navigateByUrl(ERoute.DASHBOARD);
       },
       error: (err) => {
-        this.toast.add(err.error.message, { type: 'error' });
+        this.toast.showError(err.error.message);
         this.isLoading = false;
       },
       complete: () => {

@@ -1,12 +1,14 @@
-import { AuthService } from '@/shared/services/auth.service';
-import { HttpInterceptorFn, HttpStatusCode } from '@angular/common/http';
+import { HttpInterceptorFn, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { catchError, switchMap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { catchError, filter, switchMap, take, throwError, Subject } from 'rxjs';
+
+import { AuthService } from '@/shared/services/auth.service';
 import { API } from '@/shared/constants/api';
 import { ERoute } from '@/shared/constants/routes';
 
-let isRefreshing = false;
+let refreshInProgress = false;
+let refreshSubject = new Subject<boolean>();
 
 export const authRefreshInterceptor: HttpInterceptorFn = (req, next) => {
   const auth = inject(AuthService);
@@ -16,25 +18,51 @@ export const authRefreshInterceptor: HttpInterceptorFn = (req, next) => {
   const isLogoutReq = req.url.includes(API.logout);
 
   return next(req).pipe(
-    catchError((error) => {
-      if (error.status !== HttpStatusCode.Unauthorized) return throwError(() => error);
-      if (auth.isGettingMe()) return throwError(() => error);
-      if (!auth.isLoggedIn()) return throwError(() => error);
+    catchError((error: HttpErrorResponse) => {
+      if (error.status !== HttpStatusCode.Unauthorized) {
+        return throwError(() => error);
+      }
 
-      if (isRefreshing) return throwError(() => error);
-      if (isRefreshReq || isLogoutReq) return throwError(() => error);
+      if (isRefreshReq || isLogoutReq) {
+        auth.user.set(null);
+        router.navigateByUrl(ERoute.LOGIN);
+        return throwError(() => error);
+      }
 
-      isRefreshing = true;
+      if (!auth.isLoggedIn()) {
+        return throwError(() => error);
+      }
+
+      // 🚀 если refresh уже идёт → ставим запрос в очередь
+      if (refreshInProgress) {
+        return refreshSubject.pipe(
+          filter(Boolean),
+          take(1),
+          switchMap(() => next(req))
+        );
+      }
+
+      refreshInProgress = true;
+      refreshSubject = new Subject<boolean>();
 
       return auth.refresh().pipe(
         switchMap(() => {
-          isRefreshing = false;
+          refreshInProgress = false;
+          refreshSubject.next(true);
+          refreshSubject.complete();
+
           return next(req);
         }),
+
         catchError((refreshError) => {
-          isRefreshing = false;
+          refreshInProgress = false;
+
+          refreshSubject.next(false);
+          refreshSubject.complete();
+
           auth.user.set(null);
           router.navigateByUrl(ERoute.LOGIN);
+
           return throwError(() => refreshError);
         })
       );

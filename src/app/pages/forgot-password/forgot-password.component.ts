@@ -52,11 +52,11 @@ export class ForgotPasswordComponent {
 
     this.auth.forgotPassword(email).subscribe({
       next: () => {
-        this.toast.add(`Check your email to reset your password`);
+        this.toast.showSuccess(`Check your email to reset your password`);
         this.form.reset();
       },
       error: (err) => {
-        this.toast.add(err.error.message, { type: 'error' });
+        this.toast.showError(err.error.message);
         this.isLoading = false;
       },
       complete: () => {

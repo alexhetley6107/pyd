@@ -19,14 +19,9 @@ export class BoardService {
     const params = getHttpParams({ search });
 
     this.isFetching.set(true);
+
     return this.http.get<Board[]>(API.board, { params }).pipe(
-      tap((boards) => {
-        this.boards.set(boards);
-      }),
-      catchError(() => {
-        this.boards.set([]);
-        return of([]);
-      }),
+      tap((boards) => this.boards.set(boards)),
       finalize(() => this.isFetching.set(false))
     );
   }
