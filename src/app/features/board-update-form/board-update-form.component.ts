@@ -1,6 +1,9 @@
+import { ERoute } from '@/shared/constants/routes';
+import { getError } from '@/shared/helpers/formErrors';
 import { BoardService } from '@/shared/services/board.service';
 import { ToastService } from '@/shared/services/toast.service';
-import { Component, effect, inject, resource, signal } from '@angular/core';
+import { Board } from '@/shared/types/board';
+import { Component, effect, inject, input, resource, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,66 +12,58 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.component';
-import { ERoute } from '@/shared/constants/routes';
+import { firstValueFrom } from 'rxjs';
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { TextareaComponent } from '@/shared/ui/textarea/textarea.component';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
-import { getError } from '@/shared/helpers/formErrors';
-import { firstValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'create-board',
-  imports: [
-    BreadcrumbsComponent,
-    InputComponent,
-    TextareaComponent,
-    ButtonComponent,
-    ReactiveFormsModule,
-  ],
-  templateUrl: './create-board.component.html',
+  selector: 'board-update-form',
+  imports: [InputComponent, TextareaComponent, ButtonComponent, ReactiveFormsModule],
+  templateUrl: './board-update-form.component.html',
 })
-export class CreateBoardComponent {
+export class BoardUpdateFormComponent {
   router = inject(Router);
-  toast = inject(ToastService);
   boardService = inject(BoardService);
+  toast = inject(ToastService);
   fb = inject(NonNullableFormBuilder);
+
+  currentBoard = input<Board | null>();
 
   form!: FormGroup<{
     name: FormControl<string>;
     description: FormControl<string>;
   }>;
 
-  submitTrigger = signal<null | { name: string; description: string }>(null);
+  submitTrigger = signal<null | { id: string; name: string; description: string }>(null);
 
-  createBoardResource = resource({
+  updateBoardResource = resource({
     request: () => this.submitTrigger(),
     loader: async ({ request }) => {
       if (!request) return null;
-      return await firstValueFrom(this.boardService.create(request));
+      return await firstValueFrom(this.boardService.update(request));
     },
   });
 
   constructor() {
     effect(() => {
-      const value = this.createBoardResource.value();
-      const error = this.createBoardResource.error() as any;
+      this.form = this.fb.group({
+        name: this.fb.control(this.currentBoard()?.name ?? '', [Validators.required]),
+        description: this.fb.control(this.currentBoard()?.description ?? ''),
+      });
+    });
+    effect(() => {
+      const value = this.updateBoardResource.value();
+      const error = this.updateBoardResource.error() as any;
 
       if (value) {
-        this.toast.showSuccess('Board successfully created');
+        this.toast.showSuccess('Board successfully updated');
         this.router.navigate([ERoute.BOARDS, value.id]);
       }
 
       if (error) {
         this.toast.showError(error.error.message ?? 'Unknown error');
       }
-    });
-  }
-
-  ngOnInit(): void {
-    this.form = this.fb.group({
-      name: this.fb.control('New Board', [Validators.required]),
-      description: this.fb.control('Some board description...'),
     });
   }
 
@@ -79,13 +74,15 @@ export class CreateBoardComponent {
     }
 
     const payload = {
+      id: this.currentBoard()?.id ?? '',
       name: this.form.value.name ?? '',
       description: this.form.value.description ?? '',
     };
     this.submitTrigger.set(payload);
   }
+
   handleCancel() {
-    this.router.navigate([ERoute.BOARDS]);
+    this.router.navigate([ERoute.BOARDS, this.currentBoard()?.id ?? '']);
   }
 
   get nameError(): string | null {
@@ -93,16 +90,6 @@ export class CreateBoardComponent {
   }
 
   get isLoading(): boolean {
-    return this.createBoardResource.isLoading();
+    return this.updateBoardResource.isLoading();
   }
-
-  links = [
-    {
-      text: 'Boards',
-      link: '/' + ERoute.BOARDS,
-    },
-    {
-      text: 'Create New',
-    },
-  ];
 }

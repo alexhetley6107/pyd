@@ -1,7 +1,3 @@
-<div class="mb-10">
-  <ui-breadcrumbs [links]="links" />
-</div>
-
 <form [formGroup]="form" (ngSubmit)="handleSubmit()" (keydown.enter)="handleSubmit()">
   <ui-input
     formControlName="name"
@@ -15,6 +11,6 @@
   <div class="flex justify-end mt-10 gap-10">
     <ui-button variant="outlined" (onClick)="handleCancel()">Cancel</ui-button>
 
-    <ui-button type="submit" [loading]="isLoading">Create</ui-button>
+    <ui-button type="submit" [loading]="isLoading">Update</ui-button>
   </div>
 </form>

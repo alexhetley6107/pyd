@@ -28,6 +28,7 @@ export class BoardService {
 
   getOne(id: string) {
     return this.http.get<Board>(`${API.board}/${id}`).pipe(
+      delay(4000),
       tap((board) => {
         this.boards.set([board]);
       })
