@@ -1,17 +1,28 @@
+import { ERoute } from '@/shared/constants/routes';
 import { BoardService } from '@/shared/services/board.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { ConfirmModalComponent } from '@/shared/ui/confirm-modal/confirm-modal.component';
-import { booleanAttribute, Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+  booleanAttribute,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  signal,
+} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'board-delete-modal',
   imports: [ConfirmModalComponent],
   templateUrl: './board-delete-modal.component.html',
-  styleUrl: './board-delete-modal.component.scss',
 })
 export class BoardDeleteModalComponent {
   boardService = inject(BoardService);
   toast = inject(ToastService);
+  route = inject(ActivatedRoute);
+  router = inject(Router);
 
   @Input({ transform: booleanAttribute }) open: boolean = false;
 
@@ -21,23 +32,24 @@ export class BoardDeleteModalComponent {
     this.closeModal.emit();
   }
 
-  isLoading = false;
+  isLoading = signal(false);
 
   onDeleteBoard() {
-    this.isLoading = true;
+    this.isLoading.set(true);
 
-    // const id = this.boardService?.openedBoard()?.id ?? '';
+    const boardId = this.route.snapshot.paramMap.get('id') ?? '';
 
-    this.boardService.delete('id').subscribe({
+    this.boardService.delete(boardId).subscribe({
       next: () => {
-        this.toast.add(`Board successfully deleted.`);
+        this.toast.showSuccess(`Board successfully deleted.`);
+        this.router.navigateByUrl(ERoute.BOARDS);
       },
       error: (err: any) => {
-        this.toast.add(err.error.message, { type: 'error' });
-        this.isLoading = false;
+        this.toast.showError(err.error.message);
+        this.isLoading.set(false);
       },
       complete: () => {
-        this.isLoading = false;
+        this.isLoading.set(false);
         this.onCloseModal();
       },
     });
