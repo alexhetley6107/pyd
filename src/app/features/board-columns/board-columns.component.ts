@@ -7,13 +7,14 @@ import { Component, effect, HostBinding, inject } from '@angular/core';
 import { TaskItemComponent } from '@/features/task-item/task-item.component';
 import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
 import { TaskStatuses } from '@/shared/constants';
+import { ActivatedRoute } from '@angular/router';
 
 type Column = { name: string; taskIds: string[] };
 type TaskMap = Record<string, Task>;
 
 @Component({
   selector: 'board-columns',
-  imports: [SkeletonComponent, TaskItemComponent],
+  imports: [TaskItemComponent],
   templateUrl: './board-columns.component.html',
   styleUrl: './board-columns.component.scss',
 })
@@ -21,15 +22,14 @@ export class BoardColumnsComponent {
   menu = inject(SideMenuService);
   boardService = inject(BoardService);
   taskService = inject(TaskService);
+  route = inject(ActivatedRoute);
 
-  // constructor() {
-  //   effect(() => {
-  //     const boardId = this.boardService.openedBoard()?.id;
-  //     if (!boardId) return;
+  ngOnInit() {
+    const boardId = this.route.snapshot.paramMap.get('id');
 
-  //     this.taskService.getAll({ boardId }).subscribe();
-  //   });
-  // }
+    if (!boardId) return;
+    this.taskService.getAll({ boardId }).subscribe();
+  }
 
   @HostBinding('class.menu-opened')
   get menuOpened(): boolean {
@@ -44,14 +44,14 @@ export class BoardColumnsComponent {
   get columns(): Column[] {
     return TaskStatuses.map((name) => ({
       name,
-      taskIds: this.taskService.tasks.filter((t) => t.statusId === name).map((t) => t.id),
+      taskIds: this.taskService.tasks.filter((t) => t.status === name).map((t) => t.id),
     }));
   }
 
   get taskMap(): TaskMap {
     return this.taskService.tasks
       .filter((t) => t.boardId)
-      .filter((t) => t.statusId)
+      .filter((t) => t.status)
       .reduce((acc, task) => {
         acc[task.id] = task;
         return acc;

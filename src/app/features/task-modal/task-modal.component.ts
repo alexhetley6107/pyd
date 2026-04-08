@@ -1,5 +1,5 @@
 import { getError } from '@/shared/helpers/formErrors';
-import { mediumStatus, TaskPriorities } from './../../shared/constants/index';
+import { mediumStatus, TaskPriorities, TaskStatuses } from './../../shared/constants/index';
 import { BoardService } from '@/shared/services/board.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { SelectOption } from '@/shared/types/ui';
@@ -62,7 +62,7 @@ export class TaskModalComponent {
     title: FormControl<string>;
     description: FormControl<string>;
     boardId: FormControl<string>;
-    statusId: FormControl<string>;
+    status: FormControl<string>;
     priority: FormControl<string>;
   }>;
 
@@ -98,12 +98,12 @@ export class TaskModalComponent {
     return [{ label: 'No board', value: '' }, ...options];
   }
 
-  // get columnOptions(): SelectOption[] {
-  //   return this.statusService.statuses.map((b) => ({
-  //     label: b.name,
-  //     value: b.id,
-  //   }));
-  // }
+  get columnOptions(): SelectOption[] {
+    return TaskStatuses.map((b) => ({
+      label: b,
+      value: b,
+    }));
+  }
 
   get priorityOptions(): SelectOption[] {
     return TaskPriorities.map((b) => ({
@@ -134,11 +134,13 @@ export class TaskModalComponent {
     // }
 
     const task = this.taskService.openedTask();
+    console.log(task);
+
     if (task && this.action === 'edit-task') {
       titleValue = task.title;
       descValue = task.description;
       boardValue = task.boardId ?? '';
-      statusValue = task.statusId;
+      statusValue = task.status;
       priorityValue = task.priority;
     }
 
@@ -146,7 +148,7 @@ export class TaskModalComponent {
       title: this.fb.control(titleValue, [Validators.required]),
       description: this.fb.control(descValue),
       boardId: this.fb.control(boardValue),
-      statusId: this.fb.control(statusValue),
+      status: this.fb.control(statusValue),
       priority: this.fb.control(priorityValue),
     });
   }
@@ -189,7 +191,7 @@ export class TaskModalComponent {
       title: this.form.value.title || '',
       description: this.form.value.description || '',
       boardId: this.form.value.boardId || null,
-      statusId: this.form.value.statusId || '',
+      status: this.form.value.status || '',
       priority: this.form.value.priority || '',
       date: null,
     };

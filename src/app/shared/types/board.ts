@@ -12,6 +12,6 @@ export type Task = {
   priority: string;
   date: string | null;
   boardId: string | null;
-  statusId: string;
+  status: string;
   userId: string;
 };
