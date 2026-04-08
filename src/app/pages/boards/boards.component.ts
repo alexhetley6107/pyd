@@ -6,6 +6,7 @@ import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { ERoute } from '@/shared/constants/routes';
 import { BoardsListComponent } from '@/features/boards-list/boards-list.component';
 import { BoardsSearchComponent } from '@/features/boards-search/boards-search.component';
+import { ToastService } from '@/shared/services/toast.service';
 
 @Component({
   selector: 'boards',
@@ -15,6 +16,7 @@ import { BoardsSearchComponent } from '@/features/boards-search/boards-search.co
 })
 export class BoardsComponent {
   router = inject(Router);
+  toast = inject(ToastService);
   boardService = inject(BoardService);
 
   loadSBoardsInfo() {
@@ -22,7 +24,9 @@ export class BoardsComponent {
 
     if (isBoards) return;
 
-    this.boardService.getAll().subscribe();
+    this.boardService.getAll().subscribe({
+      error: (err) => this.toast.showError(err.error.message),
+    });
   }
 
   ngOnInit() {

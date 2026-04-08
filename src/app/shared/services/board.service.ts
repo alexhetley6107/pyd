@@ -36,8 +36,9 @@ export class BoardService {
 
   create(body: { name: string }) {
     return this.http.post<Board>(API.board, body).pipe(
+      delay(1000),
       tap((board) => {
-        this.boards.set([...this.boards(), board]);
+        this.boards.update((p) => [...p, board]);
       })
     );
   }

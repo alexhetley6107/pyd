@@ -2,5 +2,17 @@
   <ui-breadcrumbs [links]="links" />
 </div>
 
-<ui-input placeholder="Board name" fullWidth variant="underlined" />
-<ui-textarea placeholder="Board description..." fullWidth />
+<form [formGroup]="form" (ngSubmit)="handleSubmit()" (keydown.enter)="handleSubmit()">
+  <ui-input
+    formControlName="name"
+    placeholder="Board name"
+    fullWidth
+    variant="underlined"
+    [error]="nameError"
+  />
+  <ui-textarea formControlName="description" placeholder="Board description..." fullWidth />
+
+  <div class="flex justify-end mt-10">
+    <ui-button type="submit" [loading]="isLoading">Create</ui-button>
+  </div>
+</form>

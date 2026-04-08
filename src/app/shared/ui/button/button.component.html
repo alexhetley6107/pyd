@@ -11,17 +11,16 @@
     lg: size === 'lg',
   }"
   [type]="type"
-  variant="variant"
-  loading="loading"
-  fullWidth="fullWidth"
   (click)="handleClick()"
 >
-  @if(loading) {
-  <div
-    class="spinner"
-    [ngClass]="{ filled: variant === 'filled', outlined: variant === 'outlined' }"
-  ></div>
-  } @else {
   <ng-content></ng-content>
+
+  @if (loading) {
+    <div class="load">
+      <div
+        class="spinner"
+        [ngClass]="{ filled: variant === 'filled', outlined: variant === 'outlined' }"
+      ></div>
+    </div>
   }
 </button>

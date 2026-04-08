@@ -28,9 +28,15 @@
     background-color: var(--prime-color);
     color: var(--white-color);
   }
+  &.filled .load {
+    background-color: var(--prime-color);
+  }
 
   &.outlined {
     color: var(--prime-color);
+    background-color: var(--white-color);
+  }
+  &.outlined {
     background-color: var(--white-color);
   }
 
@@ -58,5 +64,14 @@
     font-size: 18px;
     height: 40px;
     max-height: 49px;
+  }
+
+  .load {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 }
