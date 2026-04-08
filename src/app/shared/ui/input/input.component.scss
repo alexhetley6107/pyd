@@ -20,9 +20,18 @@
       font-size: 14px;
     }
   }
+  &.underlined {
+    input {
+      border-bottom: 2px solid var(--gray-color);
+      border-top: none;
+      border-right: none;
+      border-left: none;
+      border-radius: 0;
+    }
+  }
   &.error {
     input {
-      border: 2px solid var(--error-color);
+      border-color: var(--error-color);
     }
   }
 

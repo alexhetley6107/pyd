@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
 export class TextareaComponent implements ControlValueAccessor {
   @Input() placeholder: string = '';
   @Input() error: string | null = null;
-  @Input() rows: number = 4;
+  @Input() rows: number = 10;
 
   value: string = '';
 

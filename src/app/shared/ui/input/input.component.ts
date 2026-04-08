@@ -4,6 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 type InputTypeUnion = 'text' | 'email' | 'password';
 type InputSize = 'sm' | 'lg';
+type InputVariant = 'outlined' | 'underlined';
 
 @Component({
   selector: 'ui-input',
@@ -26,6 +27,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() size: InputSize = 'lg';
   @Input({ transform: booleanAttribute }) @HostBinding('class.full_width') fullWidth: boolean =
     false;
+  @Input() variant: InputVariant = 'outlined';
 
   isPasswordVisible = false;
   value: string = '';

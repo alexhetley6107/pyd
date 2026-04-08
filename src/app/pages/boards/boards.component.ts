@@ -18,9 +18,9 @@ export class BoardsComponent {
   boardService = inject(BoardService);
 
   loadSBoardsInfo() {
-    // const isBoards = this.boardService.boards.length;
+    const isBoards = this.boardService.boards().length;
 
-    // if (isBoards) return;
+    if (isBoards) return;
 
     this.boardService.getAll().subscribe();
   }

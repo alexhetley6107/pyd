@@ -4,15 +4,12 @@
 
   textarea {
     width: 100%;
-    border: 2px solid var(--blue-color);
+    border: 2px solid transparent;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 18px;
+    line-height: 30px;
     padding: 8px 6px;
-    padding-bottom: 16px;
-    min-height: 41px;
-    resize: vertical;
     font-family: inherit;
-
     margin-bottom: 0;
 
     &:focus {
