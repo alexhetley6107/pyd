@@ -10,6 +10,7 @@ import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BoardDeleteModalComponent } from '@/features/board-delete-modal/board-delete-modal.component';
 import { BoardUpdateFormComponent } from '@/features/board-update-form/board-update-form.component';
+import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 
 @Component({
   selector: 'board-details',
@@ -19,6 +20,7 @@ import { BoardUpdateFormComponent } from '@/features/board-update-form/board-upd
     ReactiveFormsModule,
     BoardDeleteModalComponent,
     BoardUpdateFormComponent,
+    SkeletonComponent,
   ],
   templateUrl: './board-details.component.html',
 })
@@ -31,6 +33,7 @@ export class BoardDetailsComponent {
   currentBoard = signal<Board | null>(null);
 
   isModal = signal(false);
+  isLoading = signal(false);
 
   ngOnInit() {
     const boardId = this.route.snapshot.paramMap.get('id');
@@ -45,12 +48,15 @@ export class BoardDetailsComponent {
       return;
     }
 
+    this.isLoading.set(true);
     this.boardService.getOne(boardId).subscribe({
       next: (b) => {
         this.currentBoard.set(b);
+        this.isLoading.set(false);
       },
       error: (err) => {
         this.toast.showError(err.error.message);
+        this.isLoading.set(false);
       },
     });
   }
