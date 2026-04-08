@@ -7,10 +7,18 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.component';
 import { BreadCrumbItem } from '@/shared/types/ui';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
+import { BoardColumnsComponent } from '@/features/board-columns/board-columns.component';
+import { InputComponent } from '@/shared/ui/input/input.component';
 
 @Component({
   selector: 'board-view',
-  imports: [BreadcrumbsComponent, ButtonComponent, RouterLink],
+  imports: [
+    BreadcrumbsComponent,
+    ButtonComponent,
+    RouterLink,
+    BoardColumnsComponent,
+    InputComponent,
+  ],
   templateUrl: './board-view.component.html',
   styleUrl: './board-view.component.scss',
 })

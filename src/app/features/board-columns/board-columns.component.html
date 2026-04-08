@@ -1,4 +1,4 @@
-@if (!isLoaded) {
+<!-- @if (!isLoaded) {
   <div class="fetching">
     <ui-skeleton width="300px" height="1000px"></ui-skeleton>
     <ui-skeleton width="300px" height="1000px"></ui-skeleton>
@@ -7,24 +7,23 @@
     <ui-skeleton width="300px" height="1000px"></ui-skeleton>
     <ui-skeleton width="300px" height="1000px"></ui-skeleton>
   </div>
-} @else {
-  <div class="sticky-header">
-    @for (c of columns; track c.name) {
-      <p class="header">
-        {{ c.name }}
-      </p>
-    }
-  </div>
+} @else { -->
 
-  <div class="container">
-    @for (col of columns; track col.name) {
-      <div class="column">
-        @for (taskId of col.taskIds; track taskId) {
-          <task-item [task]="taskMap[taskId]" (onClickTask)="toggleTaskModal()"></task-item>
-        }
-      </div>
-    }
-  </div>
-}
+<div class="sticky-header">
+  @for (c of columns; track c.name) {
+    <p class="header">
+      {{ c.name }}
+    </p>
+  }
+</div>
 
-<task-modal [open]="isTaskModal" (closeModal)="toggleTaskModal()" action="edit-task"></task-modal>
+<div class="container">
+  @for (col of columns; track col.name) {
+    <div class="column">
+      @for (taskId of col.taskIds; track taskId) {
+        <task-item [task]="taskMap[taskId]"></task-item>
+      }
+    </div>
+  }
+</div>
+<!-- } -->

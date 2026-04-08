@@ -13,7 +13,7 @@ type TaskMap = Record<string, Task>;
 
 @Component({
   selector: 'board-columns',
-  imports: [SkeletonComponent, TaskItemComponent, TaskModalComponent],
+  imports: [SkeletonComponent, TaskItemComponent],
   templateUrl: './board-columns.component.html',
   styleUrl: './board-columns.component.scss',
 })
@@ -21,8 +21,6 @@ export class BoardColumnsComponent {
   menu = inject(SideMenuService);
   boardService = inject(BoardService);
   taskService = inject(TaskService);
-
-  isTaskModal = false;
 
   // constructor() {
   //   effect(() => {
@@ -58,9 +56,5 @@ export class BoardColumnsComponent {
         acc[task.id] = task;
         return acc;
       }, {} as TaskMap);
-  }
-
-  toggleTaskModal() {
-    this.isTaskModal = !this.isTaskModal;
   }
 }

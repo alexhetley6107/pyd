@@ -1,5 +1,12 @@
 :host {
-  height: calc(100svh - 60px - 24px - 74px);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+
+  border: 1px solid var(--gray-color);
+
+  height: calc(100svh - 75px - 24px - 74px);
   max-height: calc(100svh - 60px - 24px - 74px);
 
   width: calc(100vw - var(--menu-close-width) - 2 * var(--page-padding));
