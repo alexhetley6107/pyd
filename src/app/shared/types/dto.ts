@@ -5,6 +5,6 @@ export type TaskDto = Omit<Task, 'id' | 'userId'> & Partial<Pick<Task, 'id'>>;
 export type TaskQueries = {
   search?: string;
   boardId?: string | null;
-  statusId?: string;
+  status?: string;
   priority?: string;
 };

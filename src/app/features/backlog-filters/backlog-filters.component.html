@@ -1,45 +1,44 @@
 <form class="" [formGroup]="form">
   @if (isFetching) {
-  <div class="filters">
-    <ui-skeleton width="200px" height="41px"></ui-skeleton>
-    <ui-skeleton width="200px" height="41px"></ui-skeleton>
-  </div>
-
+    <div class="filters">
+      <ui-skeleton width="200px" height="41px"></ui-skeleton>
+      <ui-skeleton width="200px" height="41px"></ui-skeleton>
+    </div>
   } @else {
-  <div class="filters">
-    <div class="selectors">
-      <div class="selector">
-        <ui-selector
-          [options]="boardOptions"
-          placeholder="Board"
-          formControlName="boardId"
-          [size]="'sm'"
-          fullWidth
-        ></ui-selector>
+    <div class="filters">
+      <div class="selectors">
+        <div class="selector">
+          <ui-selector
+            [options]="boardOptions"
+            placeholder="Board"
+            formControlName="boardId"
+            size="sm"
+            fullWidth
+          ></ui-selector>
+        </div>
+        <div class="selector">
+          <ui-selector
+            [options]="statusOptions"
+            placeholder="Status"
+            formControlName="status"
+            size="sm"
+            fullWidth
+          ></ui-selector>
+        </div>
+        <div class="selector">
+          <ui-selector
+            [options]="priorityOptions"
+            placeholder="Priority"
+            formControlName="priority"
+            size="sm"
+            fullWidth
+          ></ui-selector>
+        </div>
       </div>
-      <div class="selector">
-        <ui-selector
-          [options]="statusOptions"
-          placeholder="Status"
-          formControlName="statusId"
-          [size]="'sm'"
-          fullWidth
-        ></ui-selector>
-      </div>
-      <div class="selector">
-        <ui-selector
-          [options]="priorityOptions"
-          placeholder="Priority"
-          formControlName="priority"
-          [size]="'sm'"
-          fullWidth
-        ></ui-selector>
-      </div>
-    </div>
 
-    <div class="search">
-      <ui-input placeholder="Search" formControlName="search" [size]="'sm'" fullWidth></ui-input>
+      <div class="search">
+        <ui-input placeholder="Search" formControlName="search" [size]="'sm'" fullWidth></ui-input>
+      </div>
     </div>
-  </div>
   }
 </form>

@@ -25,7 +25,7 @@ export class BoardColumnsComponent {
   route = inject(ActivatedRoute);
 
   ngOnInit() {
-    const boardId = this.route.snapshot.paramMap.get('id');
+    const boardId = this.route.snapshot.paramMap.get('boardId');
 
     if (!boardId) return;
     this.taskService.getAll({ boardId }).subscribe();

@@ -30,7 +30,7 @@ export class BacklogFiltersComponent {
   form!: FormGroup<{
     search: FormControl<string>;
     boardId: FormControl<string>;
-    statusId: FormControl<string>;
+    status: FormControl<string>;
     priority: FormControl<string>;
   }>;
 
@@ -71,7 +71,7 @@ export class BacklogFiltersComponent {
     this.form = this.fb.group({
       search: this.fb.control(''),
       boardId: this.fb.control(''),
-      statusId: this.fb.control(''),
+      status: this.fb.control(''),
       priority: this.fb.control(''),
     });
 
@@ -84,7 +84,7 @@ export class BacklogFiltersComponent {
     const queries: TaskQueries = {
       search: this.form.value.search,
       boardId: this.form.value.boardId,
-      statusId: this.form.value.statusId,
+      status: this.form.value.status,
       priority: this.form.value.priority,
     };
 

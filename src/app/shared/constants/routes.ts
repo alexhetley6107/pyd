@@ -7,11 +7,13 @@ export enum ERoute {
 
   DASHBOARD = 'dashboard',
   BOARDS = 'boards',
-  BOARD = 'boards/:id',
-  BOARD_DETAILS = 'boards/:id/details',
+  BOARD_VIEW = 'boards/:boardId',
+  BOARD_DETAILS = 'boards/:boardId/details',
   CREATE_BOARD = 'create-board',
 
   CREATE_TASK = 'create-task',
+  TASK_VIEW = 'boards/:boardId/:taskId',
+
   AGILE_BOARD = 'agile-board',
 
   BACKLOG = 'backlog',

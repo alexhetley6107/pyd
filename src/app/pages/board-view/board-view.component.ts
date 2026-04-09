@@ -41,7 +41,7 @@ export class BoardViewComponent implements OnInit {
   ]);
 
   ngOnInit() {
-    const boardId = this.route.snapshot.paramMap.get('id');
+    const boardId = this.route.snapshot.paramMap.get('boardId');
     if (!boardId) {
       this.router.navigateByUrl(ERoute.BOARDS);
       return;

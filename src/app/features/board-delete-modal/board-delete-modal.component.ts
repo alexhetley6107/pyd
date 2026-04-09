@@ -37,7 +37,7 @@ export class BoardDeleteModalComponent {
   onDeleteBoard() {
     this.isLoading.set(true);
 
-    const boardId = this.route.snapshot.paramMap.get('id') ?? '';
+    const boardId = this.route.snapshot.paramMap.get('boardId') ?? '';
 
     this.boardService.delete(boardId).subscribe({
       next: () => {
