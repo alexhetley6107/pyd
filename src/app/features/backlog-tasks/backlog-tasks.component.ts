@@ -1,4 +1,4 @@
-import { TaskItemComponent } from '@/features/task-item/task-item.component';
+import { TaskItemComponent } from '@/shared/ui/task-item/task-item.component';
 import { TaskService } from '@/shared/services/task.service';
 import { Task } from '@/shared/types/board';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';

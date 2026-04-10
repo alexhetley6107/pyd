@@ -4,10 +4,11 @@ import { TaskService } from '@/shared/services/task.service';
 import { Task } from '@/shared/types/board';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 import { Component, effect, HostBinding, inject } from '@angular/core';
-import { TaskItemComponent } from '@/features/task-item/task-item.component';
+import { TaskItemComponent } from '@/shared/ui/task-item/task-item.component';
 import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
 import { TaskStatuses } from '@/shared/constants';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ERoute } from '@/shared/constants/routes';
 
 type Column = { name: string; taskIds: string[] };
 type TaskMap = Record<string, Task>;
@@ -23,6 +24,7 @@ export class BoardColumnsComponent {
   boardService = inject(BoardService);
   taskService = inject(TaskService);
   route = inject(ActivatedRoute);
+  router = inject(Router);
 
   ngOnInit() {
     const boardId = this.route.snapshot.paramMap.get('boardId');
@@ -56,5 +58,17 @@ export class BoardColumnsComponent {
         acc[task.id] = task;
         return acc;
       }, {} as TaskMap);
+  }
+
+  createTask(status: string) {
+    const boardId = this.route.snapshot.paramMap.get('boardId');
+
+    this.router.navigate([ERoute.CREATE_TASK], {
+      queryParams: { boardId, status },
+    });
+  }
+
+  openTask(taskId: string) {
+    this.router.navigate([`task/${taskId}`]);
   }
 }

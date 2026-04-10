@@ -12,7 +12,7 @@ export enum ERoute {
   CREATE_BOARD = 'create-board',
 
   CREATE_TASK = 'create-task',
-  TASK_VIEW = 'boards/:boardId/:taskId',
+  TASK_VIEW = 'task/:taskId',
 
   AGILE_BOARD = 'agile-board',
 

@@ -4,10 +4,17 @@ import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { BacklogFiltersComponent } from '@/features/backlog-filters/backlog-filters.component';
 import { BacklogTasksComponent } from '@/features/backlog-tasks/backlog-tasks.component';
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'page-backlog',
-  imports: [ButtonComponent, TaskModalComponent, BacklogFiltersComponent, BacklogTasksComponent],
+  imports: [
+    ButtonComponent,
+    TaskModalComponent,
+    BacklogFiltersComponent,
+    BacklogTasksComponent,
+    RouterLink,
+  ],
   templateUrl: './backlog.component.html',
   styleUrl: './backlog.component.scss',
 })

@@ -1,6 +1,9 @@
 <div class="flex align-center justify-between">
   <h1 class="title">Backlog</h1>
   <ui-button (onClick)="toggleNewTaskModal()" variant="outlined" size="sm">Add Task</ui-button>
+  <a routerLink="/create-task">
+    <ui-button variant="outlined" size="sm">Create Task</ui-button>
+  </a>
 </div>
 
 <task-modal [open]="isNewTaskModal" (closeModal)="toggleNewTaskModal()"></task-modal>

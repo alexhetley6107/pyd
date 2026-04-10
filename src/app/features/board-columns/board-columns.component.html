@@ -16,7 +16,7 @@
         {{ c.name }}
       </p>
 
-      <div class="plus"></div>
+      <div class="plus" (click)="createTask(c.name)"></div>
     </div>
   }
 </div>
@@ -25,7 +25,7 @@
   @for (col of columns; track col.name) {
     <div class="column">
       @for (taskId of col.taskIds; track taskId) {
-        <task-item [task]="taskMap[taskId]"></task-item>
+        <task-item [task]="taskMap[taskId]" (onClickTask)="openTask(taskId)"></task-item>
       }
     </div>
   }

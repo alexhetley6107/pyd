@@ -67,8 +67,8 @@ export class CreateBoardComponent {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      name: this.fb.control('New Board', [Validators.required]),
-      description: this.fb.control('Some board description...'),
+      name: this.fb.control('', [Validators.required]),
+      description: this.fb.control(''),
     });
   }
 
@@ -102,7 +102,7 @@ export class CreateBoardComponent {
       link: '/' + ERoute.BOARDS,
     },
     {
-      text: 'Create New',
+      text: 'Create New Board',
     },
   ];
 }
