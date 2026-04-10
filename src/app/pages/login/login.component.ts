@@ -10,7 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { getError } from '@/shared/helpers/formErrors';
-import { AuthService } from '@/shared/services/auth.service';
+import { AuthService } from '@/entities/auth/service/auth.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { decryptObject, encryptObject } from '@/shared/utils/encrypt';
 import { ERoute } from '@/shared/constants/routes';

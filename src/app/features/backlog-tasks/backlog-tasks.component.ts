@@ -1,11 +1,11 @@
-import { TaskItemComponent } from '@/shared/ui/task-item/task-item.component';
-import { TaskService } from '@/shared/services/task.service';
-import { Task } from '@/shared/types/board';
+import { TaskItemComponent } from '@/entities/task/ui/task-item/task-item.component';
+import { TaskService } from '@/entities/task/service/task.service';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
 import { ListContainerComponent } from '@/shared/ui/list-container/list-container.component';
-import { BoardService } from '@/shared/services/board.service';
+import { BoardService } from '@/entities/board/service/board.service';
+import { Task } from '@/entities/task/model';
 
 @Component({
   selector: 'backlog-tasks',

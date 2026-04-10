@@ -1,5 +1,4 @@
-import { BoardService } from '@/shared/services/board.service';
-import { Board } from '@/shared/types/board';
+import { BoardService } from '@/entities/board/service/board.service';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
@@ -7,6 +6,7 @@ import { ERoute } from '@/shared/constants/routes';
 import { BoardsListComponent } from '@/features/boards-list/boards-list.component';
 import { BoardsSearchComponent } from '@/features/boards-search/boards-search.component';
 import { ToastService } from '@/shared/services/toast.service';
+import { Board } from '@/entities/board/model';
 
 @Component({
   selector: 'boards',

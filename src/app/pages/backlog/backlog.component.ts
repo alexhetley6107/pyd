@@ -1,5 +1,5 @@
 import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
-import { BoardService } from '@/shared/services/board.service';
+import { BoardService } from '@/entities/board/service/board.service';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { BacklogFiltersComponent } from '@/features/backlog-filters/backlog-filters.component';
 import { BacklogTasksComponent } from '@/features/backlog-tasks/backlog-tasks.component';

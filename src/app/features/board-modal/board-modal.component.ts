@@ -1,5 +1,5 @@
 import { getError } from '@/shared/helpers/formErrors';
-import { BoardService } from '@/shared/services/board.service';
+import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { InputComponent } from '@/shared/ui/input/input.component';

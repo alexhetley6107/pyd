@@ -1,15 +1,1 @@
 export const MOBILE_WIDTH = 768;
-
-export const TaskPriorities = [
-  'low',
-  'medium',
-  'high',
-  'urgent',
-  'critical',
-  'blocker',
-  'optional',
-] as const;
-
-export const mediumStatus = 'medium';
-
-export const TaskStatuses = ['todo', 'in-progress', 'done'] as const;

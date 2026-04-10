@@ -1,7 +1,5 @@
-import { TaskPriorities, TaskStatuses } from '@/shared/constants';
-import { BoardService } from '@/shared/services/board.service';
-import { TaskService } from '@/shared/services/task.service';
-import { TaskQueries } from '@/shared/types/dto';
+import { BoardService } from '@/entities/board/service/board.service';
+import { TaskService } from '@/entities/task/service/task.service';
 import { SelectOption } from '@/shared/types/ui';
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { SelectorComponent } from '@/shared/ui/selector/selector.component';
@@ -14,6 +12,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { TaskPriorities, TaskQueries, TaskStatuses } from '@/entities/task/model';
 
 const allOption: SelectOption = { label: 'All variants', value: '' };
 

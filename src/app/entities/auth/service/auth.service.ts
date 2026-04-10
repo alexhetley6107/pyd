@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { tap, finalize, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { User } from '../types/user';
-import { API } from '../constants/api';
+import { User } from '../model';
+import { API } from '@/shared/constants/api';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

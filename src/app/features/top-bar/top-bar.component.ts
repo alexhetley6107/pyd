@@ -1,5 +1,5 @@
 import { ERoute } from '@/shared/constants/routes';
-import { AuthService } from '@/shared/services/auth.service';
+import { AuthService } from '@/entities/auth/service/auth.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
 import { ActionOption } from '@/shared/types/ui';
 import { PopoverComponent } from '@/shared/ui/popover/popover.component';

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { API } from '../constants/api';
-import { Board } from '../types/board';
+import { API } from '@/shared/constants/api';
 import { tap, catchError, of, finalize, delay } from 'rxjs';
-import { getHttpParams } from '../utils/getHttpParams';
+import { getHttpParams } from '@/shared/utils/getHttpParams';
+import { Board } from '../model';
 
 @Injectable({
   providedIn: 'root',

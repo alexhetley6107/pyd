@@ -1,4 +1,4 @@
-import { BoardService } from '@/shared/services/board.service';
+import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { Component, effect, inject, resource, signal } from '@angular/core';
 import {

@@ -3,7 +3,7 @@ import { Component, effect, inject } from '@angular/core';
 import { BoardModalComponent } from '@/features/board-modal/board-modal.component';
 import { BoardDeleteModalComponent } from '@/features/board-delete-modal/board-delete-modal.component';
 import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
-import { BoardService } from '@/shared/services/board.service';
+import { BoardService } from '@/entities/board/service/board.service';
 import { PopoverComponent } from '@/shared/ui/popover/popover.component';
 import { ActionOption, SelectOption } from '@/shared/types/ui';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';

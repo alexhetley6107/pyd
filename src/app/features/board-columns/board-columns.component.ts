@@ -1,15 +1,12 @@
-import { BoardService } from '@/shared/services/board.service';
+import { BoardService } from '@/entities/board/service/board.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
-import { TaskService } from '@/shared/services/task.service';
-import { Task } from '@/shared/types/board';
+import { TaskService } from '@/entities/task/service/task.service';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
-import { Component, computed, effect, HostBinding, inject, signal } from '@angular/core';
-import { TaskItemComponent } from '@/shared/ui/task-item/task-item.component';
-import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
-import { TaskStatuses } from '@/shared/constants';
+import { Component, HostBinding, inject } from '@angular/core';
+import { TaskItemComponent } from '@/entities/task/ui/task-item/task-item.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ERoute } from '@/shared/constants/routes';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Task, TaskStatuses } from '@/entities/task/model';
 
 type Column = { name: string; taskIds: string[] };
 type TaskMap = Record<string, Task>;

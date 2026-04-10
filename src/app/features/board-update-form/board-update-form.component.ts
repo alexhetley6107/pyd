@@ -1,8 +1,7 @@
 import { ERoute } from '@/shared/constants/routes';
 import { getError } from '@/shared/helpers/formErrors';
-import { BoardService } from '@/shared/services/board.service';
+import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
-import { Board } from '@/shared/types/board';
 import { Component, effect, inject, input, resource, signal } from '@angular/core';
 import {
   FormControl,
@@ -16,6 +15,7 @@ import { firstValueFrom } from 'rxjs';
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { TextareaComponent } from '@/shared/ui/textarea/textarea.component';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
+import { Board } from '@/entities/board/model';
 
 @Component({
   selector: 'board-update-form',

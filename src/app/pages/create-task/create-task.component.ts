@@ -3,11 +3,10 @@ import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.compon
 import { ERoute } from '@/shared/constants/routes';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadCrumbItem } from '@/shared/types/ui';
-import { Board } from '@/shared/types/board';
-import { BoardService } from '@/shared/services/board.service';
+import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
-import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Board } from '@/entities/board/model';
 
 @Component({
   selector: 'create-task',

@@ -1,6 +1,6 @@
-import { Board } from '@/shared/types/board';
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Board } from '../../model';
 
 @Component({
   selector: 'board-item',

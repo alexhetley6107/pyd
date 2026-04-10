@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 import { ListContainerComponent } from '@/shared/ui/list-container/list-container.component';
-import { BoardService } from '@/shared/services/board.service';
-import { Board } from '@/shared/types/board';
-import { BoardItemComponent } from './board-item/board-item.component';
+import { BoardService } from '@/entities/board/service/board.service';
+import { BoardItemComponent } from '../../entities/board/ui/board-item/board-item.component';
+import { Board } from '@/entities/board/model';
 
 @Component({
   selector: 'boards-list',

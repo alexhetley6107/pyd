@@ -1,6 +1,5 @@
 import { getError } from '@/shared/helpers/formErrors';
-import { mediumStatus, TaskPriorities, TaskStatuses } from './../../shared/constants/index';
-import { BoardService } from '@/shared/services/board.service';
+import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { SelectOption } from '@/shared/types/ui';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
@@ -22,11 +21,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { TaskService } from '@/shared/services/task.service';
-import { TaskDto } from '@/shared/types/dto';
+import { TaskService } from '@/entities/task/service/task.service';
 import { SelectorComponent } from '@/shared/ui/selector/selector.component';
 import { TextareaComponent } from '@/shared/ui/textarea/textarea.component';
 import { ConfirmModalComponent } from '@/shared/ui/confirm-modal/confirm-modal.component';
+import { mediumStatus, TaskDto, TaskPriorities, TaskStatuses } from '@/entities/task/model';
 
 type ModalAction = 'create-for-backlog' | 'create-for-board' | 'edit-task';
 

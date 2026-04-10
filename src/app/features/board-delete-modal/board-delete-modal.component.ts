@@ -1,5 +1,5 @@
 import { ERoute } from '@/shared/constants/routes';
-import { BoardService } from '@/shared/services/board.service';
+import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { ConfirmModalComponent } from '@/shared/ui/confirm-modal/confirm-modal.component';
 import {

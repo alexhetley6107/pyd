@@ -1,10 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { API } from '../constants/api';
-import { Task } from '../types/board';
+import { API } from '@/shared/constants/api';
 import { delay, tap } from 'rxjs';
-import { TaskDto, TaskQueries } from '../types/dto';
-import { getHttpParams } from '../utils/getHttpParams';
+import { getHttpParams } from '@/shared/utils/getHttpParams';
+import { Task, TaskDto, TaskQueries } from '../model';
 
 @Injectable({
   providedIn: 'root',

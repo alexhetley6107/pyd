@@ -2,7 +2,7 @@ import { Component, DestroyRef, inject } from '@angular/core';
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
-import { BoardService } from '@/shared/services/board.service';
+import { BoardService } from '@/entities/board/service/board.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ToastService } from '@/shared/services/toast.service';
 

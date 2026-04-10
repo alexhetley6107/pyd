@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SideMenuComponent } from '../../../features/side-menu/side-menu.component';
 import { TopBarComponent } from '../../../features/top-bar/top-bar.component';
-import { BoardService } from '@/shared/services/board.service';
+import { BoardService } from '@/entities/board/service/board.service';
 
 @Component({
   selector: 'app-main-layout',

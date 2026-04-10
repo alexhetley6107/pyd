@@ -1,4 +1,4 @@
-import { AuthService } from '@/shared/services/auth.service';
+import { AuthService } from '@/entities/auth/service/auth.service';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';

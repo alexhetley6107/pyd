@@ -1,7 +1,6 @@
 import { ERoute } from '@/shared/constants/routes';
-import { BoardService } from '@/shared/services/board.service';
+import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
-import { Board } from '@/shared/types/board';
 import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.component';
@@ -9,8 +8,8 @@ import { BreadCrumbItem } from '@/shared/types/ui';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { BoardColumnsComponent } from '@/features/board-columns/board-columns.component';
 import { InputComponent } from '@/shared/ui/input/input.component';
-import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
-import { TaskService } from '@/shared/services/task.service';
+import { TaskService } from '@/entities/task/service/task.service';
+import { Board } from '@/entities/board/model';
 
 @Component({
   selector: 'board-view',

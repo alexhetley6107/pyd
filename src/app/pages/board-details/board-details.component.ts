@@ -2,15 +2,15 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.component';
 import { ERoute } from '@/shared/constants/routes';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BoardService } from '@/shared/services/board.service';
+import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
-import { Board } from '@/shared/types/board';
 import { BreadCrumbItem } from '@/shared/types/ui';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BoardDeleteModalComponent } from '@/features/board-delete-modal/board-delete-modal.component';
 import { BoardUpdateFormComponent } from '@/features/board-update-form/board-update-form.component';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
+import { Board } from '@/entities/board/model';
 
 @Component({
   selector: 'board-details',
