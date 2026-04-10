@@ -29,11 +29,6 @@ export const authRefreshInterceptor: HttpInterceptorFn = (req, next) => {
         return throwError(() => error);
       }
 
-      if (!auth.isLoggedIn()) {
-        return throwError(() => error);
-      }
-
-      // 🚀 если refresh уже идёт → ставим запрос в очередь
       if (refreshInProgress) {
         return refreshSubject.pipe(
           filter(Boolean),

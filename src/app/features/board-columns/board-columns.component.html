@@ -11,9 +11,13 @@
 
 <div class="sticky-header">
   @for (c of columns; track c.name) {
-    <p class="header">
-      {{ c.name }}
-    </p>
+    <div class="header">
+      <p>
+        {{ c.name }}
+      </p>
+
+      <div class="plus"></div>
+    </div>
   }
 </div>
 
