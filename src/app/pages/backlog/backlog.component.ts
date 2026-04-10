@@ -23,22 +23,6 @@ export class BacklogComponent {
 
   isNewTaskModal = false;
 
-  get isFetching(): boolean {
-    return this.boardService.isFetching();
-  }
-
-  loadSBoardsInfo() {
-    const isBoards = this.boardService.boards.length;
-
-    if (isBoards) return;
-
-    this.boardService.getAll().subscribe();
-  }
-
-  ngOnInit() {
-    this.loadSBoardsInfo();
-  }
-
   toggleNewTaskModal() {
     this.isNewTaskModal = !this.isNewTaskModal;
   }

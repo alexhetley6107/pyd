@@ -1,5 +1,5 @@
 <div class="flex align-center justify-between mb-10">
-  @if (isLoading()) {
+  @if (isFetching) {
     <ui-skeleton width="300px" height="27px" />
   } @else {
     <ui-breadcrumbs [links]="links()" />
@@ -7,7 +7,7 @@
   <ui-button variant="outlined" size="sm" (click)="toggleDeleteModal()">Delete</ui-button>
 </div>
 
-@if (isLoading()) {
+@if (isFetching) {
   <div class="column gap-10 align-end">
     <ui-skeleton width="100%" height="60px" />
     <ui-skeleton width="100%" height="314px" />

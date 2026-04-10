@@ -9,6 +9,7 @@ import { BreadCrumbItem } from '@/shared/types/ui';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { BoardColumnsComponent } from '@/features/board-columns/board-columns.component';
 import { InputComponent } from '@/shared/ui/input/input.component';
+import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 
 @Component({
   selector: 'board-view',
@@ -18,17 +19,16 @@ import { InputComponent } from '@/shared/ui/input/input.component';
     RouterLink,
     BoardColumnsComponent,
     InputComponent,
+    SkeletonComponent,
   ],
   templateUrl: './board-view.component.html',
   styleUrl: './board-view.component.scss',
 })
-export class BoardViewComponent implements OnInit {
+export class BoardViewComponent {
   router = inject(Router);
   route = inject(ActivatedRoute);
   boardService = inject(BoardService);
   toast = inject(ToastService);
-
-  currentBoard = signal<Board | null>(null);
 
   links = computed<BreadCrumbItem[]>(() => [
     {
@@ -40,27 +40,13 @@ export class BoardViewComponent implements OnInit {
     },
   ]);
 
-  ngOnInit() {
+  currentBoard = computed<Board | null>(() => {
     const boardId = this.route.snapshot.paramMap.get('boardId');
-    if (!boardId) {
-      this.router.navigateByUrl(ERoute.BOARDS);
-      return;
-    }
+    if (!boardId) return null;
+    return this.boardService.boards().find((b) => b.id === boardId) ?? null;
+  });
 
-    const board = this.boardService.boards().find((b) => b.id === boardId);
-    if (board) {
-      this.currentBoard.set(board);
-      return;
-    }
-
-    this.boardService.getOne(boardId).subscribe({
-      next: (b) => {
-        this.currentBoard.set(b);
-      },
-      error: (err) => {
-        this.toast.showError(err.error.message);
-        // this.isLoading.set(false);
-      },
-    });
+  get isFetching(): boolean {
+    return this.boardService.isFetching();
   }
 }

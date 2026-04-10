@@ -34,18 +34,6 @@ export class CreateTaskComponent {
       this.currentBoard.set(b);
       return;
     }
-
-    this.isLoading.set(true);
-    this.boardService.getOne(boardId).subscribe({
-      next: (b) => {
-        this.currentBoard.set(b);
-        this.isLoading.set(false);
-      },
-      error: (err) => {
-        this.toast.showError(err.error.message);
-        this.isLoading.set(false);
-      },
-    });
   }
 
   links = computed<BreadCrumbItem[]>(() => {

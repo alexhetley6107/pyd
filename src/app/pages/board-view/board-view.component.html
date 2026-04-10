@@ -1,5 +1,9 @@
 <div class="flex align-center justify-between">
-  <ui-breadcrumbs [links]="links()" />
+  @if (isFetching) {
+    <ui-skeleton width="300px" height="27px" />
+  } @else {
+    <ui-breadcrumbs [links]="links()" />
+  }
   <a [routerLink]="'details'">
     <ui-button variant="outlined" size="sm">Details</ui-button>
   </a>

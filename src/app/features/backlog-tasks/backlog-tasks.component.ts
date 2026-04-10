@@ -5,6 +5,7 @@ import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 import { Component, inject, Input } from '@angular/core';
 import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
 import { ListContainerComponent } from '@/shared/ui/list-container/list-container.component';
+import { BoardService } from '@/shared/services/board.service';
 
 @Component({
   selector: 'backlog-tasks',
@@ -14,13 +15,12 @@ import { ListContainerComponent } from '@/shared/ui/list-container/list-containe
 })
 export class BacklogTasksComponent {
   taskService = inject(TaskService);
-
-  @Input() isBoardsFetching = true;
+  boardService = inject(BoardService);
 
   isTaskModal = false;
 
   get isFetching(): boolean {
-    return this.isBoardsFetching || this.taskService.isFetching;
+    return this.boardService.isFetching() || this.taskService.isFetching;
   }
 
   get tasks(): Task[] {

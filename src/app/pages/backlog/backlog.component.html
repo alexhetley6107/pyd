@@ -6,8 +6,8 @@
   </a>
 </div>
 
-<task-modal [open]="isNewTaskModal" (closeModal)="toggleNewTaskModal()"></task-modal>
+<task-modal [open]="isNewTaskModal" (closeModal)="toggleNewTaskModal()" />
 
-<backlog-filters></backlog-filters>
+<backlog-filters />
 
-<backlog-tasks [isBoardsFetching]="isFetching"></backlog-tasks>
+<backlog-tasks />

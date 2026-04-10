@@ -30,39 +30,20 @@ export class BoardDetailsComponent {
   boardService = inject(BoardService);
   toast = inject(ToastService);
 
-  currentBoard = signal<Board | null>(null);
-
   isModal = signal(false);
-  isLoading = signal(false);
 
-  ngOnInit() {
+  currentBoard = computed<Board | null>(() => {
     const boardId = this.route.snapshot.paramMap.get('boardId');
-    if (!boardId) {
-      this.router.navigateByUrl(ERoute.BOARDS);
-      return;
-    }
-
-    const b = this.boardService.boards().find((b) => b.id === boardId);
-    if (b) {
-      this.currentBoard.set(b);
-      return;
-    }
-
-    this.isLoading.set(true);
-    this.boardService.getOne(boardId).subscribe({
-      next: (b) => {
-        this.currentBoard.set(b);
-        this.isLoading.set(false);
-      },
-      error: (err) => {
-        this.toast.showError(err.error.message);
-        this.isLoading.set(false);
-      },
-    });
-  }
+    if (!boardId) return null;
+    return this.boardService.boards().find((b) => b.id === boardId) ?? null;
+  });
 
   toggleDeleteModal() {
     this.isModal.update((v) => !v);
+  }
+
+  get isFetching(): boolean {
+    return this.boardService.isFetching();
   }
 
   links = computed<BreadCrumbItem[]>(() => [

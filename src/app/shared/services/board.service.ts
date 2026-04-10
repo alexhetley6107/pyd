@@ -21,17 +21,9 @@ export class BoardService {
     this.isFetching.set(true);
 
     return this.http.get<Board[]>(API.board, { params }).pipe(
+      delay(1000),
       tap((boards) => this.boards.set(boards)),
       finalize(() => this.isFetching.set(false))
-    );
-  }
-
-  getOne(id: string) {
-    return this.http.get<Board>(`${API.board}/${id}`).pipe(
-      delay(1000),
-      tap((board) => {
-        this.boards.set([board]);
-      })
     );
   }
 

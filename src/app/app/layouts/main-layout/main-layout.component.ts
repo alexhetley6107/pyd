@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SideMenuComponent } from '../../../features/side-menu/side-menu.component';
 import { TopBarComponent } from '../../../features/top-bar/top-bar.component';
+import { BoardService } from '@/shared/services/board.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -10,4 +11,10 @@ import { TopBarComponent } from '../../../features/top-bar/top-bar.component';
   styleUrl: './main-layout.component.scss',
   standalone: true,
 })
-export class MainLayoutComponent {}
+export class MainLayoutComponent implements OnInit {
+  boardService = inject(BoardService);
+
+  ngOnInit(): void {
+    this.boardService.getAll().subscribe();
+  }
+}
