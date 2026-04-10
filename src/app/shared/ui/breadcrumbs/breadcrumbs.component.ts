@@ -1,4 +1,4 @@
-import { BreadCrumbItem } from '@/shared/types/ui';
+import { BreadCrumbItem } from '@/shared/types';
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SkeletonComponent } from '../skeleton/skeleton.component';

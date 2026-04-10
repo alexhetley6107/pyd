@@ -12,6 +12,7 @@ import {
 import { getError } from '@/shared/helpers/formErrors';
 import { AuthService } from '@/entities/auth/service/auth.service';
 import { ToastService } from '@/shared/services/toast.service';
+import { Nullable } from '@/shared/types';
 
 @Component({
   selector: 'page-forgot-password',
@@ -37,7 +38,7 @@ export class ForgotPasswordComponent {
       email: this.fb.control('', [Validators.required, Validators.email]),
     });
   }
-  get error(): string | null {
+  get error(): Nullable<string> {
     return getError(this.form.get('email'));
   }
 

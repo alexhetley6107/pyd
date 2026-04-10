@@ -4,17 +4,18 @@ import { tap, finalize, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { User } from '../model';
 import { API } from '@/shared/constants/api';
+import { Nullable } from '@/shared/types';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly http = inject(HttpClient);
 
   readonly isGettingMe = signal(true);
-  readonly user = signal<User | null>(null);
+  readonly user = signal<Nullable<User>>(null);
   readonly isLoggedIn = computed(() => this.user() !== null);
 
   getMe() {
-    return this.http.get<User | null>(API.me).pipe(
+    return this.http.get<Nullable<User>>(API.me).pipe(
       tap((user) => this.user.set(user)),
       catchError(() => {
         this.user.set(null);

@@ -4,7 +4,7 @@ import { ToastService } from '@/shared/services/toast.service';
 import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.component';
-import { BreadCrumbItem } from '@/shared/types/ui';
+import { BreadCrumbItem, Nullable } from '@/shared/types';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { BoardColumnsComponent } from '@/features/board-columns/board-columns.component';
 import { InputComponent } from '@/shared/ui/input/input.component';
@@ -39,7 +39,7 @@ export class BoardViewComponent {
     this.taskService.getAll({ boardId: this.boardId() }).subscribe();
   });
 
-  currentBoard = computed<Board | null>(() => {
+  currentBoard = computed<Nullable<Board>>(() => {
     if (!this.boardId()) return null;
     return this.boardService.boards().find((b) => b.id === this.boardId()) ?? null;
   });

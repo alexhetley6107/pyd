@@ -4,7 +4,7 @@ import { ERoute } from '@/shared/constants/routes';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
-import { BreadCrumbItem } from '@/shared/types/ui';
+import { BreadCrumbItem, Nullable } from '@/shared/types';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BoardDeleteModalComponent } from '@/features/board-delete-modal/board-delete-modal.component';
@@ -32,7 +32,7 @@ export class BoardDetailsComponent {
 
   isModal = signal(false);
 
-  currentBoard = computed<Board | null>(() => {
+  currentBoard = computed<Nullable<Board>>(() => {
     const boardId = this.route.snapshot.paramMap.get('boardId');
     if (!boardId) return null;
     return this.boardService.boards().find((b) => b.id === boardId) ?? null;

@@ -21,6 +21,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Nullable } from '@/shared/types';
 
 type BoardModalAction = 'create' | 'update';
 
@@ -48,7 +49,7 @@ export class BoardModalComponent implements OnChanges {
   get title(): string {
     return this.action === 'create' ? 'Create board' : 'Edit board';
   }
-  get nameError(): string | null {
+  get nameError(): Nullable<string> {
     return getError(this.form.get('name'), 'Name');
   }
 

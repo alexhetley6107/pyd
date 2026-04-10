@@ -16,6 +16,7 @@ import { TextareaComponent } from '@/shared/ui/textarea/textarea.component';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { getError } from '@/shared/helpers/formErrors';
 import { firstValueFrom } from 'rxjs';
+import { Nullable } from '@/shared/types';
 
 @Component({
   selector: 'create-board',
@@ -88,7 +89,7 @@ export class CreateBoardComponent {
     this.router.navigate([ERoute.BOARDS]);
   }
 
-  get nameError(): string | null {
+  get nameError(): Nullable<string> {
     return getError(this.form.get('name'));
   }
 

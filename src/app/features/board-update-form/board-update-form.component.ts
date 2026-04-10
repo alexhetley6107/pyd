@@ -16,6 +16,7 @@ import { InputComponent } from '@/shared/ui/input/input.component';
 import { TextareaComponent } from '@/shared/ui/textarea/textarea.component';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { Board } from '@/entities/board/model';
+import { Nullable } from '@/shared/types';
 
 @Component({
   selector: 'board-update-form',
@@ -28,7 +29,7 @@ export class BoardUpdateFormComponent {
   toast = inject(ToastService);
   fb = inject(NonNullableFormBuilder);
 
-  currentBoard = input<Board | null>();
+  currentBoard = input<Nullable<Board>>();
 
   form!: FormGroup<{
     name: FormControl<string>;
@@ -85,7 +86,7 @@ export class BoardUpdateFormComponent {
     this.router.navigate([ERoute.BOARDS, this.currentBoard()?.id ?? '']);
   }
 
-  get nameError(): string | null {
+  get nameError(): Nullable<string> {
     return getError(this.form.get('name'));
   }
 

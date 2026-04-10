@@ -5,7 +5,7 @@ import { BoardDeleteModalComponent } from '@/features/board-delete-modal/board-d
 import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
 import { BoardService } from '@/entities/board/service/board.service';
 import { PopoverComponent } from '@/shared/ui/popover/popover.component';
-import { ActionOption, SelectOption } from '@/shared/types/ui';
+import { ActionOption, SelectOption } from '@/shared/types';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 import { SelectorComponent } from '@/shared/ui/selector/selector.component';
 import {

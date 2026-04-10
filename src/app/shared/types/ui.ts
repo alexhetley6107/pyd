@@ -1,6 +1,8 @@
+import { Nullable } from './helpers';
+
 export type SelectOption = {
   label: string;
-  value: string | null;
+  value: Nullable<string>;
 };
 
 export type ActionOption = {

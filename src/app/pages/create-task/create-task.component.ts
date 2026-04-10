@@ -2,7 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.component';
 import { ERoute } from '@/shared/constants/routes';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BreadCrumbItem } from '@/shared/types/ui';
+import { BreadCrumbItem, Nullable } from '@/shared/types';
 import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -27,7 +27,7 @@ export class CreateTaskComponent {
 
   boardId = computed(() => this.queryParams()?.['boardId'] ?? null);
 
-  currentBoard = computed<Board | null>(() => {
+  currentBoard = computed<Nullable<Board>>(() => {
     const id = this.boardId();
     if (!id) return null;
 

@@ -1,10 +1,12 @@
+import { Nullable } from '@/shared/types';
+
 export type Task = {
   id: string;
   title: string;
   description: string;
   priority: string;
-  date: string | null;
-  boardId: string | null;
+  date: Nullable<string>;
+  boardId: Nullable<string>;
   status: string;
   userId: string;
 };
@@ -13,7 +15,7 @@ export type TaskDto = Omit<Task, 'id' | 'userId'> & Partial<Pick<Task, 'id'>>;
 
 export type TaskQueries = {
   search?: string;
-  boardId?: string | null;
+  boardId?: Nullable<string>;
   status?: string;
   priority?: string;
 };

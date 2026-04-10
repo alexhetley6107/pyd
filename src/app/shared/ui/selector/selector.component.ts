@@ -1,4 +1,4 @@
-import { SelectOption } from '@/shared/types/ui';
+import { Nullable, SelectOption } from '@/shared/types';
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -38,13 +38,13 @@ export class SelectorComponent implements ControlValueAccessor {
 
   @ViewChild('container', { static: true }) container!: ElementRef<HTMLDivElement>;
 
-  value: string | null = null;
+  value: Nullable<string> = null;
   open = false;
 
-  onChange: (value: string | null) => void = () => {};
+  onChange: (value: Nullable<string>) => void = () => {};
   onTouched: () => void = () => {};
 
-  writeValue(value: string | null): void {
+  writeValue(value: Nullable<string>): void {
     this.value = value;
     this.cd.detectChanges();
   }

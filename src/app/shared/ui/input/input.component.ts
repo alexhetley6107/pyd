@@ -1,3 +1,4 @@
+import { Nullable } from '@/shared/types';
 import { CommonModule } from '@angular/common';
 import { booleanAttribute, Component, forwardRef, HostBinding, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -23,7 +24,7 @@ type InputVariant = 'outlined' | 'underlined';
 export class InputComponent implements ControlValueAccessor {
   @Input() type: InputTypeUnion = 'text';
   @Input() placeholder: string = '';
-  @Input() error: string | null = null;
+  @Input() error: Nullable<string> = null;
   @Input() size: InputSize = 'lg';
   @Input({ transform: booleanAttribute }) @HostBinding('class.full_width') fullWidth: boolean =
     false;

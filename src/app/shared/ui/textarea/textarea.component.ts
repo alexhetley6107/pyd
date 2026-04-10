@@ -1,6 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Nullable } from '@/shared/types';
 
 @Component({
   selector: 'ui-textarea',
@@ -18,7 +19,7 @@ import { CommonModule } from '@angular/common';
 })
 export class TextareaComponent implements ControlValueAccessor {
   @Input() placeholder: string = '';
-  @Input() error: string | null = null;
+  @Input() error: Nullable<string> = null;
   @Input() rows: number = 10;
 
   value: string = '';

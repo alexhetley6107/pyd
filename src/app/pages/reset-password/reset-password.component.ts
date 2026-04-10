@@ -14,6 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Nullable } from '@/shared/types';
 
 @Component({
   selector: 'app-reset-password',
@@ -54,10 +55,10 @@ export class ResetPasswordComponent {
     );
   }
 
-  get passwordError(): string | null {
+  get passwordError(): Nullable<string> {
     return getError(this.form.get('password'), 'Password');
   }
-  get confirmPasswordError(): string | null {
+  get confirmPasswordError(): Nullable<string> {
     return getError(
       this.form.get('confirmPassword'),
       'Confirm Password',

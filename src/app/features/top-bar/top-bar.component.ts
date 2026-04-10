@@ -1,7 +1,7 @@
 import { ERoute } from '@/shared/constants/routes';
 import { AuthService } from '@/entities/auth/service/auth.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
-import { ActionOption } from '@/shared/types/ui';
+import { ActionOption } from '@/shared/types';
 import { PopoverComponent } from '@/shared/ui/popover/popover.component';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';

@@ -1,7 +1,8 @@
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { Nullable } from '../types';
 
 export const matchPasswords = (passwordField: string, confirmField: string): ValidatorFn => {
-  return (form: AbstractControl): ValidationErrors | null => {
+  return (form: AbstractControl): Nullable<ValidationErrors> => {
     const group = form as FormGroup;
     const password = group.get(passwordField)?.value;
     const confirm = group.get(confirmField)?.value;
@@ -16,7 +17,7 @@ export const matchPasswords = (passwordField: string, confirmField: string): Val
 
 export const passwordStrengthValidator: ValidatorFn = (
   control: AbstractControl
-): ValidationErrors | null => {
+): Nullable<ValidationErrors> => {
   const value = control.value || '';
 
   const hasUpperCase = /[A-Z]/.test(value);

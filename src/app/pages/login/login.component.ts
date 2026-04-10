@@ -14,6 +14,7 @@ import { AuthService } from '@/entities/auth/service/auth.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { decryptObject, encryptObject } from '@/shared/utils/encrypt';
 import { ERoute } from '@/shared/constants/routes';
+import { Nullable } from '@/shared/types';
 
 @Component({
   selector: 'page-login',
@@ -58,10 +59,10 @@ export class LoginComponent {
     this.isRememberMe.set(input.checked);
   }
 
-  get loginError(): string | null {
+  get loginError(): Nullable<string> {
     return getError(this.form.get('login'), 'login');
   }
-  get passwordError(): string | null {
+  get passwordError(): Nullable<string> {
     return getError(this.form.get('password'), 'Password');
   }
 

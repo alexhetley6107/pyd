@@ -1,7 +1,7 @@
 import { getError } from '@/shared/helpers/formErrors';
 import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
-import { SelectOption } from '@/shared/types/ui';
+import { Nullable, SelectOption } from '@/shared/types';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { ModalComponent } from '@/shared/ui/modal/modal.component';
@@ -111,7 +111,7 @@ export class TaskModalComponent {
     }));
   }
 
-  get titleError(): string | null {
+  get titleError(): Nullable<string> {
     return getError(this.form.get('title'), 'Title');
   }
 

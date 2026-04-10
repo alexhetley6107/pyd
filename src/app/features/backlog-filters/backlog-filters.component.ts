@@ -1,6 +1,6 @@
 import { BoardService } from '@/entities/board/service/board.service';
 import { TaskService } from '@/entities/task/service/task.service';
-import { SelectOption } from '@/shared/types/ui';
+import { SelectOption } from '@/shared/types';
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { SelectorComponent } from '@/shared/ui/selector/selector.component';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';

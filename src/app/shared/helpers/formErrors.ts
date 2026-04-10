@@ -1,4 +1,5 @@
 import { AbstractControl, FormGroup } from '@angular/forms';
+import { Nullable } from '../types';
 
 export const ERROR_MESSAGES: Record<string, (error: any, field?: string) => string> = {
   required: (_, field = 'This field') => `${field} is required.`,
@@ -11,11 +12,11 @@ export const ERROR_MESSAGES: Record<string, (error: any, field?: string) => stri
 };
 
 export function getError(
-  control: AbstractControl | null,
+  control: Nullable<AbstractControl>,
   fieldName = 'This field',
   formGroup?: FormGroup,
   formLevelErrorKey?: string
-): string | null {
+): Nullable<string> {
   if (!control || !control.touched) return null;
 
   // First check field-level errors

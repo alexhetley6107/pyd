@@ -4,6 +4,7 @@ import { API } from '@/shared/constants/api';
 import { delay, tap } from 'rxjs';
 import { getHttpParams } from '@/shared/utils/getHttpParams';
 import { Task, TaskDto, TaskQueries } from '../model';
+import { Nullable } from '@/shared/types';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class TaskService {
   isFetching = signal(false);
   tasks: Task[] = [];
 
-  openedTask = signal<Task | null>(null);
+  openedTask = signal<Nullable<Task>>(null);
 
   openTask(taskId: string) {
     this.openedTask.set(this.tasks.find((t) => t.id === taskId) ?? null);

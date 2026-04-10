@@ -14,6 +14,7 @@ import { matchPasswords, passwordStrengthValidator } from '@/shared/helpers/matc
 import { AuthService } from '@/entities/auth/service/auth.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { ERoute } from '@/shared/constants/routes';
+import { Nullable } from '@/shared/types';
 
 @Component({
   selector: 'page-signup',
@@ -57,16 +58,16 @@ export class SignupComponent {
       { validators: matchPasswords('password', 'confirmPassword') }
     );
   }
-  get nicknameError(): string | null {
+  get nicknameError(): Nullable<string> {
     return getError(this.form.get('nickname'), 'Nickname');
   }
-  get emailError(): string | null {
+  get emailError(): Nullable<string> {
     return getError(this.form.get('email'), 'Email');
   }
-  get passwordError(): string | null {
+  get passwordError(): Nullable<string> {
     return getError(this.form.get('password'), 'Password');
   }
-  get confirmPasswordError(): string | null {
+  get confirmPasswordError(): Nullable<string> {
     return getError(
       this.form.get('confirmPassword'),
       'Confirm Password',
