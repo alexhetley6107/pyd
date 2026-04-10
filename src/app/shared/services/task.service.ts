@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { API } from '../constants/api';
 import { Task } from '../types/board';
-import { tap } from 'rxjs';
+import { delay, tap } from 'rxjs';
 import { TaskDto, TaskQueries } from '../types/dto';
 import { getHttpParams } from '../utils/getHttpParams';
 
@@ -12,7 +12,7 @@ import { getHttpParams } from '../utils/getHttpParams';
 export class TaskService {
   constructor(private http: HttpClient) {}
 
-  isFetching = false;
+  isFetching = signal(false);
   tasks: Task[] = [];
 
   openedTask = signal<Task | null>(null);
@@ -22,14 +22,15 @@ export class TaskService {
   }
 
   getAll(queries: TaskQueries = {}) {
-    this.isFetching = true;
+    this.isFetching.set(true);
 
     const params = getHttpParams(queries);
 
     return this.http.get<Task[]>(API.task, { params }).pipe(
+      delay(1000),
       tap((tasks) => {
         this.tasks = tasks;
-        this.isFetching = false;
+        this.isFetching.set(false);
       })
     );
   }

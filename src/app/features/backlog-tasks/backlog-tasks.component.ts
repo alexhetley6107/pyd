@@ -20,7 +20,7 @@ export class BacklogTasksComponent {
   isTaskModal = false;
 
   get isFetching(): boolean {
-    return this.boardService.isFetching() || this.taskService.isFetching;
+    return this.boardService.isFetching() || this.taskService.isFetching();
   }
 
   get tasks(): Task[] {

@@ -1,33 +1,29 @@
-<!-- @if (!isLoaded) {
+@if (isFetching) {
   <div class="fetching">
-    <ui-skeleton width="300px" height="1000px"></ui-skeleton>
-    <ui-skeleton width="300px" height="1000px"></ui-skeleton>
-    <ui-skeleton width="300px" height="1000px"></ui-skeleton>
-    <ui-skeleton width="300px" height="1000px"></ui-skeleton>
-    <ui-skeleton width="300px" height="1000px"></ui-skeleton>
-    <ui-skeleton width="300px" height="1000px"></ui-skeleton>
+    @for (col of columns; track col.name) {
+      <ui-skeleton width="250px" height="600px" />
+    }
   </div>
-} @else { -->
+} @else {
+  <div class="sticky-header">
+    @for (c of columns; track c.name) {
+      <div class="header">
+        <p>
+          {{ c.name }}
+        </p>
 
-<div class="sticky-header">
-  @for (c of columns; track c.name) {
-    <div class="header">
-      <p>
-        {{ c.name }}
-      </p>
+        <div class="plus" (click)="createTask(c.name)"></div>
+      </div>
+    }
+  </div>
 
-      <div class="plus" (click)="createTask(c.name)"></div>
-    </div>
-  }
-</div>
-
-<div class="container">
-  @for (col of columns; track col.name) {
-    <div class="column">
-      @for (taskId of col.taskIds; track taskId) {
-        <task-item [task]="taskMap[taskId]" (onClickTask)="openTask(taskId)"></task-item>
-      }
-    </div>
-  }
-</div>
-<!-- } -->
+  <div class="container">
+    @for (col of columns; track col.name) {
+      <div class="column">
+        @for (taskId of col.taskIds; track taskId) {
+          <task-item [task]="taskMap[taskId]" (onClickTask)="openTask(taskId)"></task-item>
+        }
+      </div>
+    }
+  </div>
+}

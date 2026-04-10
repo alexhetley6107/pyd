@@ -6,10 +6,12 @@ import { BreadCrumbItem } from '@/shared/types/ui';
 import { Board } from '@/shared/types/board';
 import { BoardService } from '@/shared/services/board.service';
 import { ToastService } from '@/shared/services/toast.service';
+import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'create-task',
-  imports: [BreadcrumbsComponent],
+  imports: [BreadcrumbsComponent, SkeletonComponent],
   templateUrl: './create-task.component.html',
   styleUrl: './create-task.component.scss',
 })
@@ -19,22 +21,23 @@ export class CreateTaskComponent {
   boardService = inject(BoardService);
   toast = inject(ToastService);
 
-  currentBoard = signal<Board | null>(null);
-
   isModal = signal(false);
   isLoading = signal(false);
 
-  ngOnInit() {
-    const boardId = this.route.snapshot.queryParamMap.get('boardId');
+  private queryParams = toSignal(this.route.queryParams);
 
-    if (!boardId) return;
+  boardId = computed(() => this.queryParams()?.['boardId'] ?? null);
 
-    const b = this.boardService.boards().find((b) => b.id === boardId);
-    if (b) {
-      this.currentBoard.set(b);
-      return;
-    }
-  }
+  currentBoard = computed<Board | null>(() => {
+    const id = this.boardId();
+    if (!id) return null;
+
+    return this.boardService.boards().find((b) => b.id === id) ?? null;
+  });
+
+  isFetching = computed(() => {
+    return this.boardId() ? this.boardService.isFetching() : false;
+  });
 
   links = computed<BreadCrumbItem[]>(() => {
     const board = this.currentBoard();
