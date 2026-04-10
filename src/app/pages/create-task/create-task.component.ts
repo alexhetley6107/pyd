@@ -11,7 +11,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'create-task',
-  imports: [BreadcrumbsComponent, SkeletonComponent],
+  imports: [BreadcrumbsComponent],
   templateUrl: './create-task.component.html',
   styleUrl: './create-task.component.scss',
 })

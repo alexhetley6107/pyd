@@ -20,7 +20,6 @@ import { TaskService } from '@/shared/services/task.service';
     RouterLink,
     BoardColumnsComponent,
     InputComponent,
-    SkeletonComponent,
   ],
   templateUrl: './board-view.component.html',
   styleUrl: './board-view.component.scss',

@@ -1,9 +1,13 @@
-@for (link of links(); track link.text; let last = $last) {
-  <a [class.link]="!!link.link" [class.title]="!link.link" [routerLink]="link.link">{{
-    link.text
-  }}</a>
+@if (loading()) {
+  <ui-skeleton width="300px" height="27px" />
+} @else {
+  @for (link of links(); track link.text; let last = $last) {
+    <a [class.link]="!!link.link" [class.title]="!link.link" [routerLink]="link.link">{{
+      link.text
+    }}</a>
 
-  @if (!last) {
-    <span>/</span>
+    @if (!last) {
+      <span>/</span>
+    }
   }
 }

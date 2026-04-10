@@ -1,9 +1,6 @@
 <div class="flex align-center justify-between mb-10">
-  @if (isFetching) {
-    <ui-skeleton width="300px" height="27px" />
-  } @else {
-    <ui-breadcrumbs [links]="links()" />
-  }
+  <ui-breadcrumbs [links]="links()" [loading]="isFetching" />
+
   <ui-button variant="outlined" size="sm" (click)="toggleDeleteModal()">Delete</ui-button>
 </div>
 
