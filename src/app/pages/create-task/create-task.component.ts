@@ -7,10 +7,11 @@ import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Board } from '@/entities/board/model';
+import { TaskFormComponent } from '@/features/task-form/task-form.component';
 
 @Component({
   selector: 'create-task',
-  imports: [BreadcrumbsComponent],
+  imports: [BreadcrumbsComponent, TaskFormComponent],
   templateUrl: './create-task.component.html',
   styleUrl: './create-task.component.scss',
 })

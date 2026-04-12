@@ -32,8 +32,6 @@ export class BoardViewComponent {
 
   boardId = computed(() => this.route.snapshot.paramMap.get('boardId') ?? null);
 
-  // isLoading = signal(false);
-
   loadTasksEffect = effect(() => {
     if (!this.boardId()) return;
     if (this.taskService.loadedBoardId() === this.boardId()) return;

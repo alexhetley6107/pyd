@@ -2,17 +2,20 @@ import { Board } from '@/entities/board/model';
 import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { BreadCrumbItem, Nullable } from '@/shared/types';
-import { Component, computed, effect, inject } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.component';
 import { ERoute } from '@/shared/constants/routes';
 import { Task } from '@/entities/task/model';
 import { TaskService } from '@/entities/task/service/task.service';
+import { TaskFormComponent } from '@/features/task-form/task-form.component';
+import { TaskDeleteModalComponent } from '@/features/task-delete-modal/task-delete-modal.component';
+import { ButtonComponent } from '@/shared/ui/button/button.component';
 
 @Component({
   selector: 'task-view',
-  imports: [BreadcrumbsComponent],
+  imports: [BreadcrumbsComponent, TaskFormComponent, TaskDeleteModalComponent, ButtonComponent],
   templateUrl: './task-view.component.html',
   styleUrl: './task-view.component.scss',
 })
@@ -42,7 +45,11 @@ export class TaskViewComponent {
     return this.taskService.tasks().find((b) => b.id === id) ?? null;
   });
 
-  t = effect(() => {
+  loadTaskEffect = effect(() => {
+    if (!this.taskId()) return;
+
+    if (this.taskService.loadedBoardId() === this.boardId()) return;
+
     if (this.taskId()) {
       this.taskService.getAll({ id: this.taskId() ?? '' }).subscribe({
         error: (err) => {
@@ -85,4 +92,10 @@ export class TaskViewComponent {
       },
     ];
   });
+
+  isModal = signal(false);
+
+  toggleDeleteModal() {
+    this.isModal.update((v) => !v);
+  }
 }
