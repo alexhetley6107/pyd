@@ -77,6 +77,8 @@ export class BacklogFiltersComponent {
     this.form.valueChanges
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe(() => this.getTasks());
+
+    this.getTasks();
   }
 
   getTasks() {
@@ -87,6 +89,8 @@ export class BacklogFiltersComponent {
       priority: this.form.value.priority,
     };
 
-    this.taskService.getAll(queries).subscribe();
+    this.taskService
+      .getAll(queries)
+      .subscribe({ next: () => this.taskService.loadedBoardId.set(null) });
   }
 }

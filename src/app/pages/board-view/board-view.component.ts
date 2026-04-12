@@ -32,11 +32,15 @@ export class BoardViewComponent {
 
   boardId = computed(() => this.route.snapshot.paramMap.get('boardId') ?? null);
 
-  isLoading = signal(false);
+  // isLoading = signal(false);
 
   loadTasksEffect = effect(() => {
     if (!this.boardId()) return;
-    this.taskService.getAll({ boardId: this.boardId() }).subscribe();
+    if (this.taskService.loadedBoardId() === this.boardId()) return;
+
+    this.taskService.getAll({ boardId: this.boardId() }).subscribe({
+      next: () => this.taskService.loadedBoardId.set(this.boardId()),
+    });
   });
 
   currentBoard = computed<Nullable<Board>>(() => {

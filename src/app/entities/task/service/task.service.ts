@@ -13,6 +13,8 @@ export class TaskService {
   constructor(private http: HttpClient) {}
 
   isFetching = signal(false);
+  loadedBoardId = signal<Nullable<string>>(null);
+
   tasks = signal<Task[]>([]);
 
   openedTask = signal<Nullable<Task>>(null);

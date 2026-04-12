@@ -14,6 +14,7 @@ export type Task = {
 export type TaskDto = Omit<Task, 'id' | 'userId'> & Partial<Pick<Task, 'id'>>;
 
 export type TaskQueries = {
+  id?: string;
   search?: string;
   boardId?: Nullable<string>;
   status?: string;

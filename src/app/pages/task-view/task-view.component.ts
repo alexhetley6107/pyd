@@ -2,7 +2,7 @@ import { Board } from '@/entities/board/model';
 import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { BreadCrumbItem, Nullable } from '@/shared/types';
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, effect, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.component';
@@ -42,8 +42,19 @@ export class TaskViewComponent {
     return this.taskService.tasks().find((b) => b.id === id) ?? null;
   });
 
+  t = effect(() => {
+    if (this.taskId()) {
+      this.taskService.getAll({ id: this.taskId() ?? '' }).subscribe({
+        error: (err) => {
+          this.toast.showError(err.error.message);
+          this.router.navigateByUrl(this.boardId() ? ERoute.BOARDS : ERoute.BACKLOG);
+        },
+      });
+    }
+  });
+
   isFetching = computed(() => {
-    return this.boardId() ? this.boardService.isFetching() : false;
+    return this.boardService.isFetching() || this.taskService.isFetching();
   });
 
   links = computed<BreadCrumbItem[]>(() => {
