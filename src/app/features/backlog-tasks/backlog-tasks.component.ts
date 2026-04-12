@@ -24,7 +24,7 @@ export class BacklogTasksComponent {
   }
 
   get tasks(): Task[] {
-    return this.taskService.tasks;
+    return this.taskService.tasks();
   }
 
   toggleTaskModal() {

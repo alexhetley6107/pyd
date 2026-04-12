@@ -13,12 +13,12 @@ export class TaskService {
   constructor(private http: HttpClient) {}
 
   isFetching = signal(false);
-  tasks: Task[] = [];
+  tasks = signal<Task[]>([]);
 
   openedTask = signal<Nullable<Task>>(null);
 
   openTask(taskId: string) {
-    this.openedTask.set(this.tasks.find((t) => t.id === taskId) ?? null);
+    this.openedTask.set(this.tasks().find((t) => t.id === taskId) ?? null);
   }
 
   getAll(queries: TaskQueries = {}) {
@@ -29,7 +29,7 @@ export class TaskService {
     return this.http.get<Task[]>(API.task, { params }).pipe(
       delay(1000),
       tap((tasks) => {
-        this.tasks = tasks;
+        this.tasks.set(tasks);
         this.isFetching.set(false);
       })
     );
@@ -38,7 +38,7 @@ export class TaskService {
   create(body: TaskDto) {
     return this.http.post<Task>(API.task, body).pipe(
       tap((task) => {
-        this.tasks = [...this.tasks, task];
+        this.tasks.update((tasks) => [...tasks, task]);
       })
     );
   }
@@ -47,7 +47,7 @@ export class TaskService {
     return this.http.patch<Task>(API.task, body).pipe(
       tap((task) => {
         this.openedTask.set(null);
-        this.tasks = this.tasks.map((t) => (t.id === task.id ? task : t));
+        this.tasks.update((tasks) => tasks.map((t) => (t.id === task.id ? task : t)));
       })
     );
   }
@@ -55,7 +55,7 @@ export class TaskService {
   delete(id: string) {
     return this.http.delete(`${API.task}/${id}`).pipe(
       tap(() => {
-        this.tasks = this.tasks.filter((t) => t.id !== id);
+        this.tasks.update((tasks) => tasks.filter((t) => t.id !== id));
         this.openedTask.set(null);
       })
     );

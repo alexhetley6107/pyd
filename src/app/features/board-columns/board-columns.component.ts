@@ -33,20 +33,19 @@ export class BoardColumnsComponent {
     return this.taskService.isFetching();
   }
 
-  @HostBinding('class.loaded')
-  get isLoaded(): boolean {
-    return !(this.taskService.isFetching() || this.boardService.isFetching());
-  }
-
   get columns(): Column[] {
     return TaskStatuses.map((name) => ({
       name,
-      taskIds: this.taskService.tasks.filter((t) => t.status === name).map((t) => t.id),
+      taskIds: this.taskService
+        .tasks()
+        .filter((t) => t.status === name)
+        .map((t) => t.id),
     }));
   }
 
   get taskMap(): TaskMap {
-    return this.taskService.tasks
+    return this.taskService
+      .tasks()
       .filter((t) => t.boardId)
       .filter((t) => t.status)
       .reduce((acc, task) => {

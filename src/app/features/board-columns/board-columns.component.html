@@ -1,29 +1,27 @@
-@if (isFetching) {
-  <div class="fetching">
-    @for (col of columns; track col.name) {
-      <ui-skeleton width="250px" height="600px" />
-    }
-  </div>
-} @else {
-  <div class="sticky-header">
-    @for (c of columns; track c.name) {
-      <div class="header">
-        <p>
-          {{ c.name }}
-        </p>
+<div class="sticky-header">
+  @for (c of columns; track c.name) {
+    <div class="header">
+      <p>
+        {{ c.name }}
+      </p>
 
-        <div class="plus" (click)="createTask(c.name)"></div>
-      </div>
-    }
-  </div>
+      <div class="plus" (click)="createTask(c.name)"></div>
+    </div>
+  }
+</div>
 
-  <div class="container">
-    @for (col of columns; track col.name) {
-      <div class="column">
+<div class="container">
+  @for (col of columns; track col.name) {
+    <div class="column">
+      @if (isFetching) {
+        <ui-skeleton width="100%" height="100px" />
+        <ui-skeleton width="100%" height="100px" />
+        <ui-skeleton width="100%" height="100px" />
+      } @else {
         @for (taskId of col.taskIds; track taskId) {
-          <task-item [task]="taskMap[taskId]" (onClickTask)="openTask(taskId)"></task-item>
+          <task-item [task]="taskMap[taskId]" (onClickTask)="openTask(taskId)" />
         }
-      </div>
-    }
-  </div>
-}
+      }
+    </div>
+  }
+</div>

@@ -32,4 +32,4 @@ export const TaskPriorities = [
 
 export const mediumStatus = 'medium';
 
-export const TaskStatuses = ['todo', 'in-progress', 'done'] as const;
+export const TaskStatuses = ['todo', 'blocked', 'preparing', 'in-progress', 'done'] as const;
