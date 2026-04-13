@@ -5,11 +5,15 @@
 </div>
 
 <task-form
-  [boardId]="boardId()"
+  [boardId]="boardId() ?? ''"
   [title]="currentTask()?.title ?? ''"
   [description]="currentTask()?.description ?? ''"
   [priority]="currentTask()?.priority ?? ''"
   [status]="currentTask()?.status ?? ''"
+  [isLoading]="isLoading()"
+  (onSubmit)="handleUpdate($event)"
+  (onCancel)="handleCancel()"
+  submitText="Update"
 />
 
 <task-delete-modal [open]="isModal()" (closeModal)="toggleDeleteModal()" />

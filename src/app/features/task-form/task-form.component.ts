@@ -31,9 +31,13 @@ export class TaskFormComponent {
   fb = inject(NonNullableFormBuilder);
   boardService = inject(BoardService);
 
+  submitText = input('Create');
+
   isFetching = input(false);
   isLoading = input(false);
-  onSubmit = output<any>();
+
+  onSubmit = output<TaskDto>();
+  onCancel = output();
 
   title = input<string>('');
   description = input<string>('');
@@ -65,7 +69,7 @@ export class TaskFormComponent {
       value: b.id,
     }));
 
-    return [{ label: 'No board', value: '' }, ...options];
+    return [{ label: 'No board', value: null }, ...options];
   });
 
   get columnOptions(): SelectOption[] {
@@ -93,7 +97,9 @@ export class TaskFormComponent {
     this.onSubmit.emit(dto);
   }
 
-  handleCancel() {}
+  handleCancel() {
+    this.onCancel.emit();
+  }
 
   get titleError(): Nullable<string> {
     return getError(this.form.get('title'), 'Title');

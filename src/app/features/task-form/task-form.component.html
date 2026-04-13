@@ -29,6 +29,6 @@
   <div class="flex justify-end mt-10 gap-10">
     <ui-button variant="outlined" (onClick)="handleCancel()">Cancel</ui-button>
 
-    <ui-button type="submit" [loading]="isLoading()">Update</ui-button>
+    <ui-button type="submit" [loading]="isLoading()">{{ submitText() }}</ui-button>
   </div>
 </form>

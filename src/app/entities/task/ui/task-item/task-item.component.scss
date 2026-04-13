@@ -15,7 +15,7 @@
 
   .prio_line {
     height: 100%;
-    min-width: 5px;
+    min-width: 8px;
 
     &.low {
       background-color: rgba(76, 175, 80, 0.4); /* green */
@@ -33,27 +33,12 @@
       background-color: rgba(211, 47, 47, 0.4); /* dark red */
     }
 
-    &.critical {
-      background-color: rgba(156, 39, 176, 0.4); /* purple */
-    }
-
-    &.blocker {
-      background-color: rgba(0, 0, 0, 0.5); /* black */
-    }
-
-    &.optional {
-      background-color: rgba(33, 150, 243, 0.4); /* blue */
-    }
-
     &.low,
     &.medium,
     &.high,
-    &.urgent,
-    &.critical,
-    &.blocker,
-    &.optional {
+    &.urgent {
       transition: background-color 0.3s ease;
-      border-radius: 4px;
+      border-radius: 4px 0 0 4px;
     }
   }
 

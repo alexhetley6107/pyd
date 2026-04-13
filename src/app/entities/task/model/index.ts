@@ -21,15 +21,7 @@ export type TaskQueries = {
   priority?: string;
 };
 
-export const TaskPriorities = [
-  'low',
-  'medium',
-  'high',
-  'urgent',
-  'critical',
-  'blocker',
-  'optional',
-] as const;
+export const TaskPriorities = ['low', 'medium', 'high', 'urgent'] as const;
 
 export const mediumPriority = 'medium';
 

@@ -2,7 +2,7 @@ import { BoardService } from '@/entities/board/service/board.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
 import { TaskService } from '@/entities/task/service/task.service';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
-import { Component, HostBinding, inject } from '@angular/core';
+import { Component, computed, HostBinding, inject } from '@angular/core';
 import { TaskItemComponent } from '@/entities/task/ui/task-item/task-item.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ERoute } from '@/shared/constants/routes';
@@ -23,6 +23,8 @@ export class BoardColumnsComponent {
   taskService = inject(TaskService);
   route = inject(ActivatedRoute);
   router = inject(Router);
+
+  boardId = computed(() => this.route.snapshot.paramMap.get('boardId') ?? null);
 
   @HostBinding('class.menu-opened')
   get menuOpened(): boolean {
@@ -46,7 +48,7 @@ export class BoardColumnsComponent {
   get taskMap(): TaskMap {
     return this.taskService
       .tasks()
-      .filter((t) => t.boardId)
+      .filter((t) => t.boardId === this.boardId())
       .filter((t) => t.status)
       .reduce((acc, task) => {
         acc[task.id] = task;
@@ -63,7 +65,7 @@ export class BoardColumnsComponent {
   }
 
   openTask(taskId: string) {
-    this.router.navigate([`task/${taskId}`], {
+    this.router.navigate(['task', taskId], {
       queryParams: { boardId: this.route.snapshot.paramMap.get('boardId') },
     });
   }

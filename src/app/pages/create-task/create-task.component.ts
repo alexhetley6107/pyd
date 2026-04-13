@@ -73,17 +73,24 @@ export class CreateTaskComponent {
   });
 
   handleCreate(dto: TaskDto) {
-    console.log(dto);
-
     this.isLoading.set(true);
 
     this.taskService.create(dto).subscribe({
       next: () => {
         this.toast.success('Task created successfully');
-        this.router.navigate([`/${ERoute.BOARDS}/${this.boardId()}`]);
+        const backUrl = this.boardId() ? `/${ERoute.BOARDS}/${this.boardId()}` : ERoute.BACKLOG;
+        this.router.navigate([backUrl]);
+        this.isLoading.set(false);
       },
-      error: () => this.toast.error('Failed to create task'),
-      complete: () => this.isLoading.set(false),
+      error: () => {
+        this.toast.error('Failed to create task');
+        this.isLoading.set(false);
+      },
     });
+  }
+
+  handleCancel() {
+    const backUrl = this.boardId() ? `/${ERoute.BOARDS}/${this.boardId()}` : ERoute.BACKLOG;
+    this.router.navigate([backUrl]);
   }
 }

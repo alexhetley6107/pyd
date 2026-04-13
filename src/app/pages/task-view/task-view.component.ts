@@ -3,11 +3,10 @@ import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { BreadCrumbItem, Nullable } from '@/shared/types';
 import { Component, computed, effect, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.component';
 import { ERoute } from '@/shared/constants/routes';
-import { Task } from '@/entities/task/model';
+import { Task, TaskDto } from '@/entities/task/model';
 import { TaskService } from '@/entities/task/service/task.service';
 import { TaskFormComponent } from '@/features/task-form/task-form.component';
 import { TaskDeleteModalComponent } from '@/features/task-delete-modal/task-delete-modal.component';
@@ -26,9 +25,7 @@ export class TaskViewComponent {
   taskService = inject(TaskService);
   toast = inject(ToastService);
 
-  private queryParams = toSignal(this.route.queryParams);
-
-  boardId = computed(() => this.queryParams()?.['boardId'] ?? null);
+  boardId = computed(() => this.route.snapshot.queryParamMap.get('boardId') ?? null);
   taskId = computed(() => this.route.snapshot.paramMap.get('taskId') ?? null);
 
   currentBoard = computed<Nullable<Board>>(() => {
@@ -97,5 +94,37 @@ export class TaskViewComponent {
 
   toggleDeleteModal() {
     this.isModal.update((v) => !v);
+  }
+
+  isLoading = signal(false);
+
+  handleUpdate(task: TaskDto) {
+    if (!this.taskId()) return;
+
+    this.isLoading.set(true);
+
+    const dto = { ...task, id: this.taskId() ?? '' };
+
+    this.taskService.update(dto).subscribe({
+      next: () => {
+        this.toast.success('Task updated successfully');
+        const backUrl = this.boardId()
+          ? dto.boardId
+            ? `/${ERoute.BOARDS}/${dto.boardId}`
+            : ERoute.BOARDS
+          : ERoute.BACKLOG;
+        this.router.navigate([backUrl]);
+        this.isLoading.set(false);
+      },
+      error: () => {
+        this.toast.error('Failed to update task');
+        this.isLoading.set(false);
+      },
+    });
+  }
+
+  handleCancel() {
+    const backUrl = this.boardId() ? `/${ERoute.BOARDS}/${this.boardId()}` : ERoute.BACKLOG;
+    this.router.navigate([backUrl]);
   }
 }
