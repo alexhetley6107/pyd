@@ -4,6 +4,12 @@
   <ui-button variant="outlined" size="sm" (click)="toggleDeleteModal()">Delete</ui-button>
 </div>
 
-<task-form />
+<task-form
+  [boardId]="boardId()"
+  [title]="currentTask()?.title ?? ''"
+  [description]="currentTask()?.description ?? ''"
+  [priority]="currentTask()?.priority ?? ''"
+  [status]="currentTask()?.status ?? ''"
+/>
 
 <task-delete-modal [open]="isModal()" (closeModal)="toggleDeleteModal()" />

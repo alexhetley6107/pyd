@@ -8,6 +8,8 @@ import { ToastService } from '@/shared/services/toast.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Board } from '@/entities/board/model';
 import { TaskFormComponent } from '@/features/task-form/task-form.component';
+import { TaskService } from '@/entities/task/service/task.service';
+import { TaskDto } from '@/entities/task/model';
 
 @Component({
   selector: 'create-task',
@@ -19,14 +21,16 @@ export class CreateTaskComponent {
   router = inject(Router);
   route = inject(ActivatedRoute);
   boardService = inject(BoardService);
+  taskService = inject(TaskService);
+
   toast = inject(ToastService);
 
-  isModal = signal(false);
   isLoading = signal(false);
 
   private queryParams = toSignal(this.route.queryParams);
 
   boardId = computed(() => this.queryParams()?.['boardId'] ?? null);
+  status = computed(() => this.queryParams()?.['status'] ?? null);
 
   currentBoard = computed<Nullable<Board>>(() => {
     const id = this.boardId();
@@ -67,4 +71,19 @@ export class CreateTaskComponent {
       },
     ];
   });
+
+  handleCreate(dto: TaskDto) {
+    console.log(dto);
+
+    this.isLoading.set(true);
+
+    this.taskService.create(dto).subscribe({
+      next: () => {
+        this.toast.success('Task created successfully');
+        this.router.navigate([`/${ERoute.BOARDS}/${this.boardId()}`]);
+      },
+      error: () => this.toast.error('Failed to create task'),
+      complete: () => this.isLoading.set(false),
+    });
+  }
 }

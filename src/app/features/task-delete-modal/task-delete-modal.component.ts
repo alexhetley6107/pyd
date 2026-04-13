@@ -35,11 +35,11 @@ export class TaskDeleteModalComponent {
 
     this.taskService.delete(taskId).subscribe({
       next: () => {
-        this.toast.showSuccess(`Task successfully deleted.`);
+        this.toast.success(`Task successfully deleted.`);
         this.router.navigate([ERoute.BOARDS, this.boardId() ?? '']);
       },
       error: (err: any) => {
-        this.toast.showError(err.error.message);
+        this.toast.error(err.error.message);
         this.isLoading.set(false);
       },
       complete: () => {

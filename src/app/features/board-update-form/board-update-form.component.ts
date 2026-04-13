@@ -58,12 +58,12 @@ export class BoardUpdateFormComponent {
       const error = this.updateBoardResource.error() as any;
 
       if (value) {
-        this.toast.showSuccess('Board successfully updated');
+        this.toast.success('Board successfully updated');
         this.router.navigate([ERoute.BOARDS, value.id]);
       }
 
       if (error) {
-        this.toast.showError(error.error.message ?? 'Unknown error');
+        this.toast.error(error.error.message ?? 'Unknown error');
       }
     });
   }

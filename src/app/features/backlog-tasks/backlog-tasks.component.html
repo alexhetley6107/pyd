@@ -10,7 +10,7 @@
   } @else {
     <ui-list-container>
       @for (task of tasks; track task.id) {
-        <task-item [task]="task" (onClickTask)="toggleTaskModal()" />
+        <task-item [task]="task" (onClickTask)="toggleTaskModal(task.id)" />
       }
     </ui-list-container>
   }

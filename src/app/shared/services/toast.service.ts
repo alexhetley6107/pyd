@@ -37,11 +37,11 @@ export class ToastService {
     this.add$.next({ message, options });
   }
 
-  showSuccess(message: string) {
+  success(message: string) {
     this.add(message, { type: 'success' });
   }
 
-  showError(message: string) {
+  error(message: string) {
     this.add(message, { type: 'error', delay: 10000 });
   }
 

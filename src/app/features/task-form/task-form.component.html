@@ -1,1 +1,34 @@
-<p>task-form works!</p>
+<form [formGroup]="form" (ngSubmit)="handleSubmit()" (keydown.enter)="handleSubmit()">
+  <ui-input
+    formControlName="title"
+    placeholder="Task title"
+    fullWidth
+    variant="underlined"
+    [error]="titleError"
+  />
+  <ui-textarea formControlName="description" placeholder="Task description..." fullWidth />
+
+  <div class="selects">
+    <ui-selector
+      formControlName="boardId"
+      placeholder="Select board..."
+      [options]="boardOptions()"
+    />
+    <ui-selector
+      formControlName="status"
+      placeholder="Select column..."
+      [options]="columnOptions"
+    />
+    <ui-selector
+      formControlName="priority"
+      placeholder="Select proirity..."
+      [options]="priorityOptions"
+    />
+  </div>
+
+  <div class="flex justify-end mt-10 gap-10">
+    <ui-button variant="outlined" (onClick)="handleCancel()">Cancel</ui-button>
+
+    <ui-button type="submit" [loading]="isLoading()">Update</ui-button>
+  </div>
+</form>

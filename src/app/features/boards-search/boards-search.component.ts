@@ -29,7 +29,7 @@ export class BoardsSearchComponent {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe({
-        error: (err) => this.toast.showError(err.error.message),
+        error: (err) => this.toast.error(err.error.message),
       });
   }
 }

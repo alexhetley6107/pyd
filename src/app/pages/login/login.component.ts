@@ -85,11 +85,11 @@ export class LoginComponent {
           localStorage.removeItem('rememberMe');
         }
         this.router.navigateByUrl(ERoute.DASHBOARD);
-        this.toast.showSuccess(`Welcome ${res.nickname}`);
+        this.toast.success(`Welcome ${res.nickname}`);
         this.isLoading.set(false);
       },
       error: (err) => {
-        this.toast.showError(err.error.message);
+        this.toast.error(err.error.message);
         this.isLoading.set(false);
       },
     });

@@ -80,7 +80,7 @@ export class ResetPasswordComponent {
 
     this.auth.resetPassword(token, newPassword).subscribe({
       next: (res) => {
-        this.toast.showSuccess(res.message);
+        this.toast.success(res.message);
         this.form.reset();
 
         setTimeout(() => {
@@ -88,7 +88,7 @@ export class ResetPasswordComponent {
         }, 5000);
       },
       error: (err) => {
-        this.toast.showError(err.error.message);
+        this.toast.error(err.error.message);
         this.isLoading = false;
       },
       complete: () => {

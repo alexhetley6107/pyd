@@ -53,7 +53,7 @@ export class TaskViewComponent {
     if (this.taskId()) {
       this.taskService.getAll({ id: this.taskId() ?? '' }).subscribe({
         error: (err) => {
-          this.toast.showError(err.error.message);
+          this.toast.error(err.error.message);
           this.router.navigateByUrl(this.boardId() ? ERoute.BOARDS : ERoute.BACKLOG);
         },
       });

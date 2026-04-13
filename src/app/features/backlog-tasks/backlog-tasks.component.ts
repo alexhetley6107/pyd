@@ -27,7 +27,11 @@ export class BacklogTasksComponent {
     return this.taskService.tasks();
   }
 
-  toggleTaskModal() {
+  toggleTaskModal(id?: string) {
+    if (id) {
+      this.taskService.openTask(id);
+    }
+
     this.isTaskModal = !this.isTaskModal;
   }
 }

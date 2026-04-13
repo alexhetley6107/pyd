@@ -25,7 +25,7 @@ import { TaskService } from '@/entities/task/service/task.service';
 import { SelectorComponent } from '@/shared/ui/selector/selector.component';
 import { TextareaComponent } from '@/shared/ui/textarea/textarea.component';
 import { ConfirmModalComponent } from '@/shared/ui/confirm-modal/confirm-modal.component';
-import { mediumStatus, TaskDto, TaskPriorities, TaskStatuses } from '@/entities/task/model';
+import { mediumPriority, TaskDto, TaskPriorities, TaskStatuses } from '@/entities/task/model';
 
 type ModalAction = 'create-for-backlog' | 'create-for-board' | 'edit-task';
 
@@ -126,7 +126,7 @@ export class TaskModalComponent {
     let boardValue = '';
     let statusValue = '';
 
-    let priorityValue = mediumStatus;
+    let priorityValue = mediumPriority;
 
     // if (this.action === 'create-for-board') {
     //   boardValue = this.boardService.openedBoard()?.id ?? '';

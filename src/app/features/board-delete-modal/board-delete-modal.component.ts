@@ -41,11 +41,11 @@ export class BoardDeleteModalComponent {
 
     this.boardService.delete(boardId).subscribe({
       next: () => {
-        this.toast.showSuccess(`Board successfully deleted.`);
+        this.toast.success(`Board successfully deleted.`);
         this.router.navigateByUrl(ERoute.BOARDS);
       },
       error: (err: any) => {
-        this.toast.showError(err.error.message);
+        this.toast.error(err.error.message);
         this.isLoading.set(false);
       },
       complete: () => {
