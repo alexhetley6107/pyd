@@ -1,6 +1,11 @@
+:host {
+  height: 100%;
+}
+
 .wrapper {
   width: 100%;
   position: relative;
+  height: 100%;
 
   textarea {
     width: 100%;
@@ -11,6 +16,8 @@
     padding: 8px 6px;
     font-family: inherit;
     margin-bottom: 0;
+    height: 100%;
+    resize: none;
 
     &:focus {
       outline: none;

@@ -5,6 +5,7 @@
 </div>
 
 <task-form
+  [isFetching]="isFetching()"
   [boardId]="boardId() ?? ''"
   [title]="currentTask()?.title ?? ''"
   [description]="currentTask()?.description ?? ''"

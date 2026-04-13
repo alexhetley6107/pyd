@@ -1,34 +1,41 @@
-<form [formGroup]="form" (ngSubmit)="handleSubmit()" (keydown.enter)="handleSubmit()">
-  <ui-input
-    formControlName="title"
-    placeholder="Task title"
-    fullWidth
-    variant="underlined"
-    [error]="titleError"
-  />
-  <ui-textarea formControlName="description" placeholder="Task description..." fullWidth />
+<form class="task-form" [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <!-- (keydown.enter)="handleSubmit()" -->
+  <div class="container">
+    <div class="inputs-block">
+      <ui-input
+        formControlName="title"
+        placeholder="Task title"
+        fullWidth
+        variant="underlined"
+        [error]="titleError"
+      />
+      <ui-textarea formControlName="description" placeholder="Task description..." fullWidth />
+    </div>
 
-  <div class="selects">
-    <ui-selector
-      formControlName="boardId"
-      placeholder="Select board..."
-      [options]="boardOptions()"
-    />
-    <ui-selector
-      formControlName="status"
-      placeholder="Select column..."
-      [options]="columnOptions"
-    />
-    <ui-selector
-      formControlName="priority"
-      placeholder="Select proirity..."
-      [options]="priorityOptions"
-    />
-  </div>
+    <div class="selects-block">
+      <div class="selects">
+        <ui-selector
+          formControlName="boardId"
+          placeholder="Select board..."
+          [options]="boardOptions()"
+        />
+        <ui-selector
+          formControlName="status"
+          placeholder="Select column..."
+          [options]="columnOptions"
+        />
+        <ui-selector
+          formControlName="priority"
+          placeholder="Select proirity..."
+          [options]="priorityOptions"
+        />
+        <ui-input placeholder="Date" fullWidth />
+      </div>
+      <div class="flex justify-end mt-10 gap-10">
+        <ui-button variant="outlined" (onClick)="handleCancel()" fullWidth>Cancel</ui-button>
 
-  <div class="flex justify-end mt-10 gap-10">
-    <ui-button variant="outlined" (onClick)="handleCancel()">Cancel</ui-button>
-
-    <ui-button type="submit" [loading]="isLoading()">{{ submitText() }}</ui-button>
+        <ui-button type="submit" [loading]="isLoading()" fullWidth>{{ submitText() }}</ui-button>
+      </div>
+    </div>
   </div>
 </form>

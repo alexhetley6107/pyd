@@ -1,0 +1,34 @@
+.task-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: calc(100% - 60px);
+
+  .container {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    height: 100%;
+    flex: 1;
+
+    .inputs-block {
+      width: 70%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .selects-block {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .selects {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  }
+}
