@@ -6,6 +6,7 @@ import { ListContainerComponent } from '@/shared/ui/list-container/list-containe
 import { BoardService } from '@/entities/board/service/board.service';
 import { Task } from '@/entities/task/model';
 import { Router } from '@angular/router';
+import { ERoute } from '@/shared/constants/routes';
 
 @Component({
   selector: 'backlog-tasks',
@@ -27,6 +28,6 @@ export class BacklogTasksComponent {
   }
 
   openTask(taskId: string) {
-    this.router.navigate(['task', taskId]);
+    this.router.navigate([ERoute.BACKLOG, taskId]);
   }
 }

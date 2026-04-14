@@ -65,8 +65,6 @@ export class BoardColumnsComponent {
   }
 
   openTask(taskId: string) {
-    this.router.navigate(['task', taskId], {
-      queryParams: { boardId: this.route.snapshot.paramMap.get('boardId') },
-    });
+    this.router.navigate(['task', taskId]);
   }
 }

@@ -14,8 +14,8 @@ export enum ERoute {
   CREATE_TASK = 'create-task',
   TASK_VIEW = 'task/:taskId',
 
-  AGILE_BOARD = 'agile-board',
-
   BACKLOG = 'backlog',
+  BACKLOG_TASK_VIEW = 'backlog/:taskId',
+
   SETTING = 'setting',
 }

@@ -16,7 +16,6 @@ import { ButtonComponent } from '@/shared/ui/button/button.component';
   selector: 'task-view',
   imports: [BreadcrumbsComponent, TaskFormComponent, TaskDeleteModalComponent, ButtonComponent],
   templateUrl: './task-view.component.html',
-  styleUrl: './task-view.component.scss',
 })
 export class TaskViewComponent {
   router = inject(Router);
@@ -25,15 +24,7 @@ export class TaskViewComponent {
   taskService = inject(TaskService);
   toast = inject(ToastService);
 
-  boardId = computed(() => this.route.snapshot.queryParamMap.get('boardId') ?? null);
   taskId = computed(() => this.route.snapshot.paramMap.get('taskId') ?? null);
-
-  currentBoard = computed<Nullable<Board>>(() => {
-    const id = this.boardId();
-    if (!id) return null;
-
-    return this.boardService.boards().find((b) => b.id === id) ?? null;
-  });
 
   currentTask = computed<Nullable<Task>>(() => {
     const id = this.taskId();
@@ -42,19 +33,26 @@ export class TaskViewComponent {
     return this.taskService.tasks().find((b) => b.id === id) ?? null;
   });
 
+  currentBoard = computed<Nullable<Board>>(() => {
+    if (!this.currentTask()) return null;
+
+    const boardId = this.currentTask()?.boardId;
+
+    return this.boardService.boards().find((b) => b.id === boardId) ?? null;
+  });
+
+  isBacklogTask = computed<boolean>(() => this.router.url.includes(ERoute.BACKLOG));
+
   loadTaskEffect = effect(() => {
-    if (!this.taskId()) return;
+    if (this.currentTask()) return;
 
-    if (this.taskService.loadedBoardId() === this.boardId()) return;
-
-    if (this.taskId()) {
-      this.taskService.getAll({ id: this.taskId() ?? '' }).subscribe({
-        error: (err) => {
-          this.toast.error(err.error.message);
-          this.router.navigateByUrl(this.boardId() ? ERoute.BOARDS : ERoute.BACKLOG);
-        },
-      });
-    }
+    this.taskService.getAll({ id: this.taskId() ?? '' }).subscribe({
+      error: (err) => {
+        this.toast.error(err.error.message);
+        const backUrl = this.isBacklogTask() ? ERoute.BACKLOG : ERoute.BOARDS;
+        this.router.navigate([backUrl]);
+      },
+    });
   });
 
   isFetching = computed(() => {
@@ -62,23 +60,21 @@ export class TaskViewComponent {
   });
 
   links = computed<BreadCrumbItem[]>(() => {
-    const board = this.currentBoard();
-
-    const base = board
+    const base = this.isBacklogTask()
       ? [
+          {
+            text: 'Backlog',
+            link: '/' + ERoute.BACKLOG,
+          },
+        ]
+      : [
           {
             text: 'Boards',
             link: '/' + ERoute.BOARDS,
           },
           {
-            text: board.name,
-            link: `/${ERoute.BOARDS}/${board.id}`,
-          },
-        ]
-      : [
-          {
-            text: 'Backlog',
-            link: '/' + ERoute.BACKLOG,
+            text: this.currentBoard()?.name ?? '',
+            link: `/${ERoute.BOARDS}/${this.currentBoard()?.id ?? ''}`,
           },
         ];
 
@@ -108,13 +104,10 @@ export class TaskViewComponent {
     this.taskService.update(dto).subscribe({
       next: () => {
         this.toast.success('Task updated successfully');
-        const backUrl = this.boardId()
-          ? dto.boardId
-            ? `/${ERoute.BOARDS}/${dto.boardId}`
-            : ERoute.BOARDS
-          : ERoute.BACKLOG;
+        const backUrl = this.isBacklogTask()
+          ? ERoute.BACKLOG
+          : `/${ERoute.BOARDS}/${this.currentBoard()?.id ?? ''}`;
         this.router.navigate([backUrl]);
-        this.isLoading.set(false);
       },
       error: () => {
         this.toast.error('Failed to update task');
@@ -124,7 +117,9 @@ export class TaskViewComponent {
   }
 
   handleCancel() {
-    const backUrl = this.boardId() ? `/${ERoute.BOARDS}/${this.boardId()}` : ERoute.BACKLOG;
+    const backUrl = this.isBacklogTask()
+      ? ERoute.BACKLOG
+      : `/${ERoute.BOARDS}/${this.currentBoard()?.id ?? ''}`;
     this.router.navigate([backUrl]);
   }
 }

@@ -11,7 +11,7 @@ export type Task = {
   userId: string;
 };
 
-export type TaskDto = Omit<Task, 'id' | 'userId'> & Partial<Pick<Task, 'id'>>;
+export type TaskDto = Partial<Task>;
 
 export type TaskQueries = {
   id?: string;

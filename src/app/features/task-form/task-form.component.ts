@@ -2,7 +2,7 @@ import { Component, computed, effect, inject, input, output } from '@angular/cor
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { TextareaComponent } from '@/shared/ui/textarea/textarea.component';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
-import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   mediumPriority,
   TaskDto,
@@ -30,7 +30,7 @@ import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
   styleUrl: './task-form.component.scss',
 })
 export class TaskFormComponent {
-  fb = inject(NonNullableFormBuilder);
+  fb = inject(FormBuilder);
   boardService = inject(BoardService);
 
   submitText = input('Create');
@@ -43,14 +43,14 @@ export class TaskFormComponent {
 
   title = input<string>('');
   description = input<string>('');
-  boardId = input<string>('');
+  boardId = input<Nullable<string>>(null);
   status = input<string>(toDoStatus);
   priority = input<string>(mediumPriority);
 
   form = this.fb.group({
     title: this.fb.control('', [Validators.required]),
     description: this.fb.control(''),
-    boardId: this.fb.control(''),
+    boardId: this.fb.control<string | null>(null),
     status: this.fb.control(''),
     priority: this.fb.control(''),
   });

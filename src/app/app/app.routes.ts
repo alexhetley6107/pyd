@@ -50,6 +50,7 @@ export const routes: Routes = [
       { path: ERoute.CREATE_TASK, component: CreateTaskComponent },
       { path: ERoute.TASK_VIEW, component: TaskViewComponent },
       { path: ERoute.BACKLOG, component: BacklogComponent },
+      { path: ERoute.BACKLOG_TASK_VIEW, component: TaskViewComponent },
       { path: ERoute.SETTING, component: SettingComponent },
     ],
   },

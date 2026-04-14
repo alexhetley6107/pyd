@@ -6,7 +6,7 @@
 
 <task-form
   [isFetching]="isFetching()"
-  [boardId]="boardId() ?? ''"
+  [boardId]="currentTask()?.boardId ?? null"
   [title]="currentTask()?.title ?? ''"
   [description]="currentTask()?.description ?? ''"
   [priority]="currentTask()?.priority ?? ''"
