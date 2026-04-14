@@ -17,4 +17,4 @@
   submitText="Update"
 />
 
-<task-delete-modal [open]="isModal()" (closeModal)="toggleDeleteModal()" />
+<task-delete-modal [task]="currentTask()" [open]="isModal()" (closeModal)="toggleDeleteModal()" />
