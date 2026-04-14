@@ -10,10 +10,8 @@
   } @else {
     <ui-list-container>
       @for (task of tasks; track task.id) {
-        <task-item [task]="task" (onClickTask)="toggleTaskModal(task.id)" />
+        <task-item [task]="task" (onClickTask)="openTask(task.id)" />
       }
     </ui-list-container>
   }
 }
-
-<task-modal [open]="isTaskModal" (closeModal)="toggleTaskModal()" action="edit-task"></task-modal>

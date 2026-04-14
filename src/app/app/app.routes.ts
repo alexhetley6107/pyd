@@ -4,7 +4,6 @@ import { LoginComponent } from '../pages/login/login.component';
 import { SignupComponent } from '../pages/signup/signup.component';
 import { ForgotPasswordComponent } from '../pages/forgot-password/forgot-password.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
-import { AgileBoardComponent } from '@/pages/agile-board/agile-board.component';
 import { BacklogComponent } from '@/pages/backlog/backlog.component';
 import { NotFoundComponent } from '@/pages/not-found/not-found.component';
 import { PrivateGuard } from '@/app/guards/private.guard';
@@ -50,7 +49,6 @@ export const routes: Routes = [
       { path: ERoute.CREATE_BOARD, component: CreateBoardComponent },
       { path: ERoute.CREATE_TASK, component: CreateTaskComponent },
       { path: ERoute.TASK_VIEW, component: TaskViewComponent },
-      { path: ERoute.AGILE_BOARD, component: AgileBoardComponent },
       { path: ERoute.BACKLOG, component: BacklogComponent },
       { path: ERoute.SETTING, component: SettingComponent },
     ],

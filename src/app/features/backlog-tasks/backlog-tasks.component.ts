@@ -2,22 +2,21 @@ import { TaskItemComponent } from '@/entities/task/ui/task-item/task-item.compon
 import { TaskService } from '@/entities/task/service/task.service';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 import { Component, inject } from '@angular/core';
-import { TaskModalComponent } from '@/features/task-modal/task-modal.component';
 import { ListContainerComponent } from '@/shared/ui/list-container/list-container.component';
 import { BoardService } from '@/entities/board/service/board.service';
 import { Task } from '@/entities/task/model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'backlog-tasks',
-  imports: [SkeletonComponent, TaskItemComponent, TaskModalComponent, ListContainerComponent],
+  imports: [SkeletonComponent, TaskItemComponent, ListContainerComponent],
   templateUrl: './backlog-tasks.component.html',
   styleUrl: './backlog-tasks.component.scss',
 })
 export class BacklogTasksComponent {
   taskService = inject(TaskService);
   boardService = inject(BoardService);
-
-  isTaskModal = false;
+  router = inject(Router);
 
   get isFetching(): boolean {
     return this.boardService.isFetching() || this.taskService.isFetching();
@@ -27,11 +26,7 @@ export class BacklogTasksComponent {
     return this.taskService.tasks();
   }
 
-  toggleTaskModal(id?: string) {
-    if (id) {
-      this.taskService.openTask(id);
-    }
-
-    this.isTaskModal = !this.isTaskModal;
+  openTask(taskId: string) {
+    this.router.navigate(['task', taskId]);
   }
 }
