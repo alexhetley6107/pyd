@@ -14,6 +14,7 @@ import { Nullable, SelectOption } from '@/shared/types';
 import { getError } from '@/shared/helpers/formErrors';
 import { BoardService } from '@/entities/board/service/board.service';
 import { SelectorComponent } from '@/shared/ui/selector/selector.component';
+import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 
 @Component({
   selector: 'task-form',
@@ -23,6 +24,7 @@ import { SelectorComponent } from '@/shared/ui/selector/selector.component';
     SelectorComponent,
     ButtonComponent,
     ReactiveFormsModule,
+    SkeletonComponent,
   ],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.scss',
