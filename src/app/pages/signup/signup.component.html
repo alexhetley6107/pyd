@@ -5,30 +5,30 @@
   class="auth-form"
 >
   <h1 class="">Sign up</h1>
-  <div class="">
-    <ui-input formControlName="nickname" [error]="nicknameError" placeholder="Nickname" fullWidth />
-    <ui-input
-      formControlName="email"
-      [error]="emailError"
-      placeholder="Email"
-      type="email"
-      fullWidth
-    />
-    <ui-input
-      formControlName="password"
-      [error]="passwordError"
-      placeholder="Password"
-      type="password"
-      fullWidth
-    />
-    <ui-input
-      formControlName="confirmPassword"
-      [error]="confirmPasswordError"
-      placeholder="Confirm your password"
-      type="password"
-      fullWidth
-    />
-  </div>
+
+  <ui-input formControlName="nickname" [error]="nicknameError" placeholder="Nickname" fullWidth />
+  <ui-input
+    formControlName="email"
+    [error]="emailError"
+    placeholder="Email"
+    type="email"
+    fullWidth
+  />
+  <ui-input
+    formControlName="password"
+    [error]="passwordError"
+    placeholder="Password"
+    type="password"
+    fullWidth
+  />
+  <ui-input
+    formControlName="confirmPassword"
+    [error]="confirmPasswordError"
+    placeholder="Confirm your password"
+    type="password"
+    fullWidth
+  />
+
   <ui-button fullWidth size="lg" [loading]="isLoading" type="submit">Sign up</ui-button>
 
   <div class="text-center">

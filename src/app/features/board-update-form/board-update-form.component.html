@@ -1,12 +1,15 @@
-<form [formGroup]="form" (ngSubmit)="handleSubmit()" (keydown.enter)="handleSubmit()">
-  <ui-input
-    formControlName="name"
-    placeholder="Board name"
-    fullWidth
-    variant="underlined"
-    [error]="nameError"
-  />
-  <ui-textarea formControlName="description" placeholder="Board description..." fullWidth />
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <div class="column gap-10">
+    <ui-input
+      formControlName="name"
+      placeholder="Board name"
+      fullWidth
+      variant="underlined"
+      [error]="nameError"
+    />
+
+    <ui-textarea formControlName="description" placeholder="Board description..." fullWidth />
+  </div>
 
   <div class="flex justify-end mt-10 gap-10">
     <ui-button variant="outlined" (onClick)="handleCancel()">Cancel</ui-button>
