@@ -1,12 +1,6 @@
 <div class="sticky-header">
   @for (c of columns; track c.name) {
-    <div class="header">
-      <p>
-        {{ c.name }}
-      </p>
-
-      <div class="plus" (click)="createTask(c.name)"></div>
-    </div>
+    <board-column-header [name]="c.name" />
   }
 </div>
 
