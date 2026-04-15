@@ -1,5 +1,5 @@
 <div class="flex align-center justify-between">
-  <ui-breadcrumbs [links]="links()" [loading]="isFetching" />
+  <ui-breadcrumbs [links]="links()" [loading]="isFetching()" />
 
   <a [routerLink]="'details'">
     <ui-button variant="outlined" size="sm">Details</ui-button>
@@ -7,7 +7,7 @@
 </div>
 
 <div class="search">
-  <ui-input placeholder="Search" formControlName="search" [size]="'sm'" />
+  <ui-input placeholder="Search" [size]="'sm'" [formControl]="searchControl" />
 </div>
 
-<board-columns />
+<board-columns [isFetching]="isFetching()" [tasks]="tasks()" />

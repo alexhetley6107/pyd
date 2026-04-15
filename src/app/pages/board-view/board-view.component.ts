@@ -10,6 +10,10 @@ import { BoardColumnsComponent } from '@/features/board-columns/board-columns.co
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { TaskService } from '@/entities/task/service/task.service';
 import { Board } from '@/entities/board/model';
+import { Task } from '@/entities/task/model';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'board-view',
@@ -19,6 +23,7 @@ import { Board } from '@/entities/board/model';
     RouterLink,
     BoardColumnsComponent,
     InputComponent,
+    ReactiveFormsModule,
   ],
   templateUrl: './board-view.component.html',
   styleUrl: './board-view.component.scss',
@@ -31,6 +36,12 @@ export class BoardViewComponent {
   toast = inject(ToastService);
 
   boardId = computed(() => this.route.snapshot.paramMap.get('boardId') ?? null);
+
+  searchControl = new FormControl('');
+
+  search = toSignal(this.searchControl.valueChanges.pipe(debounceTime(300)), {
+    initialValue: '',
+  });
 
   loadTasksEffect = effect(() => {
     if (!this.boardId()) return;
@@ -46,9 +57,21 @@ export class BoardViewComponent {
     return this.boardService.boards().find((b) => b.id === this.boardId()) ?? null;
   });
 
-  get isFetching(): boolean {
-    return this.boardService.isFetching();
-  }
+  tasks = computed<Task[]>(() => {
+    const search = this.search()?.toLowerCase() || '';
+
+    return this.taskService
+      .tasks()
+      .filter(
+        (board) =>
+          board.title.toLowerCase().includes(search) ||
+          board.description.toLowerCase().includes(search)
+      );
+  });
+
+  isFetching = computed(() => {
+    return this.boardService.isFetching() || this.taskService.isFetching();
+  });
 
   links = computed<BreadCrumbItem[]>(() => [
     {
