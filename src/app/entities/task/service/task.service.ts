@@ -17,12 +17,6 @@ export class TaskService {
 
   tasks = signal<Task[]>([]);
 
-  openedTask = signal<Nullable<Task>>(null);
-
-  openTask(taskId: string) {
-    this.openedTask.set(this.tasks().find((t) => t.id === taskId) ?? null);
-  }
-
   getAll(queries: TaskQueries = {}) {
     this.isFetching.set(true);
 
@@ -48,7 +42,6 @@ export class TaskService {
   update(body: TaskDto) {
     return this.http.patch<Task>(API.task, body).pipe(
       tap((task) => {
-        this.openedTask.set(null);
         this.tasks.update((tasks) => tasks.map((t) => (t.id === task.id ? task : t)));
       })
     );
@@ -58,7 +51,6 @@ export class TaskService {
     return this.http.delete(`${API.task}/${id}`).pipe(
       tap(() => {
         this.tasks.update((tasks) => tasks.filter((t) => t.id !== id));
-        this.openedTask.set(null);
       })
     );
   }
