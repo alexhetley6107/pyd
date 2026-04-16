@@ -7,13 +7,12 @@
   height: calc(100svh - 80px - 24px - 74px);
   max-height: calc(100svh - 80px - 24px - 74px);
 
-  width: calc(100vw - var(--menu-close-width) - 2 * var(--page-padding));
-
   position: relative;
   border-radius: var(--radius-5);
   border: 1px solid var(--gray-color);
   overflow: scroll;
 
+  width: calc(100vw - var(--menu-close-width) - 2 * var(--page-padding));
   &.menu-opened {
     width: calc(100vw - var(--menu-open-width) - 2 * var(--page-padding));
   }
@@ -40,7 +39,6 @@
 
   .container {
     display: flex;
-    overflow: scroll;
     width: fit-content;
     align-items: stretch;
     height: 100%;
@@ -67,4 +65,8 @@
 }
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.padding {
+  padding: 10px;
 }
