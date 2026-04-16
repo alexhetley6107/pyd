@@ -1,3 +1,7 @@
+:host {
+  overflow: visible;
+}
+
 .wrapper {
   box-shadow: var(--shadow);
   border-radius: 6px;
@@ -26,11 +30,11 @@
     }
 
     &.high {
-      background-color: rgba(244, 67, 54, 0.4); /* red */
+      background-color: rgba(246, 44, 30, 0.588); /* red */
     }
 
     &.urgent {
-      background-color: rgba(211, 47, 47, 0.4); /* dark red */
+      background-color: rgba(31, 3, 3, 0.686); /* dark red */
     }
 
     &.low,

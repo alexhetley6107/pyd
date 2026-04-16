@@ -4,7 +4,7 @@ export type Task = {
   id: string;
   title: string;
   description: string;
-  priority: string;
+  priority: EPriority;
   date: Nullable<string>;
   boardId: Nullable<string>;
   status: string;
@@ -21,9 +21,27 @@ export type TaskQueries = {
   priority?: string;
 };
 
-export const TaskPriorities = ['low', 'medium', 'high', 'urgent'] as const;
+export enum EStatus {
+  TODO = 'todo',
+  BLOCKED = 'blocked',
+  PREPARING = 'preparing',
+  IN_PROGRESS = 'in-progress',
+  DONE = 'done',
+}
 
-export const mediumPriority = 'medium';
+export const TaskStatuses = [
+  EStatus.TODO,
+  EStatus.BLOCKED,
+  EStatus.PREPARING,
+  EStatus.IN_PROGRESS,
+  EStatus.DONE,
+];
 
-export const TaskStatuses = ['todo', 'blocked', 'preparing', 'in-progress', 'done'] as const;
-export const toDoStatus = 'todo';
+export enum EPriority {
+  LOW = 'low',
+  MEDIUM = 'medium',
+  HIGH = 'high',
+  URGENT = 'urgent',
+}
+
+export const TaskPriorities = [EPriority.LOW, EPriority.MEDIUM, EPriority.HIGH, EPriority.URGENT];

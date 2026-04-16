@@ -3,13 +3,7 @@ import { InputComponent } from '@/shared/ui/input/input.component';
 import { TextareaComponent } from '@/shared/ui/textarea/textarea.component';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import {
-  mediumPriority,
-  TaskDto,
-  TaskPriorities,
-  TaskStatuses,
-  toDoStatus,
-} from '@/entities/task/model';
+import { EPriority, EStatus, TaskDto, TaskPriorities, TaskStatuses } from '@/entities/task/model';
 import { Nullable, SelectOption } from '@/shared/types';
 import { getError } from '@/shared/helpers/formErrors';
 import { BoardService } from '@/entities/board/service/board.service';
@@ -44,8 +38,8 @@ export class TaskFormComponent {
   title = input<string>('');
   description = input<string>('');
   boardId = input<Nullable<string>>(null);
-  status = input<string>(toDoStatus);
-  priority = input<string>(mediumPriority);
+  status = input<string>(EStatus.TODO);
+  priority = input<string>(EPriority.MEDIUM);
 
   form = this.fb.group({
     title: this.fb.control('', [Validators.required]),

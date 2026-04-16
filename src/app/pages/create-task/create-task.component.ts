@@ -9,7 +9,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Board } from '@/entities/board/model';
 import { TaskFormComponent } from '@/features/task-form/task-form.component';
 import { TaskService } from '@/entities/task/service/task.service';
-import { TaskDto, toDoStatus } from '@/entities/task/model';
+import { EStatus, TaskDto } from '@/entities/task/model';
 
 @Component({
   selector: 'create-task',
@@ -30,7 +30,7 @@ export class CreateTaskComponent {
   private queryParams = toSignal(this.route.queryParams);
 
   boardId = computed(() => this.queryParams()?.['boardId'] ?? null);
-  status = computed(() => this.queryParams()?.['status'] ?? toDoStatus);
+  status = computed(() => this.queryParams()?.['status'] ?? EStatus.TODO);
 
   currentBoard = computed<Nullable<Board>>(() => {
     const id = this.boardId();
