@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, EventEmitter, HostBinding, inject, Input, Output } from '@angular/core';
-import { Task } from '../../model';
+import { EStatus, Task } from '../../model';
 import { Nullable } from '@/shared/types';
 
 @Component({
@@ -19,6 +19,6 @@ export class TaskItemComponent {
   }
 
   get isDone() {
-    return this.task?.status === 'done';
+    return this.task?.status === EStatus.DONE;
   }
 }

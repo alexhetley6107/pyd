@@ -4,11 +4,12 @@ export type Task = {
   id: string;
   title: string;
   description: string;
+  status: string;
   priority: EPriority;
   date: Nullable<string>;
   boardId: Nullable<string>;
-  status: string;
   userId: string;
+  order: number;
 };
 
 export type TaskDto = Partial<Task>;

@@ -1,11 +1,11 @@
 import { SideMenuService } from '@/shared/services/side-menu.service';
 import { TaskService } from '@/entities/task/service/task.service';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
-import { Component, computed, effect, HostBinding, inject, input } from '@angular/core';
+import { Component, computed, HostBinding, inject, input } from '@angular/core';
 import { TaskItemComponent } from '@/entities/task/ui/task-item/task-item.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Task, TaskStatuses } from '@/entities/task/model';
-import { BoardColumnHeaderComponent } from './board-column-header/board-column-header.component';
+import { EStatus, Task, TaskStatuses } from '@/entities/task/model';
+import { BoardColumnHeaderComponent } from './ui/board-column-header/board-column-header.component';
 import {
   CdkDrag,
   CdkDragDrop,
@@ -15,8 +15,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { ToastService } from '@/shared/services/toast.service';
-type Column = { name: string; taskIds: string[] };
-type TaskMap = Record<string, Task>;
+import { getNewOrder } from './utils';
 
 @Component({
   selector: 'board-columns',
@@ -65,19 +64,18 @@ export class BoardColumnsComponent {
       {} as Record<string, Task[]>
     );
 
-    this.tasks().forEach((task) => {
-      res[task.status].push(task);
-    });
+    [...this.tasks()]
+      .sort((a, b) => a.order - b.order)
+      .forEach((task) => {
+        res[task.status].push(task);
+      });
 
     return res;
   });
 
   onTaskDrop(event: CdkDragDrop<Task[]>) {
-    const item = event.item.data;
-
-    const status = event.container.id;
-
-    console.log(status);
+    const task = event.item.data as Task;
+    const newStatus = event.container.id as EStatus;
 
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -90,7 +88,15 @@ export class BoardColumnsComponent {
       );
     }
 
-    const dto = { id: item.id, status };
+    const container = event.container.data;
+
+    const prev = container[event.currentIndex - 1];
+    const next = container[event.currentIndex + 1];
+
+    const newOrder = getNewOrder(prev, next);
+
+    const dto = { id: task.id, status: newStatus, order: newOrder };
+
     this.taskService.update(dto).subscribe({
       error: () => {
         this.toast.error('Failed to update task');
