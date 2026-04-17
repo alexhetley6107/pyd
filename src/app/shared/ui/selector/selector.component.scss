@@ -68,6 +68,8 @@
 }
 
 .options-list {
+  background-color: var(--white-color);
+
   box-sizing: border-box;
   position: absolute;
   top: calc(100% + 5px);

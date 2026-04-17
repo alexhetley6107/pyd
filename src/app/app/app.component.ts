@@ -1,4 +1,5 @@
 import { ToastProviderComponent } from '@/features/toast-provider/toast-provider.component';
+import { registerIcons } from '@/shared/ui/icon/model/registerIcons';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
@@ -8,4 +9,8 @@ import { RouterOutlet } from '@angular/router';
   imports: [FormsModule, ReactiveFormsModule, ToastProviderComponent, RouterOutlet],
   templateUrl: './app.component.html',
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor() {
+    registerIcons();
+  }
+}

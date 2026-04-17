@@ -10,24 +10,25 @@
   <nav class="links" (click)="onLinkClick()">
     <ul>
       @for (l of links; track l.path) {
-      <li
-        [ngClass]="{
-        only_mobile: l.onlyMobile,
-      }"
-      >
-        <a [routerLink]="l.path" routerLinkActive="active" #rla="routerLinkActive">
-          <img [src]="'svg/' + l.icon + (rla.isActive ? 'red' : 'blue') + '.svg'" alt="" />
-          <span [class.active]="rla.isActive">
-            {{ l.title }}
-          </span>
-        </a>
-      </li>
+        <li
+          [ngClass]="{
+            only_mobile: l.onlyMobile,
+          }"
+        >
+          <a [routerLink]="l.path" routerLinkActive="active" #rla="routerLinkActive">
+            <ui-icon [name]="l.icon" [size]="32" [color]="getIconColor(rla.isActive)" />
+
+            <span [class.active]="rla.isActive">
+              {{ l.title }}
+            </span>
+          </a>
+        </li>
       }
     </ul>
   </nav>
 
   <button class="collapse_btn" (click)="toggleMenu()">
-    <img src="/svg/chevron_left.svg" alt="" />
+    <ui-icon name="chevron-left" [size]="32" />
   </button>
 
   <button class="logout" (click)="logout()">Log Out</button>

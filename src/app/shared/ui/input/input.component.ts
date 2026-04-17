@@ -2,6 +2,7 @@ import { Nullable } from '@/shared/types';
 import { CommonModule } from '@angular/common';
 import { booleanAttribute, Component, forwardRef, HostBinding, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { IconComponent } from '../icon/icon.component';
 
 type InputTypeUnion = 'text' | 'email' | 'password';
 type InputSize = 'sm' | 'lg';
@@ -9,7 +10,7 @@ type InputVariant = 'outlined' | 'underlined';
 
 @Component({
   selector: 'ui-input',
-  imports: [CommonModule],
+  imports: [CommonModule, IconComponent],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
   standalone: true,

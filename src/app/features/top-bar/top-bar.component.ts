@@ -6,10 +6,11 @@ import { PopoverComponent } from '@/shared/ui/popover/popover.component';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { IconComponent } from '@/shared/ui/icon/icon.component';
 
 @Component({
   selector: 'top-bar',
-  imports: [PopoverComponent],
+  imports: [PopoverComponent, IconComponent],
   standalone: true,
   templateUrl: './top-bar.component.html',
   styleUrl: './top-bar.component.scss',
