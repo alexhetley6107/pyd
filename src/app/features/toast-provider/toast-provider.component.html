@@ -1,20 +1,19 @@
 <div class="toast-wrapper">
   @for (t of toasts(); track t.id) {
-  <div class="toast" [ngClass]="{ hide: !t.isOpen }">
-    <div class="toast_content">
-      @if (t.type === 'error') {
-      <img class="icon" src="/svg/error.svg" alt="" />
+    <div class="toast" [ngClass]="{ hide: !t.isOpen }">
+      <div class="toast_content">
+        @if (t.type === 'error') {
+          <ui-icon name="error" [size]="36" color="var(--error-color)" />
+        }
+        @if (t.type === 'success') {
+          <ui-icon name="success" [size]="36" color="var(--success-color)" />
+        }
+        <div class="message">
+          {{ t.message }}
+        </div>
 
-      } @if (t.type === 'success') {
-      <img class="icon" src="/svg/success.svg" alt="" />
-
-      }
-      <div class="message">
-        {{ t.message }}
+        <ui-icon name="close" [size]="26" (click)="closeToast(t.id)" />
       </div>
-
-      <img class="close" src="/svg/close.svg" alt="" (click)="closeToast(t.id)" />
     </div>
-  </div>
   }
 </div>

@@ -12,6 +12,7 @@ import {
   booleanAttribute,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { IconComponent } from '../icon/icon.component';
 
 type SelectorSize = 'sm' | 'lg';
 
@@ -27,7 +28,7 @@ type SelectorSize = 'sm' | 'lg';
       multi: true,
     },
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, IconComponent],
 })
 export class SelectorComponent implements ControlValueAccessor {
   @Input() placeholder = 'Select...';

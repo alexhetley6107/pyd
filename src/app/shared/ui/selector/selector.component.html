@@ -11,7 +11,7 @@
   <div class="selected-value" [class.placeholder]="!value">
     {{ selectedLabel || placeholder }}
   </div>
-  <img src="/svg/chevron-left.svg" class="arrow" [class.open]="open" />
+  <ui-icon name="chevron-left" [size]="size === 'sm' ? 20 : 28" [class.open]="open" class="arrow" />
 
   @if (open) {
     <ul class="options-list" role="listbox">
