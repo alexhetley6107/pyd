@@ -18,7 +18,8 @@
     margin-bottom: 0;
     height: 100%;
     resize: none;
-    background-color: var(--white-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
 
     &:focus {
       outline: none;

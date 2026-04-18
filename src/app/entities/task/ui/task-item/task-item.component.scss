@@ -10,7 +10,7 @@
   display: flex;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  background-color: var(--white-color);
+  background-color: var(--bg-color);
 
   @media (hover: hover) {
     &:hover {

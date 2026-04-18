@@ -3,14 +3,16 @@ import { AuthService } from '@/entities/auth/service/auth.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
 import { ActionOption } from '@/shared/types';
 import { PopoverComponent } from '@/shared/ui/popover/popover.component';
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { IconComponent } from '@/shared/ui/icon/icon.component';
+import { ThemeService } from '@/shared/services/theme.service';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'top-bar',
-  imports: [PopoverComponent, IconComponent],
+  imports: [PopoverComponent, IconComponent, TitleCasePipe],
   standalone: true,
   templateUrl: './top-bar.component.html',
   styleUrl: './top-bar.component.scss',
@@ -19,6 +21,7 @@ export class TopBarComponent {
   router = inject(Router);
   auth = inject(AuthService);
   menu = inject(SideMenuService);
+  theme = inject(ThemeService);
 
   get letters() {
     const user = this.auth.user();
@@ -31,13 +34,17 @@ export class TopBarComponent {
       .join('');
   }
 
-  menuItems: ActionOption[] = [
+  menuItems = computed<ActionOption[]>(() => [
     {
-      text: 'Setting',
+      text: 'setting',
       action: () => this.router.navigateByUrl(ERoute.SETTING),
     },
     {
-      text: 'Log out',
+      text: this.theme.theme() + ' theme',
+      action: () => this.theme.toggleTheme(),
+    },
+    {
+      text: 'log out',
       action: () =>
         this.auth
           .logout()
@@ -48,7 +55,7 @@ export class TopBarComponent {
           )
           .subscribe(),
     },
-  ];
+  ]);
 
   toggleMenu() {
     this.menu.toggleMenu();

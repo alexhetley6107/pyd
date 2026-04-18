@@ -10,5 +10,5 @@ import { MatIconModule } from '@angular/material/icon';
 export class IconComponent {
   name = input.required<string>();
   size = input(20);
-  color = input();
+  color = input('var(--text-color)');
 }

@@ -1,6 +1,7 @@
 import { ToastProviderComponent } from '@/features/toast-provider/toast-provider.component';
+import { ThemeService } from '@/shared/services/theme.service';
 import { registerIcons } from '@/shared/ui/icon/model/registerIcons';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 
@@ -10,7 +11,10 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
+  theme = inject(ThemeService);
+
   constructor() {
     registerIcons();
+    this.theme.initTheme();
   }
 }

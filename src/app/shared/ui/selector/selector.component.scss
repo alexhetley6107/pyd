@@ -13,7 +13,7 @@
 
   border: 2px solid var(--gray-color);
   border-radius: 6px;
-  background-color: var(--white-color);
+  background-color: var(--bg-color);
   cursor: pointer;
   user-select: none;
   outline: none;
@@ -68,7 +68,7 @@
 }
 
 .options-list {
-  background-color: var(--white-color);
+  background-color: var(--bg-color);
 
   box-sizing: border-box;
   position: absolute;
@@ -81,7 +81,7 @@
 
   border-radius: 6px;
   z-index: 10;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -94,10 +94,10 @@
   text-transform: capitalize;
 
   &:hover {
-    background-color: #f0f8ff;
+    color: var(--prime-color);
   }
 
   &.selected {
-    background-color: #e4dfdf;
+    color: var(--prime-color);
   }
 }

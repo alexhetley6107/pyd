@@ -9,7 +9,7 @@
 .button {
   padding: 10px 20px;
   background-color: var(--prime-color);
-  color: var(--white-color);
+  color: var(--bg-color);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -26,7 +26,7 @@
 
   &.filled {
     background-color: var(--prime-color);
-    color: var(--white-color);
+    color: var(--bg-color);
   }
   &.filled .load {
     background-color: var(--prime-color);
@@ -34,10 +34,10 @@
 
   &.outlined {
     color: var(--prime-color);
-    background-color: var(--white-color);
+    background-color: var(--bg-color);
   }
   &.outlined {
-    background-color: var(--white-color);
+    background-color: var(--bg-color);
   }
 
   &.disabled {

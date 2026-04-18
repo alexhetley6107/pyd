@@ -1,13 +1,14 @@
 <div class="topbar">
   <div class="right-icons">
     <ui-icon name="notification" [size]="32" />
+
     <ui-popover>
       <div class="circle" popover-anchor>{{ letters }}</div>
 
       <div popover-content>
         <div class="menu_items">
-          @for (m of menuItems; track m.text) {
-            <div class="menu_item" (click)="m.action()">{{ m.text }}</div>
+          @for (m of menuItems(); track m.text) {
+            <div class="menu_item" (click)="m.action()">{{ m.text | titlecase }}</div>
           }
         </div>
       </div>

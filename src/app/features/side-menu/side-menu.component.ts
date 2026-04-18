@@ -42,7 +42,7 @@ export class SideMenuComponent {
   }
 
   getIconColor(active: boolean) {
-    return active ? 'var(--prime-color)' : 'var(--blue-color)';
+    return active ? 'var(--prime-color)' : 'var(--text-color)';
   }
 
   links = [

@@ -8,15 +8,15 @@
   background-color: transparent;
 
   &.filled {
-    border: 4px solid var(--white-color);
+    border: 4px solid var(--bg-color);
     border-top: 4px solid var(--prime-color);
     border-left: 4px solid var(--prime-color);
   }
 
   &.outlined {
     border: 4px solid var(--prime-color);
-    border-top: 4px solid var(--white-color);
-    border-left: 4px solid var(--white-color);
+    border-top: 4px solid var(--bg-color);
+    border-left: 4px solid var(--bg-color);
   }
 }
 
