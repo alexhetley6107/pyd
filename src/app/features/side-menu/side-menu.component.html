@@ -19,7 +19,7 @@
             <ui-icon [name]="l.icon" [size]="32" [color]="getIconColor(rla.isActive)" />
 
             <span [class.active]="rla.isActive">
-              {{ l.title }}
+              {{ l.title | titlecase }}
             </span>
           </a>
         </li>

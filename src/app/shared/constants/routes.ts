@@ -17,5 +17,5 @@ export enum ERoute {
   BACKLOG = 'backlog',
   BACKLOG_TASK_VIEW = 'backlog/:taskId',
 
-  SETTING = 'setting',
+  PROFILE = 'profile',
 }

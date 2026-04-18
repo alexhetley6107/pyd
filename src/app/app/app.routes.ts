@@ -7,7 +7,6 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { BacklogComponent } from '@/pages/backlog/backlog.component';
 import { NotFoundComponent } from '@/pages/not-found/not-found.component';
 import { PrivateGuard } from '@/app/guards/private.guard';
-import { SettingComponent } from '@/pages/setting/setting.component';
 import { ResetPasswordComponent } from '@/pages/reset-password/reset-password.component';
 import { BoardsComponent } from '@/pages/boards/boards.component';
 import { CreateBoardComponent } from '@/pages/create-board/create-board.component';
@@ -19,6 +18,7 @@ import { DashboardComponent } from '@/pages/dashboard/dashboard.component';
 import { BoardViewComponent } from '@/pages/board-view/board-view.component';
 import { BoardDetailsComponent } from '@/pages/board-details/board-details.component';
 import { TaskViewComponent } from '@/pages/task-view/task-view.component';
+import { ProfileComponent } from '@/pages/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -51,7 +51,7 @@ export const routes: Routes = [
       { path: ERoute.TASK_VIEW, component: TaskViewComponent },
       { path: ERoute.BACKLOG, component: BacklogComponent },
       { path: ERoute.BACKLOG_TASK_VIEW, component: TaskViewComponent },
-      { path: ERoute.SETTING, component: SettingComponent },
+      { path: ERoute.PROFILE, component: ProfileComponent },
     ],
   },
   { path: '**', component: NotFoundComponent },

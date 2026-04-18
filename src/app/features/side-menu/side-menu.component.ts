@@ -3,7 +3,7 @@ import { ERoute } from '@/shared/constants/routes';
 import { AuthService } from '@/entities/auth/service/auth.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
 import { LogoComponent } from '@/shared/ui/logo/logo.component';
-import { NgClass } from '@angular/common';
+import { NgClass, TitleCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { tap } from 'rxjs';
@@ -11,7 +11,7 @@ import { IconComponent } from '@/shared/ui/icon/icon.component';
 
 @Component({
   selector: 'side-menu',
-  imports: [RouterLink, LogoComponent, NgClass, RouterLinkActive, IconComponent],
+  imports: [RouterLink, LogoComponent, NgClass, RouterLinkActive, IconComponent, TitleCasePipe],
   templateUrl: './side-menu.component.html',
   styleUrl: './side-menu.component.scss',
   standalone: true,
@@ -46,10 +46,10 @@ export class SideMenuComponent {
   }
 
   links = [
-    { title: 'Dashboard', path: ERoute.DASHBOARD, icon: 'agile' },
-    { title: 'Boards', path: ERoute.BOARDS, icon: 'backlog' },
-    { title: 'Backlog', path: ERoute.BACKLOG, icon: 'backlog' },
-    { title: 'Setting', path: ERoute.SETTING, icon: 'dashboard', onlyMobile: true },
+    { title: 'dashboard', path: ERoute.DASHBOARD, icon: 'dashboard' },
+    { title: 'boards', path: ERoute.BOARDS, icon: 'agile' },
+    { title: 'backlog', path: ERoute.BACKLOG, icon: 'backlog' },
+    { title: 'profile', path: ERoute.PROFILE, icon: 'agile', onlyMobile: true },
   ];
 
   logout() {

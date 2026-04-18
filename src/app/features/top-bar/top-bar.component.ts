@@ -36,8 +36,8 @@ export class TopBarComponent {
 
   menuItems = computed<ActionOption[]>(() => [
     {
-      text: 'setting',
-      action: () => this.router.navigateByUrl(ERoute.SETTING),
+      text: 'profile',
+      action: () => this.router.navigateByUrl(ERoute.PROFILE),
     },
     {
       text: this.theme.theme() + ' theme',
