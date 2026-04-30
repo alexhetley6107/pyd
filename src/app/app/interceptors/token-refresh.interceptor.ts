@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, filter, switchMap, take, throwError, Subject } from 'rxjs';
 
-import { AuthService } from '@/entities/auth/service/auth.service';
+import { AuthService } from '@/entities/user/service/auth.service';
 import { API } from '@/shared/constants/api';
 import { ERoute } from '@/shared/constants/routes';
 

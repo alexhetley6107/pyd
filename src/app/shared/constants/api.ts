@@ -14,4 +14,6 @@ export const API = {
   board: `${URL}/board`,
   status: `${URL}/status`,
   task: `${URL}/task`,
+
+  upload: `${URL}/user/upload-photo`,
 };

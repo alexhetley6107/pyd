@@ -1,0 +1,13 @@
+<div class="upload">
+  <label class="upload-box">
+    <input type="file" (change)="onFileChange($event)" hidden />
+
+    @if (preview()) {
+      <img [src]="preview()" alt="preview" />
+    } @else {
+      <span>Upload photo</span>
+    }
+  </label>
+</div>
+
+<ui-button class="button" [loading]="loading()" (click)="upload()">Save</ui-button>

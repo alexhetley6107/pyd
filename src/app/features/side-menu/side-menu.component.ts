@@ -1,6 +1,6 @@
 import { MOBILE_WIDTH } from '@/shared/constants';
 import { ERoute } from '@/shared/constants/routes';
-import { AuthService } from '@/entities/auth/service/auth.service';
+import { AuthService } from '@/entities/user/service/auth.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
 import { LogoComponent } from '@/shared/ui/logo/logo.component';
 import { NgClass, TitleCasePipe } from '@angular/common';

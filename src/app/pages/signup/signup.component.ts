@@ -11,7 +11,7 @@ import {
 } from '@angular/forms';
 import { getError } from '@/shared/helpers/formErrors';
 import { matchPasswords, passwordStrengthValidator } from '@/shared/helpers/matchPasswords';
-import { AuthService } from '@/entities/auth/service/auth.service';
+import { AuthService } from '@/entities/user/service/auth.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { ERoute } from '@/shared/constants/routes';
 import { Nullable } from '@/shared/types';

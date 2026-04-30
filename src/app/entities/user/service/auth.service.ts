@@ -50,4 +50,12 @@ export class AuthService {
   logout() {
     return this.http.post(API.logout, {}).pipe(tap(() => this.user.set(null)));
   }
+
+  upload(formData: FormData) {
+    return this.http.post(API.upload, formData).pipe(
+      tap((res) => {
+        console.log({ res });
+      })
+    );
+  }
 }
