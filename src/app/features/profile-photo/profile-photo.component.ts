@@ -1,7 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, effect, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { ToastService } from '@/shared/services/toast.service';
 import { UserService } from '@/entities/user/service/user.service';
+import { Nullable } from '@/shared/types';
 
 @Component({
   selector: 'profile-photo',
@@ -14,10 +15,24 @@ export class ProfilePhotoComponent {
   toast = inject(ToastService);
   user = inject(UserService);
 
-  preview = signal<string | null>(null);
+  preview = signal<Nullable<string>>(null);
   loading = signal(false);
 
-  private file: File | null = null;
+  private file: Nullable<File> = null;
+
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+
+  constructor() {
+    effect(() => {
+      this.preview.set(this.user.user()?.photo ?? null);
+    });
+  }
+
+  isOriginalImage = computed(() => this.preview() === this.user.user()?.photo);
+
+  openFilePicker() {
+    this.fileInput.nativeElement.click();
+  }
 
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;

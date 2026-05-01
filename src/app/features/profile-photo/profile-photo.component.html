@@ -1,6 +1,6 @@
 <div class="upload">
   <label class="upload-box">
-    <input type="file" (change)="onFileChange($event)" hidden />
+    <input #fileInput type="file" (change)="onFileChange($event)" hidden />
 
     @if (preview()) {
       <img [src]="preview()" alt="preview" />
@@ -10,4 +10,8 @@
   </label>
 </div>
 
-<ui-button class="button" [loading]="loading()" (click)="upload()">Save</ui-button>
+@if (isOriginalImage()) {
+  <ui-button variant="outlined" (click)="openFilePicker()">Update</ui-button>
+} @else {
+  <ui-button [loading]="loading()" (click)="upload()">Save</ui-button>
+}
