@@ -1,8 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { AuthService } from '@/entities/user/service/auth.service';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { ToastService } from '@/shared/services/toast.service';
+import { UserService } from '@/entities/user/service/user.service';
 
 @Component({
   selector: 'profile-photo',
@@ -13,13 +12,12 @@ import { ToastService } from '@/shared/services/toast.service';
 })
 export class ProfilePhotoComponent {
   toast = inject(ToastService);
+  user = inject(UserService);
 
   preview = signal<string | null>(null);
   loading = signal(false);
 
   private file: File | null = null;
-
-  user = inject(AuthService);
 
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -54,8 +52,8 @@ export class ProfilePhotoComponent {
     formData.append('file', this.file);
 
     this.loading.set(true);
-    this.user.upload(formData).subscribe({
-      next: (res) => {
+    this.user.uploadPhoto(formData).subscribe({
+      next: () => {
         this.loading.set(false);
         this.toast.success('Upload successful');
       },

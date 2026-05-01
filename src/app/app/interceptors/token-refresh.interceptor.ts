@@ -12,6 +12,7 @@ let refreshSubject = new Subject<boolean>();
 
 export const authRefreshInterceptor: HttpInterceptorFn = (req, next) => {
   const auth = inject(AuthService);
+
   const router = inject(Router);
 
   const isRefreshReq = req.url.includes(API.refresh);
@@ -24,7 +25,7 @@ export const authRefreshInterceptor: HttpInterceptorFn = (req, next) => {
       }
 
       if (isRefreshReq || isLogoutReq) {
-        auth.user.set(null);
+        auth.setUser(null);
         router.navigateByUrl(ERoute.LOGIN);
         return throwError(() => error);
       }
@@ -55,7 +56,7 @@ export const authRefreshInterceptor: HttpInterceptorFn = (req, next) => {
           refreshSubject.next(false);
           refreshSubject.complete();
 
-          auth.user.set(null);
+          auth.setUser(null);
           router.navigateByUrl(ERoute.LOGIN);
 
           return throwError(() => refreshError);

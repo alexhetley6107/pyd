@@ -5,20 +5,25 @@ import { of } from 'rxjs';
 import { User } from '../model';
 import { API } from '@/shared/constants/api';
 import { Nullable } from '@/shared/types';
+import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly http = inject(HttpClient);
+  private readonly userService = inject(UserService);
 
   readonly isGettingMe = signal(true);
-  readonly user = signal<Nullable<User>>(null);
-  readonly isLoggedIn = computed(() => this.user() !== null);
+  readonly isLoggedIn = computed(() => this.userService.user() !== null);
+
+  setUser(user: Nullable<User>) {
+    this.userService.user.set(user);
+  }
 
   getMe() {
     return this.http.get<Nullable<User>>(API.me).pipe(
-      tap((user) => this.user.set(user)),
+      tap((user) => this.setUser(user)),
       catchError(() => {
-        this.user.set(null);
+        this.setUser(null);
         return of(null);
       }),
       finalize(() => this.isGettingMe.set(false))
@@ -26,13 +31,13 @@ export class AuthService {
   }
 
   login(body: { login: string; password: string }) {
-    return this.http.post<User>(API.login, body).pipe(tap((user) => this.user.set(user)));
+    return this.http.post<User>(API.login, body).pipe(tap((user) => this.setUser(user)));
   }
 
   signup(nickname: string, email: string, password: string) {
     return this.http
       .post<User>(API.signup, { nickname, email, password })
-      .pipe(tap((user) => this.user.set(user)));
+      .pipe(tap((user) => this.setUser(user)));
   }
 
   forgotPassword(email: string) {
@@ -48,14 +53,6 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.post(API.logout, {}).pipe(tap(() => this.user.set(null)));
-  }
-
-  upload(formData: FormData) {
-    return this.http.post(API.upload, formData).pipe(
-      tap((res) => {
-        console.log({ res });
-      })
-    );
+    return this.http.post(API.logout, {}).pipe(tap(() => this.setUser(null)));
   }
 }

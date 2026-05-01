@@ -9,6 +9,7 @@ import { tap } from 'rxjs';
 import { IconComponent } from '@/shared/ui/icon/icon.component';
 import { ThemeService } from '@/shared/services/theme.service';
 import { TitleCasePipe } from '@angular/common';
+import { UserService } from '@/entities/user/service/user.service';
 
 @Component({
   selector: 'top-bar',
@@ -22,9 +23,10 @@ export class TopBarComponent {
   auth = inject(AuthService);
   menu = inject(SideMenuService);
   theme = inject(ThemeService);
+  user = inject(UserService);
 
   get letters() {
-    const user = this.auth.user();
+    const user = this.user.user();
 
     if (!user) return 'U';
 
