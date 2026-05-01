@@ -25,16 +25,18 @@ export class TopBarComponent {
   theme = inject(ThemeService);
   user = inject(UserService);
 
-  get letters() {
-    const user = this.user.user();
-
-    if (!user) return 'U';
-
-    return user?.nickname
-      .split(' ')
+  letters = computed(() => {
+    return this.user
+      .user()
+      ?.nickname.split(' ')
       .map((name) => name[0].toLocaleUpperCase())
       .join('');
-  }
+  });
+
+  avatar = computed(() => {
+    const path = this.user.user()?.photo || '';
+    return path;
+  });
 
   menuItems = computed<ActionOption[]>(() => [
     {

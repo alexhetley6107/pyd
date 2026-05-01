@@ -3,7 +3,13 @@
     <ui-icon name="notification" [size]="32" />
 
     <ui-popover>
-      <div class="circle" popover-anchor>{{ letters }}</div>
+      <div class="circle" popover-anchor>
+        @if (avatar()) {
+          <img [src]="avatar()" alt="avatar" />
+        } @else {
+          {{ letters() }}
+        }
+      </div>
 
       <div popover-content>
         <div class="menu_items">
