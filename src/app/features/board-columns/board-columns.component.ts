@@ -52,7 +52,7 @@ export class BoardColumnsComponent {
 
   @HostBinding('class.menu-opened')
   get menuOpened(): boolean {
-    return this.menu.isOpen;
+    return this.menu.isOpen();
   }
 
   openTask(taskId: string) {

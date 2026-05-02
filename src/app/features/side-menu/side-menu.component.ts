@@ -22,7 +22,7 @@ export class SideMenuComponent {
   router = inject(Router);
 
   get isCollapsed() {
-    return !this.menu.isOpen;
+    return !this.menu.isOpen();
   }
 
   toggleMenu() {
