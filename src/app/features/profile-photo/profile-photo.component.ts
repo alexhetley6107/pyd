@@ -1,4 +1,13 @@
-import { Component, computed, effect, ElementRef, inject, signal, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { ToastService } from '@/shared/services/toast.service';
 import { UserService } from '@/entities/user/service/user.service';
@@ -10,6 +19,7 @@ import { Nullable } from '@/shared/types';
   imports: [ButtonComponent],
   templateUrl: './profile-photo.component.html',
   styleUrl: './profile-photo.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfilePhotoComponent {
   toast = inject(ToastService);
@@ -20,7 +30,7 @@ export class ProfilePhotoComponent {
 
   private file: Nullable<File> = null;
 
-  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInput');
 
   constructor() {
     effect(() => {
@@ -31,7 +41,7 @@ export class ProfilePhotoComponent {
   isOriginalImage = computed(() => this.preview() === this.user.user()?.photo);
 
   openFilePicker() {
-    this.fileInput.nativeElement.click();
+    this.fileInput()?.nativeElement.click();
   }
 
   onFileChange(event: Event) {

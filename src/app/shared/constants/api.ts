@@ -1,4 +1,4 @@
-import { ENV } from '@/app/environments/environment';
+import { ENV } from '../../../environments/environment';
 
 const URL = ENV.API_URL;
 

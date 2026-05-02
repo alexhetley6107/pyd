@@ -4,7 +4,7 @@ import { AuthService } from '@/entities/user/service/auth.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
 import { LogoComponent } from '@/shared/ui/logo/logo.component';
 import { NgClass, TitleCasePipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { tap } from 'rxjs';
 import { IconComponent } from '@/shared/ui/icon/icon.component';
@@ -14,7 +14,7 @@ import { IconComponent } from '@/shared/ui/icon/icon.component';
   imports: [RouterLink, LogoComponent, NgClass, RouterLinkActive, IconComponent, TitleCasePipe],
   templateUrl: './side-menu.component.html',
   styleUrl: './side-menu.component.scss',
-  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SideMenuComponent {
   auth = inject(AuthService);

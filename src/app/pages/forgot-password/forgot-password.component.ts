@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { Router, RouterLink } from '@angular/router';
@@ -18,7 +18,7 @@ import { Nullable } from '@/shared/types';
   selector: 'page-forgot-password',
   imports: [ButtonComponent, RouterLink, InputComponent, ReactiveFormsModule],
   templateUrl: './forgot-password.component.html',
-  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotPasswordComponent {
   router = inject(Router);

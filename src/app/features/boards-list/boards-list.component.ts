@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
 import { ListContainerComponent } from '@/shared/ui/list-container/list-container.component';
 import { BoardService } from '@/entities/board/service/board.service';
@@ -20,6 +20,7 @@ import { debounceTime } from 'rxjs';
   ],
   templateUrl: './boards-list.component.html',
   styleUrl: './boards-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardsListComponent {
   boardService = inject(BoardService);

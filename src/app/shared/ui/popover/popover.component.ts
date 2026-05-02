@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener, Input, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnDestroy,
+} from '@angular/core';
 
 type PopoverType = 'popover' | 'select' | 'tooltip';
 
@@ -9,6 +16,7 @@ type PopoverType = 'popover' | 'select' | 'tooltip';
   imports: [CommonModule],
   templateUrl: './popover.component.html',
   styleUrls: ['./popover.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopoverComponent implements OnDestroy {
   @Input() type: PopoverType = 'popover';

@@ -1,4 +1,11 @@
-import { booleanAttribute, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { ButtonComponent } from '../button/button.component';
 
@@ -7,6 +14,7 @@ import { ButtonComponent } from '../button/button.component';
   imports: [ModalComponent, ButtonComponent],
   templateUrl: './confirm-modal.component.html',
   styleUrl: './confirm-modal.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmModalComponent {
   @Input({ transform: booleanAttribute }) open: boolean = false;

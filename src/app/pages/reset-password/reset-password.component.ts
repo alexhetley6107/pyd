@@ -5,7 +5,7 @@ import { AuthService } from '@/entities/user/service/auth.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { InputComponent } from '@/shared/ui/input/input.component';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -19,8 +19,8 @@ import { Nullable } from '@/shared/types';
 @Component({
   selector: 'app-reset-password',
   imports: [ButtonComponent, RouterLink, InputComponent, ReactiveFormsModule],
-
   templateUrl: './reset-password.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResetPasswordComponent {
   router = inject(Router);

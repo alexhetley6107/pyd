@@ -1,7 +1,15 @@
 import { ERoute } from '@/shared/constants/routes';
 import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
-import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.component';
 import { BreadCrumbItem, Nullable } from '@/shared/types';
@@ -27,6 +35,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   ],
   templateUrl: './board-view.component.html',
   styleUrl: './board-view.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardViewComponent {
   router = inject(Router);

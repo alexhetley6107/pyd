@@ -1,7 +1,7 @@
 import { TaskItemComponent } from '@/entities/task/ui/task-item/task-item.component';
 import { TaskService } from '@/entities/task/service/task.service';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ListContainerComponent } from '@/shared/ui/list-container/list-container.component';
 import { BoardService } from '@/entities/board/service/board.service';
 import { Task } from '@/entities/task/model';
@@ -12,7 +12,7 @@ import { ERoute } from '@/shared/constants/routes';
   selector: 'backlog-tasks',
   imports: [SkeletonComponent, TaskItemComponent, ListContainerComponent],
   templateUrl: './backlog-tasks.component.html',
-  styleUrl: './backlog-tasks.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BacklogTasksComponent {
   taskService = inject(TaskService);

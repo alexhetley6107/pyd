@@ -1,4 +1,12 @@
-import { Component, computed, effect, inject, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  output,
+} from '@angular/core';
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { TextareaComponent } from '@/shared/ui/textarea/textarea.component';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
@@ -22,6 +30,7 @@ import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
   ],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskFormComponent {
   fb = inject(FormBuilder);

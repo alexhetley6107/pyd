@@ -1,6 +1,13 @@
 import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
-import { Component, effect, inject, resource, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  resource,
+  signal,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -28,6 +35,7 @@ import { Nullable } from '@/shared/types';
     ReactiveFormsModule,
   ],
   templateUrl: './create-board.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateBoardComponent {
   router = inject(Router);

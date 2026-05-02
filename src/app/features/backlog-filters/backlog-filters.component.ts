@@ -4,7 +4,7 @@ import { SelectOption } from '@/shared/types';
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { SelectorComponent } from '@/shared/ui/selector/selector.component';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -21,6 +21,7 @@ const allOption: SelectOption = { label: 'All variants', value: '' };
   imports: [SelectorComponent, ReactiveFormsModule, SkeletonComponent, InputComponent],
   templateUrl: './backlog-filters.component.html',
   styleUrl: './backlog-filters.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BacklogFiltersComponent {
   boardService = inject(BoardService);

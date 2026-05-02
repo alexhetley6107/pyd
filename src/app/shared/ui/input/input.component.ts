@@ -1,6 +1,13 @@
 import { Nullable } from '@/shared/types';
 import { CommonModule } from '@angular/common';
-import { booleanAttribute, Component, forwardRef, HostBinding, Input } from '@angular/core';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  HostBinding,
+  Input,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IconComponent } from '../icon/icon.component';
 
@@ -13,7 +20,7 @@ type InputVariant = 'outlined' | 'underlined';
   imports: [CommonModule, IconComponent],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
-  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

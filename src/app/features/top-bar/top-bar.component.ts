@@ -3,7 +3,7 @@ import { AuthService } from '@/entities/user/service/auth.service';
 import { SideMenuService } from '@/shared/services/side-menu.service';
 import { ActionOption } from '@/shared/types';
 import { PopoverComponent } from '@/shared/ui/popover/popover.component';
-import { Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { IconComponent } from '@/shared/ui/icon/icon.component';
@@ -14,9 +14,9 @@ import { UserService } from '@/entities/user/service/user.service';
 @Component({
   selector: 'top-bar',
   imports: [PopoverComponent, IconComponent, TitleCasePipe],
-  standalone: true,
   templateUrl: './top-bar.component.html',
   styleUrl: './top-bar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopBarComponent {
   router = inject(Router);

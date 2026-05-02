@@ -1,5 +1,5 @@
 import { AuthService } from '@/entities/user/service/auth.service';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ERoute } from '@/shared/constants/routes';
@@ -11,6 +11,7 @@ import { LogoComponent } from '@/shared/ui/logo/logo.component';
   imports: [LogoComponent],
   templateUrl: './auth-check.component.html',
   styleUrl: './auth-check.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthCheckComponent {
   router = inject(Router);

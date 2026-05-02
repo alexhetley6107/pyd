@@ -1,5 +1,5 @@
 import { BoardService } from '@/entities/board/service/board.service';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { ERoute } from '@/shared/constants/routes';
@@ -12,6 +12,7 @@ import { Board } from '@/entities/board/model';
   imports: [ButtonComponent, BoardsListComponent],
   templateUrl: './boards.component.html',
   styleUrl: './boards.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardsComponent {
   router = inject(Router);

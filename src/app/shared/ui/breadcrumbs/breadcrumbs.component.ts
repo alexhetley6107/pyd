@@ -1,5 +1,5 @@
 import { BreadCrumbItem } from '@/shared/types';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SkeletonComponent } from '../skeleton/skeleton.component';
 
@@ -8,6 +8,7 @@ import { SkeletonComponent } from '../skeleton/skeleton.component';
   imports: [RouterLink, SkeletonComponent],
   templateUrl: './breadcrumbs.component.html',
   styleUrl: './breadcrumbs.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsComponent {
   links = input<BreadCrumbItem[]>([]);

@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, EventEmitter, HostBinding, inject, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { EStatus, Task } from '../../model';
 import { Nullable } from '@/shared/types';
 
@@ -8,6 +8,7 @@ import { Nullable } from '@/shared/types';
   imports: [NgClass],
   templateUrl: './task-item.component.html',
   styleUrl: './task-item.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskItemComponent {
   @Input() task: Nullable<Task> = null;

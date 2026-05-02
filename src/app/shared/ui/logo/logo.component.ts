@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 type SizeUnion = 'sm' | 'md' | 'lg';
 
@@ -8,6 +8,7 @@ type SizeUnion = 'sm' | 'md' | 'lg';
   imports: [NgClass],
   templateUrl: './logo.component.html',
   styleUrl: './logo.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogoComponent {
   @Input() size: SizeUnion = 'md';

@@ -1,10 +1,18 @@
-import { booleanAttribute, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'ui-modal',
   imports: [],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalComponent {
   @Input({ transform: booleanAttribute }) open: boolean = false;

@@ -2,7 +2,15 @@ import { ERoute } from '@/shared/constants/routes';
 import { getError } from '@/shared/helpers/formErrors';
 import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
-import { Component, effect, inject, input, resource, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  input,
+  resource,
+  signal,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -22,6 +30,7 @@ import { Nullable } from '@/shared/types';
   selector: 'board-update-form',
   imports: [InputComponent, TextareaComponent, ButtonComponent, ReactiveFormsModule],
   templateUrl: './board-update-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardUpdateFormComponent {
   router = inject(Router);

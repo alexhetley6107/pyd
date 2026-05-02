@@ -4,6 +4,7 @@ import { ToastService } from '@/shared/services/toast.service';
 import { ConfirmModalComponent } from '@/shared/ui/confirm-modal/confirm-modal.component';
 import {
   booleanAttribute,
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   inject,
@@ -17,6 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'board-delete-modal',
   imports: [ConfirmModalComponent],
   templateUrl: './board-delete-modal.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardDeleteModalComponent {
   boardService = inject(BoardService);

@@ -10,6 +10,7 @@ import {
   ChangeDetectorRef,
   HostBinding,
   booleanAttribute,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IconComponent } from '../icon/icon.component';
@@ -21,6 +22,7 @@ type SelectorSize = 'sm' | 'lg';
   standalone: true,
   templateUrl: './selector.component.html',
   styleUrl: './selector.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

@@ -1,7 +1,14 @@
 import { SideMenuService } from '@/shared/services/side-menu.service';
 import { TaskService } from '@/entities/task/service/task.service';
 import { SkeletonComponent } from '@/shared/ui/skeleton/skeleton.component';
-import { Component, computed, HostBinding, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  HostBinding,
+  inject,
+  input,
+} from '@angular/core';
 import { TaskItemComponent } from '@/entities/task/ui/task-item/task-item.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EStatus, Task, TaskStatuses } from '@/entities/task/model';
@@ -29,6 +36,7 @@ import { getNewOrder } from './utils';
   ],
   templateUrl: './board-columns.component.html',
   styleUrl: './board-columns.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardColumnsComponent {
   menu = inject(SideMenuService);

@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
 import {
   booleanAttribute,
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   HostBinding,
@@ -17,7 +18,7 @@ type ButtonSize = 'sm' | 'md' | 'lg';
   imports: [NgClass],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
-  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
   @Input({ transform: booleanAttribute }) fullWidth: boolean = false;

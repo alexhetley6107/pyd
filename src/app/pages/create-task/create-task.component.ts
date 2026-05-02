@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.component';
 import { ERoute } from '@/shared/constants/routes';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,6 +16,7 @@ import { EStatus, TaskDto } from '@/entities/task/model';
   imports: [BreadcrumbsComponent, TaskFormComponent],
   templateUrl: './create-task.component.html',
   styleUrl: './create-task.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateTaskComponent {
   router = inject(Router);

@@ -1,9 +1,10 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'ui-skeleton',
   templateUrl: './skeleton.component.html',
   styleUrl: './skeleton.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkeletonComponent {
   @Input() @HostBinding('style.border-radius') radius = '5px';

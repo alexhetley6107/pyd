@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Nullable } from '@/shared/types';
@@ -9,6 +9,7 @@ import { Nullable } from '@/shared/types';
   imports: [CommonModule],
   templateUrl: './textarea.component.html',
   styleUrl: './textarea.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

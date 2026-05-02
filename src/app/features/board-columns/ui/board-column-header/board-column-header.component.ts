@@ -1,5 +1,5 @@
 import { ERoute } from '@/shared/constants/routes';
-import { Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [],
   templateUrl: './board-column-header.component.html',
   styleUrl: './board-column-header.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardColumnHeaderComponent {
   route = inject(ActivatedRoute);

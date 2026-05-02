@@ -1,7 +1,7 @@
 import { ToastProviderComponent } from '@/features/toast-provider/toast-provider.component';
 import { ThemeService } from '@/shared/services/theme.service';
 import { registerIcons } from '@/shared/ui/icon/model/registerIcons';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 
@@ -9,6 +9,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   imports: [FormsModule, ReactiveFormsModule, ToastProviderComponent, RouterOutlet],
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   theme = inject(ThemeService);

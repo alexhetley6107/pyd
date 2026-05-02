@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.component';
 import { ERoute } from '@/shared/constants/routes';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,6 +23,7 @@ import { Board } from '@/entities/board/model';
     SkeletonComponent,
   ],
   templateUrl: './board-details.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardDetailsComponent {
   router = inject(Router);

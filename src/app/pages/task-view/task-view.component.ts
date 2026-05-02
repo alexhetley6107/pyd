@@ -2,7 +2,14 @@ import { Board } from '@/entities/board/model';
 import { BoardService } from '@/entities/board/service/board.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { BreadCrumbItem, Nullable } from '@/shared/types';
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbsComponent } from '@/shared/ui/breadcrumbs/breadcrumbs.component';
 import { ERoute } from '@/shared/constants/routes';
@@ -16,6 +23,7 @@ import { ButtonComponent } from '@/shared/ui/button/button.component';
   selector: 'task-view',
   imports: [BreadcrumbsComponent, TaskFormComponent, TaskDeleteModalComponent, ButtonComponent],
   templateUrl: './task-view.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskViewComponent {
   router = inject(Router);
