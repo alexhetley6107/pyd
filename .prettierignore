@@ -1,0 +1,9 @@
+node_modules
+apps/*/node_modules
+apps/*/dist
+apps/web/.angular
+apps/web/out-tsc
+apps/server/coverage
+apps/server/uploads
+apps/server/images
+package-lock.json
