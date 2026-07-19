@@ -6,10 +6,10 @@ type Theme = 'light' | 'dark';
   providedIn: 'root',
 })
 export class ThemeService {
-  theme = signal<Theme>('light');
+  theme = signal<Theme>('dark');
 
   initTheme() {
-    const theme = localStorage.getItem('theme') ?? 'light';
+    const theme = localStorage.getItem('theme') ?? 'dark';
     this.setTheme(theme as Theme);
   }
 
