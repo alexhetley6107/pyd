@@ -3,24 +3,24 @@ node_modules
 
 # builds
 dist
-apps/web/.angular
-apps/web/out-tsc
-apps/web/dist
-apps/server/dist
+frontend/.angular
+frontend/out-tsc
+frontend/dist
+backend/dist
 
 # env
 .env
 .development.env
 .production.env
-apps/web/src/environments/environment.ts
+frontend/src/environments/environment.ts
 
 # tests / coverage
 coverage
 .nyc_output
 
 # runtime data
-apps/server/uploads
-apps/server/images
+backend/uploads
+backend/images
 
 # OS / editor
 .DS_Store

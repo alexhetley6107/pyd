@@ -2,16 +2,16 @@
   "name": "pyd",
   "version": "0.0.0",
   "private": true,
-  "workspaces": ["apps/*"],
+  "workspaces": ["frontend", "backend"],
   "scripts": {
-    "dev:web": "npm run dev -w @pyd/web",
-    "dev:server": "npm run dev -w @pyd/server",
-    "dev": "npm run dev:server & npm run dev:web",
-    "build:web": "npm run build -w @pyd/web",
-    "build:server": "npm run build -w @pyd/server",
-    "build": "npm run build:server && npm run build:web",
-    "format": "prettier --write \"apps/*/src/**/*.{ts,html,scss,json}\"",
-    "format:check": "prettier --check \"apps/*/src/**/*.{ts,html,scss,json}\""
+    "dev:frontend": "npm run dev -w @pyd/frontend",
+    "dev:backend": "npm run dev -w @pyd/backend",
+    "dev": "npm run dev:backend & npm run dev:frontend",
+    "build:frontend": "npm run build -w @pyd/frontend",
+    "build:backend": "npm run build -w @pyd/backend",
+    "build": "npm run build:backend && npm run build:frontend",
+    "format": "prettier --write \"{frontend,backend}/src/**/*.{ts,html,scss,json}\"",
+    "format:check": "prettier --check \"{frontend,backend}/src/**/*.{ts,html,scss,json}\""
   },
   "devDependencies": {
     "prettier": "^3.4.2"

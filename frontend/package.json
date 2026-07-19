@@ -1,5 +1,5 @@
 {
-  "name": "@pyd/web",
+  "name": "@pyd/frontend",
   "version": "0.0.0",
   "scripts": {
     "dev": "node set-env.js && ng serve",
