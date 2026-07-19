@@ -1,12 +1,11 @@
 import { Nullable } from '@/shared/types';
-import { CommonModule } from '@angular/common';
 import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   forwardRef,
-  HostBinding,
-  Input,
+  input,
+  signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IconComponent } from '../icon/icon.component';
@@ -17,10 +16,13 @@ type InputVariant = 'outlined' | 'underlined';
 
 @Component({
   selector: 'ui-input',
-  imports: [CommonModule, IconComponent],
+  imports: [IconComponent],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.full_width]': 'fullWidth()',
+  },
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -30,27 +32,26 @@ type InputVariant = 'outlined' | 'underlined';
   ],
 })
 export class InputComponent implements ControlValueAccessor {
-  @Input() type: InputTypeUnion = 'text';
-  @Input() placeholder: string = '';
-  @Input() error: Nullable<string> = null;
-  @Input() size: InputSize = 'lg';
-  @Input({ transform: booleanAttribute }) @HostBinding('class.full_width') fullWidth: boolean =
-    false;
-  @Input() variant: InputVariant = 'outlined';
+  readonly type = input<InputTypeUnion>('text');
+  readonly placeholder = input('');
+  readonly error = input<Nullable<string>>(null);
+  readonly size = input<InputSize>('lg');
+  readonly fullWidth = input(false, { transform: booleanAttribute });
+  readonly variant = input<InputVariant>('outlined');
 
-  isPasswordVisible = false;
-  value: string = '';
+  protected readonly isPasswordVisible = signal(false);
+  protected readonly value = signal('');
 
   togglePassword(event: MouseEvent) {
     event.preventDefault();
-    this.isPasswordVisible = !this.isPasswordVisible;
+    this.isPasswordVisible.update((v) => !v);
   }
 
-  onChange: (value: string) => void = () => {};
-  onTouched: () => void = () => {};
+  private onChange: (value: string) => void = () => {};
+  private onTouched: () => void = () => {};
 
   writeValue(value: string): void {
-    this.value = value || '';
+    this.value.set(value || '');
   }
 
   registerOnChange(fn: any): void {
@@ -63,13 +64,14 @@ export class InputComponent implements ControlValueAccessor {
 
   handleInput(event: Event): void {
     const input = event.target as HTMLInputElement;
-    this.value = input.value;
-    this.onChange(this.value);
+    this.value.set(input.value);
+    this.onChange(input.value);
   }
 
   handleBlur(): void {
-    this.value = this.value.trim();
-    this.onChange(this.value);
+    const trimmed = this.value().trim();
+    this.value.set(trimmed);
+    this.onChange(trimmed);
     this.onTouched();
   }
 }

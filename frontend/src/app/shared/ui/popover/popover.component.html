@@ -1,14 +1,12 @@
 <div (click)="togglePopover()" class="wrapper">
   <ng-content select="[popover-anchor]"></ng-content>
 
-  @if (open) {
+  @if (open()) {
     <div
       class="popover-content"
-      [ngClass]="{
-        popover: type === 'popover',
-        tooltip: type === 'tooltip',
-        select: type === 'select',
-      }"
+      [class.popover]="type() === 'popover'"
+      [class.tooltip]="type() === 'tooltip'"
+      [class.select]="type() === 'select'"
     >
       <ng-content select="[popover-content]"></ng-content>
     </div>

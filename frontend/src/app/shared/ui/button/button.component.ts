@@ -1,12 +1,9 @@
-import { NgClass } from '@angular/common';
 import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  HostBinding,
-  Input,
-  Output,
+  input,
+  output,
 } from '@angular/core';
 
 type ButtonVariant = 'filled' | 'outlined';
@@ -15,28 +12,26 @@ type ButtonSize = 'sm' | 'md' | 'lg';
 
 @Component({
   selector: 'ui-button',
-  imports: [NgClass],
+  imports: [],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.full_width]': 'fullWidth()',
+  },
 })
 export class ButtonComponent {
-  @Input({ transform: booleanAttribute }) fullWidth: boolean = false;
-  @Input({ transform: booleanAttribute }) disabled: boolean = false;
-  @Input({ transform: booleanAttribute }) loading: boolean = false;
+  readonly fullWidth = input(false, { transform: booleanAttribute });
+  readonly disabled = input(false, { transform: booleanAttribute });
+  readonly loading = input(false, { transform: booleanAttribute });
 
-  @Input() variant: ButtonVariant = 'filled';
-  @Input() type: ButtonType = 'button';
-  @Input() size: ButtonSize = 'md';
+  readonly variant = input<ButtonVariant>('filled');
+  readonly type = input<ButtonType>('button');
+  readonly size = input<ButtonSize>('md');
 
-  @Output() onClick = new EventEmitter<void>();
+  readonly onClick = output<void>();
 
   handleClick() {
     this.onClick.emit();
-  }
-
-  @HostBinding('class.full_width')
-  get fullWidthClass(): boolean {
-    return this.fullWidth;
   }
 }

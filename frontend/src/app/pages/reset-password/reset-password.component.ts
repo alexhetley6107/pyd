@@ -5,7 +5,7 @@ import { AuthService } from '@/entities/user/service/auth.service';
 import { ToastService } from '@/shared/services/toast.service';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { InputComponent } from '@/shared/ui/input/input.component';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -27,8 +27,8 @@ export class ResetPasswordComponent {
   auth = inject(AuthService);
   toast = inject(ToastService);
 
-  isLoading = false;
-  isDone = false;
+  readonly isLoading = signal(false);
+  readonly isDone = signal(false);
 
   form!: FormGroup<{
     password: FormControl<string>;
@@ -73,7 +73,7 @@ export class ResetPasswordComponent {
       return;
     }
 
-    this.isLoading = true;
+    this.isLoading.set(true);
 
     const token = this.route.snapshot.queryParamMap.get('token') ?? '';
     const newPassword = this.form.value.password ?? '';
@@ -89,11 +89,11 @@ export class ResetPasswordComponent {
       },
       error: (err) => {
         this.toast.error(err.error.message);
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
       complete: () => {
-        this.isLoading = false;
-        this.isDone = true;
+        this.isLoading.set(false);
+        this.isDone.set(true);
       },
     });
   }

@@ -1,13 +1,18 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'ui-skeleton',
   templateUrl: './skeleton.component.html',
   styleUrl: './skeleton.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[style.border-radius]': 'radius()',
+    '[style.width]': 'width()',
+    '[style.height]': 'height()',
+  },
 })
 export class SkeletonComponent {
-  @Input() @HostBinding('style.border-radius') radius = '5px';
-  @Input() @HostBinding('style.width') width = '100%';
-  @Input() @HostBinding('style.height') height = '20px';
+  readonly radius = input('5px');
+  readonly width = input('100%');
+  readonly height = input('20px');
 }

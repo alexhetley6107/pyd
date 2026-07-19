@@ -1,29 +1,15 @@
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-import { LoginComponent } from '../pages/login/login.component';
-import { SignupComponent } from '../pages/signup/signup.component';
-import { ForgotPasswordComponent } from '../pages/forgot-password/forgot-password.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
-import { BacklogComponent } from '@/pages/backlog/backlog.component';
-import { NotFoundComponent } from '@/pages/not-found/not-found.component';
 import { PrivateGuard } from '@/app/guards/private.guard';
-import { ResetPasswordComponent } from '@/pages/reset-password/reset-password.component';
-import { BoardsComponent } from '@/pages/boards/boards.component';
-import { CreateBoardComponent } from '@/pages/create-board/create-board.component';
-import { CreateTaskComponent } from '@/pages/create-task/create-task.component';
-import { AuthCheckComponent } from '@/pages/auth-check/auth-check.component';
 import { PublicGuard } from '@/app/guards/public.guard';
 import { ERoute } from '@/shared/constants/routes';
-import { DashboardComponent } from '@/pages/dashboard/dashboard.component';
-import { BoardViewComponent } from '@/pages/board-view/board-view.component';
-import { BoardDetailsComponent } from '@/pages/board-details/board-details.component';
-import { TaskViewComponent } from '@/pages/task-view/task-view.component';
-import { ProfileComponent } from '@/pages/profile/profile.component';
 
 export const routes: Routes = [
   {
     path: ERoute.ME,
-    component: AuthCheckComponent,
+    loadComponent: () =>
+      import('@/pages/auth-check/auth-check.component').then((m) => m.AuthCheckComponent),
   },
   {
     path: '',
@@ -31,10 +17,29 @@ export const routes: Routes = [
     canActivate: [PublicGuard],
     children: [
       { path: '', redirectTo: ERoute.LOGIN, pathMatch: 'full' },
-      { path: ERoute.LOGIN, component: LoginComponent },
-      { path: ERoute.SIGNUP, component: SignupComponent },
-      { path: ERoute.FORGOT_PASSWORD, component: ForgotPasswordComponent },
-      { path: ERoute.RESET_PASSWORD, component: ResetPasswordComponent },
+      {
+        path: ERoute.LOGIN,
+        loadComponent: () => import('@/pages/login/login.component').then((m) => m.LoginComponent),
+      },
+      {
+        path: ERoute.SIGNUP,
+        loadComponent: () =>
+          import('@/pages/signup/signup.component').then((m) => m.SignupComponent),
+      },
+      {
+        path: ERoute.FORGOT_PASSWORD,
+        loadComponent: () =>
+          import('@/pages/forgot-password/forgot-password.component').then(
+            (m) => m.ForgotPasswordComponent
+          ),
+      },
+      {
+        path: ERoute.RESET_PASSWORD,
+        loadComponent: () =>
+          import('@/pages/reset-password/reset-password.component').then(
+            (m) => m.ResetPasswordComponent
+          ),
+      },
     ],
   },
   {
@@ -42,17 +47,63 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [PrivateGuard],
     children: [
-      { path: ERoute.DASHBOARD, component: DashboardComponent },
-      { path: ERoute.BOARDS, component: BoardsComponent },
-      { path: ERoute.BOARD_VIEW, component: BoardViewComponent },
-      { path: ERoute.BOARD_DETAILS, component: BoardDetailsComponent },
-      { path: ERoute.CREATE_BOARD, component: CreateBoardComponent },
-      { path: ERoute.CREATE_TASK, component: CreateTaskComponent },
-      { path: ERoute.TASK_VIEW, component: TaskViewComponent },
-      { path: ERoute.BACKLOG, component: BacklogComponent },
-      { path: ERoute.BACKLOG_TASK_VIEW, component: TaskViewComponent },
-      { path: ERoute.PROFILE, component: ProfileComponent },
+      {
+        path: ERoute.DASHBOARD,
+        loadComponent: () =>
+          import('@/pages/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+      },
+      {
+        path: ERoute.BOARDS,
+        loadComponent: () =>
+          import('@/pages/boards/boards.component').then((m) => m.BoardsComponent),
+      },
+      {
+        path: ERoute.BOARD_VIEW,
+        loadComponent: () =>
+          import('@/pages/board-view/board-view.component').then((m) => m.BoardViewComponent),
+      },
+      {
+        path: ERoute.BOARD_DETAILS,
+        loadComponent: () =>
+          import('@/pages/board-details/board-details.component').then(
+            (m) => m.BoardDetailsComponent
+          ),
+      },
+      {
+        path: ERoute.CREATE_BOARD,
+        loadComponent: () =>
+          import('@/pages/create-board/create-board.component').then((m) => m.CreateBoardComponent),
+      },
+      {
+        path: ERoute.CREATE_TASK,
+        loadComponent: () =>
+          import('@/pages/create-task/create-task.component').then((m) => m.CreateTaskComponent),
+      },
+      {
+        path: ERoute.TASK_VIEW,
+        loadComponent: () =>
+          import('@/pages/task-view/task-view.component').then((m) => m.TaskViewComponent),
+      },
+      {
+        path: ERoute.BACKLOG,
+        loadComponent: () =>
+          import('@/pages/backlog/backlog.component').then((m) => m.BacklogComponent),
+      },
+      {
+        path: ERoute.BACKLOG_TASK_VIEW,
+        loadComponent: () =>
+          import('@/pages/task-view/task-view.component').then((m) => m.TaskViewComponent),
+      },
+      {
+        path: ERoute.PROFILE,
+        loadComponent: () =>
+          import('@/pages/profile/profile.component').then((m) => m.ProfileComponent),
+      },
     ],
   },
-  { path: '**', component: NotFoundComponent },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('@/pages/not-found/not-found.component').then((m) => m.NotFoundComponent),
+  },
 ];

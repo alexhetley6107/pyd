@@ -1,4 +1,4 @@
-@if (open) {
+@if (open()) {
   <div class="overlay" (click)="onCloseModal()">
     <div class="body" (click)="$event.stopPropagation()">
       <ng-content></ng-content>

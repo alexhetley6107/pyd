@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { Router, RouterLink } from '@angular/router';
 import { InputComponent } from '@/shared/ui/input/input.component';
@@ -27,7 +27,7 @@ export class SignupComponent {
   auth = inject(AuthService);
   toast = inject(ToastService);
 
-  isLoading = false;
+  readonly isLoading = signal(false);
 
   form!: FormGroup<{
     nickname: FormControl<string>;
@@ -82,7 +82,7 @@ export class SignupComponent {
       return;
     }
 
-    this.isLoading = true;
+    this.isLoading.set(true);
 
     const nickname = this.form.value.nickname ?? '';
     const email = this.form.value.email ?? '';
@@ -95,10 +95,10 @@ export class SignupComponent {
       },
       error: (err) => {
         this.toast.error(err.error.message);
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
       complete: () => {
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
     });
   }

@@ -1,16 +1,15 @@
 import { Nullable, SelectOption } from '@/shared/types';
-import { CommonModule } from '@angular/common';
 import {
   Component,
-  Input,
   forwardRef,
   ElementRef,
   HostListener,
-  ViewChild,
-  ChangeDetectorRef,
-  HostBinding,
   booleanAttribute,
   ChangeDetectionStrategy,
+  input,
+  signal,
+  computed,
+  viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IconComponent } from '../icon/icon.component';
@@ -23,6 +22,9 @@ type SelectorSize = 'sm' | 'lg';
   templateUrl: './selector.component.html',
   styleUrl: './selector.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.full_width]': 'fullWidth()',
+  },
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -30,26 +32,29 @@ type SelectorSize = 'sm' | 'lg';
       multi: true,
     },
   ],
-  imports: [CommonModule, IconComponent],
+  imports: [IconComponent],
 })
 export class SelectorComponent implements ControlValueAccessor {
-  @Input() placeholder = 'Select...';
-  @Input() options: SelectOption[] = [];
-  @Input() size: SelectorSize = 'lg';
-  @Input({ transform: booleanAttribute }) @HostBinding('class.full_width') fullWidth: boolean =
-    false;
+  readonly placeholder = input('Select...');
+  readonly options = input<SelectOption[]>([]);
+  readonly size = input<SelectorSize>('lg');
+  readonly fullWidth = input(false, { transform: booleanAttribute });
 
-  @ViewChild('container', { static: true }) container!: ElementRef<HTMLDivElement>;
+  readonly container = viewChild.required<ElementRef<HTMLDivElement>>('container');
 
-  value: Nullable<string> = null;
-  open = false;
+  protected readonly value = signal<Nullable<string>>(null);
+  protected readonly open = signal(false);
 
-  onChange: (value: Nullable<string>) => void = () => {};
-  onTouched: () => void = () => {};
+  protected readonly selectedLabel = computed(() => {
+    const selected = this.options().find((o) => o.value === this.value());
+    return selected?.value ? selected.label : this.placeholder();
+  });
+
+  private onChange: (value: Nullable<string>) => void = () => {};
+  private onTouched: () => void = () => {};
 
   writeValue(value: Nullable<string>): void {
-    this.value = value;
-    this.cd.detectChanges();
+    this.value.set(value);
   }
 
   registerOnChange(fn: any): void {
@@ -61,47 +66,37 @@ export class SelectorComponent implements ControlValueAccessor {
   }
 
   toggleOpen() {
-    this.open = !this.open;
+    this.open.update((v) => !v);
   }
 
   close() {
-    this.open = false;
+    this.open.set(false);
     this.onTouched();
-    setTimeout(() => {
-      this.open = false;
-    }, 0);
   }
 
   select(option: SelectOption) {
-    if (this.value !== option.value) {
-      this.value = option.value;
-      this.onChange(this.value);
+    if (this.value() !== option.value) {
+      this.value.set(option.value);
+      this.onChange(option.value);
     }
     this.close();
-  }
-
-  get selectedLabel(): string {
-    const selected = this.options.find((o) => o.value === this.value);
-    return selected?.value ? selected.label : this.placeholder;
   }
 
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (this.open && !this.container.nativeElement.contains(target)) {
+    if (this.open() && !this.container().nativeElement.contains(target)) {
       this.close();
     }
   }
 
   @HostListener('keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
-    if (!this.open) {
+    if (!this.open()) {
       if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
-        this.open = true;
+        this.open.set(true);
       }
     }
   }
-
-  constructor(private cd: ChangeDetectorRef) {}
 }

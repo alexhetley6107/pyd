@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { Nullable } from '@/shared/types';
 
 @Component({
   selector: 'ui-textarea',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './textarea.component.html',
   styleUrl: './textarea.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,17 +18,17 @@ import { Nullable } from '@/shared/types';
   ],
 })
 export class TextareaComponent implements ControlValueAccessor {
-  @Input() placeholder: string = '';
-  @Input() error: Nullable<string> = null;
-  @Input() rows: number = 10;
+  readonly placeholder = input('');
+  readonly error = input<Nullable<string>>(null);
+  readonly rows = input(10);
 
-  value: string = '';
+  protected readonly value = signal('');
 
-  onChange: (value: string) => void = () => {};
-  onTouched: () => void = () => {};
+  private onChange: (value: string) => void = () => {};
+  private onTouched: () => void = () => {};
 
   writeValue(value: string): void {
-    this.value = value || '';
+    this.value.set(value || '');
   }
 
   registerOnChange(fn: any): void {
@@ -42,13 +41,14 @@ export class TextareaComponent implements ControlValueAccessor {
 
   handleInput(event: Event): void {
     const textarea = event.target as HTMLTextAreaElement;
-    this.value = textarea.value;
-    this.onChange(this.value);
+    this.value.set(textarea.value);
+    this.onChange(textarea.value);
   }
 
   handleBlur(): void {
-    this.value = this.value.trim();
-    this.onChange(this.value);
+    const trimmed = this.value().trim();
+    this.value.set(trimmed);
+    this.onChange(trimmed);
     this.onTouched();
   }
 }

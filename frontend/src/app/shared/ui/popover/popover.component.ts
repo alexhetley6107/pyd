@@ -1,11 +1,12 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostListener,
-  Input,
+  inject,
+  input,
   OnDestroy,
+  signal,
 } from '@angular/core';
 
 type PopoverType = 'popover' | 'select' | 'tooltip';
@@ -13,27 +14,26 @@ type PopoverType = 'popover' | 'select' | 'tooltip';
 @Component({
   selector: 'ui-popover',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './popover.component.html',
   styleUrls: ['./popover.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopoverComponent implements OnDestroy {
-  @Input() type: PopoverType = 'popover';
+  readonly type = input<PopoverType>('popover');
 
-  open = false;
+  protected readonly open = signal(false);
 
+  private readonly elRef = inject(ElementRef);
   private documentClickListener = this.handleDocumentClick.bind(this);
 
-  constructor(private elRef: ElementRef) {}
-
   togglePopover() {
-    if (this.open) {
-      this.open = false;
+    if (this.open()) {
+      this.open.set(false);
       return;
     }
 
-    this.open = true;
+    this.open.set(true);
     document.addEventListener('click', this.documentClickListener);
   }
 
@@ -45,7 +45,7 @@ export class PopoverComponent implements OnDestroy {
   }
 
   closePopover() {
-    this.open = false;
+    this.open.set(false);
     document.removeEventListener('click', this.documentClickListener);
   }
 

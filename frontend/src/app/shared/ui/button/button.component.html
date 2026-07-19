@@ -1,25 +1,24 @@
 <button
   class="button"
-  [disabled]="disabled || loading"
-  [ngClass]="{
-    full_width: fullWidth,
-    filled: variant === 'filled',
-    outlined: variant === 'outlined',
-    disabled: disabled,
-    sm: size === 'sm',
-    md: size === 'md',
-    lg: size === 'lg',
-  }"
-  [type]="type"
+  [disabled]="disabled() || loading()"
+  [class.full_width]="fullWidth()"
+  [class.filled]="variant() === 'filled'"
+  [class.outlined]="variant() === 'outlined'"
+  [class.disabled]="disabled()"
+  [class.sm]="size() === 'sm'"
+  [class.md]="size() === 'md'"
+  [class.lg]="size() === 'lg'"
+  [type]="type()"
   (click)="handleClick()"
 >
   <ng-content></ng-content>
 
-  @if (loading) {
+  @if (loading()) {
     <div class="load">
       <div
         class="spinner"
-        [ngClass]="{ filled: variant === 'filled', outlined: variant === 'outlined' }"
+        [class.filled]="variant() === 'filled'"
+        [class.outlined]="variant() === 'outlined'"
       ></div>
     </div>
   }

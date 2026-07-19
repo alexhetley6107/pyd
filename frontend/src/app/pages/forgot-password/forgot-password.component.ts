@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { InputComponent } from '@/shared/ui/input/input.component';
 import { ButtonComponent } from '@/shared/ui/button/button.component';
 import { Router, RouterLink } from '@angular/router';
@@ -25,7 +25,7 @@ export class ForgotPasswordComponent {
   auth = inject(AuthService);
   toast = inject(ToastService);
 
-  isLoading = false;
+  readonly isLoading = signal(false);
 
   form!: FormGroup<{
     email: FormControl<string>;
@@ -47,7 +47,7 @@ export class ForgotPasswordComponent {
       this.form.markAllAsTouched();
       return;
     }
-    this.isLoading = true;
+    this.isLoading.set(true);
 
     const email = this.form.value.email ?? '';
 
@@ -58,10 +58,10 @@ export class ForgotPasswordComponent {
       },
       error: (err) => {
         this.toast.error(err.error.message);
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
       complete: () => {
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
     });
   }

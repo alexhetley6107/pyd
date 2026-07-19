@@ -1,11 +1,4 @@
-import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { ButtonComponent } from '../button/button.component';
 
@@ -17,13 +10,13 @@ import { ButtonComponent } from '../button/button.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmModalComponent {
-  @Input({ transform: booleanAttribute }) open: boolean = false;
-  @Input({ transform: booleanAttribute }) isLoading: boolean = false;
+  readonly open = input(false, { transform: booleanAttribute });
+  readonly isLoading = input(false, { transform: booleanAttribute });
 
-  @Input() title: string = 'Are you sure?';
+  readonly title = input('Are you sure?');
 
-  @Output() closeModal = new EventEmitter<void>();
-  @Output() confirm = new EventEmitter<void>();
+  readonly closeModal = output<void>();
+  readonly confirm = output<void>();
 
   onCloseModal() {
     this.closeModal.emit();

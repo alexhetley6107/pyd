@@ -1,7 +1,8 @@
 <div class="wrapper">
   <textarea
-    [placeholder]="placeholder"
-    [value]="value"
+    [placeholder]="placeholder()"
+    [rows]="rows()"
+    [value]="value()"
     (input)="handleInput($event)"
     (blur)="handleBlur()"
   ></textarea>

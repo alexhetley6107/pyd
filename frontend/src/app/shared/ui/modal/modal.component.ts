@@ -1,11 +1,4 @@
-import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'ui-modal',
@@ -15,9 +8,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalComponent {
-  @Input({ transform: booleanAttribute }) open: boolean = false;
+  readonly open = input(false, { transform: booleanAttribute });
 
-  @Output() closeModal = new EventEmitter<void>();
+  readonly closeModal = output<void>();
 
   onCloseModal() {
     this.closeModal.emit();

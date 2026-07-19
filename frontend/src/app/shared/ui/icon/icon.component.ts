@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent {
-  name = input.required<string>();
-  size = input(20);
-  color = input('var(--text-color)');
+  readonly name = input.required<string>();
+  readonly size = input(20);
+  readonly color = input('var(--text-color)');
 }

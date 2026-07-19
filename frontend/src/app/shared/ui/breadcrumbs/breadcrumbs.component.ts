@@ -11,6 +11,6 @@ import { SkeletonComponent } from '../skeleton/skeleton.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsComponent {
-  links = input<BreadCrumbItem[]>([]);
-  loading = input(false);
+  readonly links = input<BreadCrumbItem[]>([]);
+  readonly loading = input(false);
 }
